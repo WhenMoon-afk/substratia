@@ -33,7 +33,7 @@ const tools = [
   },
   {
     name: 'Prompt Library',
-    description: 'Curated collection of prompts for communication, creativity, productivity, and more.',
+    description: 'Curated prompts for communication, creativity, productivity. Click to copy.',
     href: '/tools/prompts',
     icon: (
       <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,7 +41,7 @@ const tools = [
       </svg>
     ),
     color: 'cyan',
-    badge: 'Coming Soon',
+    badge: '8 Prompts',
   },
 ]
 
@@ -71,11 +71,7 @@ export default function ToolsIndexPage() {
               className={`group bg-white/5 border border-white/10 rounded-xl p-6 hover:border-forge-${tool.color}/50 transition-all relative`}
             >
               {tool.badge && (
-                <span className={`absolute -top-2 -right-2 px-2 py-0.5 text-xs font-medium rounded-full ${
-                  tool.badge === 'Coming Soon'
-                    ? 'bg-gray-600 text-gray-300'
-                    : 'bg-forge-cyan text-forge-dark'
-                }`}>
+                <span className="absolute -top-2 -right-2 px-2 py-0.5 text-xs font-medium rounded-full bg-forge-cyan text-forge-dark">
                   {tool.badge}
                 </span>
               )}
