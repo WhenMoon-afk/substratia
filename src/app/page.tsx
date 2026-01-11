@@ -309,7 +309,7 @@ export default function Home() {
       </section>
 
       {/* Pro Teaser */}
-      <section className="relative z-10 py-24">
+      <section id="waitlist" className="relative z-10 py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="gradient-border rounded-2xl p-8 md:p-12 text-center">
