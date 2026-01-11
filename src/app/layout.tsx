@@ -12,11 +12,20 @@ export const metadata: Metadata = {
     description: 'Free tools: momentum (instant context recovery) + memory-mcp (persistent memory). Open source, MIT licensed.',
     type: 'website',
     url: 'https://substratia.io',
+    images: [
+      {
+        url: 'https://substratia.io/brand/social.png',
+        width: 1200,
+        height: 630,
+        alt: 'Substratia - Memory Infrastructure for AI',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Substratia - Memory Infrastructure for AI',
     description: 'Free, open-source: momentum (context recovery <5ms) + memory-mcp (persistent memory). Stop re-explaining context to Claude.',
+    images: ['https://substratia.io/brand/social.png'],
   },
   alternates: {
     canonical: 'https://substratia.io',
