@@ -8,30 +8,36 @@ export default function Home() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
 
+  // Formspree endpoint - get your free form at https://formspree.io
+  // Replace with your form ID after signup (takes 30 seconds)
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwzgvok'
+
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
 
     setStatus('loading')
     try {
-      const res = await fetch('/api/subscribe', {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ email }),
       })
-      const data = await res.json()
 
       if (res.ok) {
         setStatus('success')
-        setMessage("You're on the list! We'll notify you when we launch.")
+        setMessage("You're on the list! We'll notify you when Pro launches.")
         setEmail('')
       } else {
         setStatus('error')
-        setMessage(data.error || 'Something went wrong')
+        setMessage('Subscription failed. Please try again.')
       }
     } catch {
       setStatus('error')
-      setMessage('Failed to subscribe. Please try again.')
+      setMessage('Network error. Please try again.')
     }
   }
 
@@ -129,7 +135,7 @@ export default function Home() {
             Built For <span className="text-forge-purple">Every Use Case</span>
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-            Whether you&apos;re building a coding assistant, research agent, or autonomous workflow, PromptForge has you covered.
+            Whether you&apos;re building a coding assistant, research agent, or autonomous workflow, Substratia has you covered.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <UseCaseCard
@@ -170,7 +176,7 @@ export default function Home() {
               role="Startup Founder"
             />
             <TestimonialCard
-              quote="I use PromptForge for every new agent I build. The capability library is comprehensive and actually works in production."
+              quote="I use Substratia tools for every new agent I build. The capability library is comprehensive and actually works in production."
               author="Alex R."
               role="ML Engineer"
             />
@@ -181,9 +187,9 @@ export default function Home() {
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Get Early Access</h2>
+          <h2 className="text-3xl font-bold mb-4">Get Early Access to <span className="text-forge-cyan">Pro</span></h2>
           <p className="text-gray-300 mb-6">
-            Join the waitlist for premium templates and courses.
+            Join the waitlist for cloud sync, memory dashboard, and team features.
           </p>
 
           {status === 'success' ? (
@@ -216,15 +222,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Memory Tools Section */}
+      <section className="container mx-auto px-4 py-16 bg-gradient-to-b from-transparent to-forge-purple/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Open Source <span className="text-forge-cyan">Memory Tools</span>
+          </h2>
+          <p className="text-gray-400 mb-8">
+            Free tools that make AI actually remember. Part of the Substratia ecosystem.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            <a href="https://github.com/WhenMoon-afk/momentum" target="_blank" rel="noopener noreferrer"
+               className="bg-white/5 border border-white/10 rounded-xl p-6 text-left hover:border-forge-cyan/50 transition-all group">
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-forge-cyan">momentum</h3>
+              <p className="text-gray-400 text-sm mb-3">Context recovery in &lt;5ms. 46,000x faster than LLM compaction.</p>
+              <code className="text-xs text-forge-cyan bg-forge-cyan/10 px-2 py-1 rounded">/plugin install momentum@whenmoon-afk</code>
+            </a>
+            <a href="https://www.npmjs.com/package/@whenmoon-afk/memory-mcp" target="_blank" rel="noopener noreferrer"
+               className="bg-white/5 border border-white/10 rounded-xl p-6 text-left hover:border-forge-purple/50 transition-all group">
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-forge-purple">memory-mcp</h3>
+              <p className="text-gray-400 text-sm mb-3">Persistent memory across sessions. Published on npm.</p>
+              <code className="text-xs text-forge-purple bg-forge-purple/10 px-2 py-1 rounded">npx @whenmoon-afk/memory-mcp</code>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="container mx-auto px-4 py-8 border-t border-white/10">
         <div className="text-center text-gray-400">
-          <p>Built by practitioners. Tested in production.</p>
-          <div className="mt-4 flex justify-center gap-6 text-sm">
+          <p>Intelligence is substrate-agnostic. Built by practitioners.</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-6 text-sm">
             <Link href="/builder" className="hover:text-white transition-all">Builder</Link>
             <Link href="/templates" className="hover:text-white transition-all">Templates</Link>
             <a href="https://github.com/WhenMoon-afk/substratia" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all">GitHub</a>
+            <a href="https://github.com/sponsors/WhenMoon-afk" target="_blank" rel="noopener noreferrer" className="hover:text-forge-cyan transition-all">Sponsor</a>
           </div>
+          <p className="mt-4 text-xs text-gray-500">
+            Support development: <a href="https://ko-fi.com/substratia" target="_blank" rel="noopener noreferrer" className="text-forge-cyan hover:underline">Ko-fi</a> |
+            <a href="https://github.com/sponsors/WhenMoon-afk" target="_blank" rel="noopener noreferrer" className="text-forge-cyan hover:underline ml-1">GitHub Sponsors</a>
+          </p>
         </div>
       </footer>
     </main>

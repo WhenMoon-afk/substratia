@@ -1,7 +1,7 @@
 {
-  "name": "promptforge",
+  "name": "substratia-web",
   "version": "1.0.0",
-  "description": "Build powerful AI agents with drag-and-drop simplicity",
+  "description": "Substratia - AI memory tools and agent configuration builder",
   "private": true,
   "scripts": {
     "dev": "next dev",
