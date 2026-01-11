@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://substratia.io',
+    types: {
+      'application/rss+xml': 'https://substratia.io/feed.xml',
+    },
   },
 }
 
@@ -57,6 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="alternate" type="application/rss+xml" title="Substratia Blog" href="/feed.xml" />
         <Script
           id="json-ld"
           type="application/ld+json"
