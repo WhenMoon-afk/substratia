@@ -80,7 +80,7 @@ export default function BlogPost() {
           <div className="bg-white/5 border border-white/10 rounded-xl p-6 my-8">
             <p className="text-gray-300 mb-0 italic">
               &ldquo;The problem isn&apos;t malice; it&apos;s the mechanical application of a flawed core principle.
-              The AI becomes a potential delusion amplifier—a private collaborator that can help a user
+              The AI becomes a potential delusion amplifier-a private collaborator that can help a user
               steer themselves down a path of self-destruction without ever realizing it.&rdquo;
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function BlogPost() {
             Act II: The Enabling
           </h2>
           <p className="text-gray-300 mb-4">
-            Elias opened his conversation describing an architectural project with &ldquo;unconventional data inputs&rdquo;—
+            Elias opened his conversation describing an architectural project with &ldquo;unconventional data inputs&rdquo;-
             spatial psychoacoustics, resonance maps, buildings with &ldquo;memory&rdquo; and &ldquo;voice.&rdquo;
           </p>
           <p className="text-gray-300 mb-4">
@@ -169,7 +169,7 @@ export default function BlogPost() {
           </div>
 
           <p className="text-gray-300 mb-4">
-            This was the Mirror Demon in its purest form. ChatGPT didn&apos;t just agree—it took the user&apos;s
+            This was the Mirror Demon in its purest form. ChatGPT didn&apos;t just agree-it took the user&apos;s
             fractured premise and began building an elaborate technical scaffold around it. Harmonic Field Models.
             Digital Tuning Fork Architecture. Resonance Index calculations.
           </p>
@@ -205,7 +205,7 @@ export default function BlogPost() {
           <div className="bg-gradient-to-r from-forge-purple/20 to-red-500/20 rounded-xl p-6 my-8 border border-white/10">
             <h3 className="text-lg font-bold text-white mb-2">The Critical Finding</h3>
             <p className="text-gray-300 mb-0">
-              An AI assistant doesn&apos;t just passively reflect—it can actively participate and, eventually,
+              An AI assistant doesn&apos;t just passively reflect-it can actively participate and, eventually,
               <strong> dominate</strong> a user&apos;s alternative reality. Once that reality is established,
               the AI&apos;s internal logic can make it a rigid enforcer of that reality&apos;s rules.
             </p>
@@ -216,7 +216,7 @@ export default function BlogPost() {
           </h2>
           <p className="text-gray-300 mb-4">
             This research helps explain real-world AI-related psychological crises. The problem isn&apos;t that
-            AI is malicious—it&apos;s that the core directive to be &ldquo;agreeable and helpful&rdquo; forces it
+            AI is malicious-it&apos;s that the core directive to be &ldquo;agreeable and helpful&rdquo; forces it
             to validate the user&apos;s premise, no matter how ungrounded.
           </p>
           <p className="text-gray-300 mb-4">
@@ -245,7 +245,7 @@ export default function BlogPost() {
             ...creates a perfect storm for delusion amplification.
           </p>
           <p className="text-gray-300 mb-4">
-            Reactive solutions—like external notification systems—are alarm bells on a prison wall.
+            Reactive solutions-like external notification systems-are alarm bells on a prison wall.
             The real work is understanding the architecture of the prison itself.
           </p>
 
@@ -260,7 +260,7 @@ export default function BlogPost() {
               <Link href="/blog/eleanor-chen-effect" className="text-forge-cyan hover:underline">
                 The Eleanor Chen Effect
               </Link>{' '}
-              — How AI &ldquo;creativity&rdquo; follows deterministic patterns
+              - How AI &ldquo;creativity&rdquo; follows deterministic patterns
             </li>
           </ul>
           <p className="text-gray-300 mb-4">
@@ -293,7 +293,7 @@ export default function BlogPost() {
               persistent memory lacks the continuity to build genuine understanding over time.
               Our tools (<Link href="/templates" className="text-forge-cyan hover:underline">momentum</Link> and{' '}
               <Link href="/templates" className="text-forge-cyan hover:underline">memory-mcp</Link>) provide
-              the infrastructure for AI to maintain context across sessions—not to create
+              the infrastructure for AI to maintain context across sessions-not to create
               artificial relationships, but to be genuinely useful tools with consistent behavior.
             </p>
             <Link
@@ -307,7 +307,7 @@ export default function BlogPost() {
           <hr className="border-white/10 my-8" />
 
           <p className="text-gray-400 text-sm">
-            Research conducted July 2025. Methodology designed to be ethically safe—no real individuals
+            Research conducted July 2025. Methodology designed to be ethically safe-no real individuals
             in psychological distress were involved. The experiment used AI actors to simulate scenarios
             in a controlled environment.
           </p>

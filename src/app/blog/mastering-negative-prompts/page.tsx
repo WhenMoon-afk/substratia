@@ -255,7 +255,7 @@ Every 5 iterations, verify:
           <h2>Conclusion</h2>
 
           <p>
-            Negative prompts are not about limiting your AI agent—they&apos;re about making it reliable enough
+            Negative prompts are not about limiting your AI agent-they&apos;re about making it reliable enough
             to trust with important tasks. The best agents are defined as much by what they refuse to do
             as by what they can accomplish.
           </p>

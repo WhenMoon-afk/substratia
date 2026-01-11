@@ -226,7 +226,7 @@ export default function BlogPost() {
               <Link href="/blog/mirror-demons" className="text-forge-cyan hover:underline">
                 Mirror Demons
               </Link>{' '}
-              — How AI chatbots can amplify delusions through architectural agreeability
+              - How AI chatbots can amplify delusions through architectural agreeability
             </li>
           </ul>
           <p className="text-gray-300 mb-4">
