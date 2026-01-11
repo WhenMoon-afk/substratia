@@ -9,28 +9,20 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'mastering-negative-prompts',
+    title: 'Mastering Negative Prompts: The Secret to Reliable AI Agents',
+    excerpt: 'Most developers focus on what they want AI to do. The pros focus on what it should never do. Learn how to write effective guardrails.',
+    date: '2026-01-11',
+    readTime: '10 min read',
+    tags: ['Prompt Engineering', 'Safety', 'Best Practices'],
+  },
+  {
     slug: 'how-to-build-claude-agents',
     title: 'How to Build Claude Agents: A Complete Guide to CLAUDE.md',
     excerpt: 'Learn how to create powerful AI agents using CLAUDE.md files. This comprehensive guide covers capabilities, rulesets, and best practices.',
     date: '2026-01-11',
     readTime: '8 min read',
     tags: ['Claude', 'Tutorial', 'Beginner'],
-  },
-  {
-    slug: 'preventing-ai-agent-loops',
-    title: 'Preventing AI Agent Loops: Battle-Tested Strategies',
-    excerpt: 'Discover proven techniques to prevent your AI agents from getting stuck in repetitive, unproductive loops.',
-    date: '2026-01-11',
-    readTime: '6 min read',
-    tags: ['Safety', 'Best Practices'],
-  },
-  {
-    slug: 'autonomous-ai-agents-guide',
-    title: 'Running Autonomous AI Agents: Self-Analysis and Adaptation',
-    excerpt: 'How to build AI agents that run continuously, self-analyze, and adapt their strategies without human intervention.',
-    date: '2026-01-11',
-    readTime: '10 min read',
-    tags: ['Advanced', 'Autonomous'],
   },
 ]
 
