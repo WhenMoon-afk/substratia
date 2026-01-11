@@ -5,11 +5,11 @@ import Nav from '@/components/Nav'
 
 export const metadata: Metadata = {
   title: 'Substratia - Memory Infrastructure for AI | momentum & memory-mcp',
-  description: 'Free, open-source tools that give AI a memory. momentum: context recovery in <5ms (46,000x faster). memory-mcp: persistent memory across sessions. AgentForge: visual agent config builder.',
+  description: 'Free, open-source tools that give AI a memory. momentum: context recovery in <5ms. memory-mcp: persistent memory across sessions. AgentForge: visual agent config builder.',
   keywords: 'AI memory, Claude memory, context recovery, momentum plugin, memory-mcp, CLAUDE.md, agents.md, AI tools, open source AI, Claude Code plugins, persistent AI memory, MCP server',
   openGraph: {
     title: 'Substratia - Give Your AI a Memory That Works',
-    description: 'Free tools: momentum (46,000x faster context recovery) + memory-mcp (persistent memory). Open source, MIT licensed.',
+    description: 'Free tools: momentum (instant context recovery) + memory-mcp (persistent memory). Open source, MIT licensed.',
     type: 'website',
     url: 'https://substratia.io',
   },
