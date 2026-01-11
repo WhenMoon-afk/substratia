@@ -205,6 +205,7 @@ The /pro page collects emails but makes no firm promises. Language is intentiona
 - Fixed pricing FAQ to use future tense (Pro not launched yet)
 - Aligned footer nav with header nav (added Tools link, fixed Memory label)
 - Updated ACTIVATION_GUIDE to reflect Formspree already configured
+- Fixed context-window-churn blog post with accurate benchmark numbers
 
 **2026-01-11** (Session 3):
 - Added 3 new blog posts:
