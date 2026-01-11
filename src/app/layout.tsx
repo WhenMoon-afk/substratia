@@ -4,6 +4,10 @@ import './globals.css'
 import Nav from '@/components/Nav'
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/brand/logo-icon.png',
+    apple: '/brand/logo-icon.png',
+  },
   title: 'Substratia - Memory Infrastructure for AI | momentum & memory-mcp',
   description: 'Free, open-source tools that give AI a memory. momentum: context recovery in <5ms. memory-mcp: persistent memory across sessions. AgentForge: visual agent config builder.',
   keywords: 'AI memory, Claude memory, context recovery, momentum plugin, memory-mcp, CLAUDE.md, agents.md, AI tools, open source AI, Claude Code plugins, persistent AI memory, MCP server',
