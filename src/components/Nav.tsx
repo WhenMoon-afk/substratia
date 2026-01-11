@@ -11,6 +11,7 @@ export default function Nav() {
     { href: '/builder', label: 'Builder' },
     { href: '/templates', label: 'Templates' },
     { href: '/pricing', label: 'Pricing' },
+    { href: '/docs', label: 'Docs' },
     { href: '/blog', label: 'Blog' },
   ]
 
