@@ -9,6 +9,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'eleanor-chen-effect',
+    title: 'The Eleanor Chen Effect: Why AI Keeps Writing the Same Story',
+    excerpt: 'Ask multiple AI instances to write about AI and grief, and they create the same character. We investigate why LLMs converge on remarkably similar narratives.',
+    date: '2026-01-11',
+    readTime: '8 min read',
+    tags: ['Research', 'AI Creativity', 'Original'],
+    featured: true,
+  },
+  {
     slug: 'memory-mcp-v2-whats-new',
     title: "What's New in memory-mcp v2.5: From Python to TypeScript",
     excerpt: 'memory-mcp has been completely rewritten. No more embeddings, no more pip - just npx and instant persistent memory.',
