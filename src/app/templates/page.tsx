@@ -7,104 +7,84 @@ interface Template {
   name: string
   description: string
   price: number
-  category: 'agent' | 'system' | 'course'
+  category: 'starter' | 'professional' | 'enterprise'
   features: string[]
   popular?: boolean
-  gumroadId?: string // Gumroad product short URL
+  stripeLink?: string // Stripe Payment Link URL
 }
 
 const templates: Template[] = [
   {
-    id: 'loop-guardian',
-    name: 'Loop Guardian System',
-    description: 'Prevent AI agents from getting stuck in repetitive, unproductive loops. Battle-tested in production.',
-    price: 29,
-    category: 'agent',
+    id: 'developer-agent-system',
+    name: 'Developer Agent System',
+    description: 'Complete system for building AI coding assistants. 5 production-ready agent configs with documentation.',
+    price: 49,
+    category: 'starter',
     features: [
-      'Anti-loop detection rules',
-      'Action diversity checks',
-      'Progress gates',
-      'Retry budgets',
-      'Escalation protocols'
+      '5 complete CLAUDE.md configs',
+      'Code review agent',
+      'Documentation agent',
+      'Testing agent',
+      'Refactoring agent',
+      'Security audit agent',
+      'Integration guide'
     ],
-    popular: true
+    popular: true,
+    stripeLink: undefined // Will be set once Stripe Payment Link is created
   },
   {
-    id: 'autonomous-ops',
-    name: 'Autonomous Operations Guide',
+    id: 'autonomous-ops-system',
+    name: 'Autonomous Operations System',
     description: 'Run AI agents continuously without human intervention. Self-analyze, self-correct, adapt.',
-    price: 39,
-    category: 'agent',
+    price: 79,
+    category: 'professional',
     features: [
-      'Iteration cycle framework',
+      'Loop prevention guardrails',
       'Self-analysis protocol',
-      'Decision trees',
-      'Context management',
-      'Emergency procedures'
+      'Progress tracking system',
+      'Error recovery patterns',
+      'Session handoff templates',
+      'Escalation procedures'
     ]
   },
   {
-    id: 'ceo-framework',
-    name: 'CEO/Overseer Framework',
-    description: 'Multi-agent orchestration system with hierarchical management structure.',
-    price: 49,
-    category: 'system',
+    id: 'multi-agent-orchestrator',
+    name: 'Multi-Agent Orchestrator',
+    description: 'Coordinate multiple AI agents with hierarchical management. CEO/worker patterns.',
+    price: 99,
+    category: 'professional',
     features: [
       'Hierarchical agent architecture',
-      'Communication protocols',
+      'Inter-agent communication',
+      'Task delegation system',
       'Performance metrics',
-      'Continuous improvement loop',
+      'Conflict resolution',
       'Emergency protocols'
     ],
     popular: true
   },
   {
-    id: 'brainstorm-agent',
-    name: 'Brainstorm Agent',
-    description: 'Continuous idea generation and market research automation.',
-    price: 19,
-    category: 'agent',
-    features: [
-      'Research target list',
-      'Execution loop',
-      'Output format templates',
-      'Competitor analysis'
-    ]
-  },
-  {
-    id: 'monitoring-agent',
-    name: 'Monitoring & Metrics Agent',
-    description: 'Track AI agent performance and business KPIs with actionable insights.',
-    price: 29,
-    category: 'agent',
-    features: [
-      'Performance metrics',
-      'Daily/weekly reports',
-      'Alert thresholds',
-      'Trend analysis'
-    ]
-  },
-  {
     id: 'complete-system',
-    name: 'Company Overseer Complete',
-    description: 'Full end-to-end AI automation system. Everything you need to run autonomous agents.',
+    name: 'Substratia Complete Bundle',
+    description: 'Everything we offer. All systems, all updates, priority support.',
     price: 199,
-    category: 'system',
+    category: 'enterprise',
     features: [
-      'All agent templates',
-      'Browser automation safety',
-      'Session handoff system',
-      'Platform diversification',
-      'Full source code',
-      'Email support'
+      'All current systems included',
+      'All future systems included',
+      'Priority email support',
+      'Private Discord access',
+      'Custom config review (1x)',
+      'Lifetime updates'
     ],
     popular: true
   }
 ]
 
 export default function TemplatesPage() {
-  const agents = templates.filter(t => t.category === 'agent')
-  const systems = templates.filter(t => t.category === 'system')
+  const starter = templates.filter(t => t.category === 'starter')
+  const professional = templates.filter(t => t.category === 'professional')
+  const enterprise = templates.filter(t => t.category === 'enterprise')
 
   return (
     <main className="min-h-screen text-white">
@@ -112,13 +92,13 @@ export default function TemplatesPage() {
         {/* Hero */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-1 bg-forge-purple/20 border border-forge-purple/50 rounded-full text-sm text-forge-purple mb-4">
-            Battle-tested in production
+            Production-ready agent systems
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Premium Agent <span className="text-forge-cyan">Templates</span>
+            AI Agent <span className="text-forge-cyan">Systems</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-            Skip months of trial and error. Use the same templates powering real AI systems in production today.
+            Complete, documented systems for building production AI agents. Not templates - full solutions.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
@@ -137,32 +117,45 @@ export default function TemplatesPage() {
               <svg className="w-5 h-5 text-forge-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              14-day money-back
+              30-day money-back
             </div>
           </div>
         </div>
 
-        {/* Agent Templates */}
+        {/* Starter */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <span className="text-forge-cyan">Agent Templates</span>
-            <span className="text-sm font-normal text-gray-400">Individual agents for specific tasks</span>
+            <span className="text-forge-cyan">Starter</span>
+            <span className="text-sm font-normal text-gray-400">Get started with AI agent development</span>
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {agents.map(template => (
+            {starter.map(template => (
               <TemplateCard key={template.id} template={template} />
             ))}
           </div>
         </section>
 
-        {/* System Bundles */}
+        {/* Professional */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <span className="text-forge-purple">System Bundles</span>
-            <span className="text-sm font-normal text-gray-400">Complete multi-agent solutions</span>
+            <span className="text-forge-purple">Professional</span>
+            <span className="text-sm font-normal text-gray-400">Advanced systems for production use</span>
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {systems.map(template => (
+            {professional.map(template => (
+              <TemplateCard key={template.id} template={template} />
+            ))}
+          </div>
+        </section>
+
+        {/* Enterprise */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <span className="text-yellow-400">Enterprise</span>
+            <span className="text-sm font-normal text-gray-400">Complete bundle with support</span>
+          </h2>
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {enterprise.map(template => (
               <TemplateCard key={template.id} template={template} />
             ))}
           </div>
@@ -187,10 +180,6 @@ export default function TemplatesPage() {
 }
 
 function TemplateCard({ template }: { template: Template }) {
-  const gumroadUrl = template.gumroadId
-    ? `https://promptforge.gumroad.com/l/${template.gumroadId}`
-    : '#coming-soon'
-
   return (
     <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-forge-purple/50 transition-all relative">
       {template.popular && (
@@ -212,9 +201,9 @@ function TemplateCard({ template }: { template: Template }) {
 
       <div className="flex items-center justify-between">
         <span className="text-2xl font-bold">${template.price}</span>
-        {template.gumroadId ? (
+        {template.stripeLink ? (
           <a
-            href={gumroadUrl}
+            href={template.stripeLink}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 bg-forge-purple hover:bg-forge-purple/80 rounded-lg font-medium transition-all"
