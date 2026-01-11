@@ -10,9 +10,9 @@ export default function Nav() {
   const links = [
     { href: '/templates', label: 'Memory' },
     { href: '/tools', label: 'Tools' },
-    { href: '/builder', label: 'Builder' },
+    { href: '/reviews', label: 'Reviews' },
+    { href: '/consulting', label: 'Consulting' },
     { href: '/blog', label: 'Blog' },
-    { href: 'https://skyceres.substack.com', label: 'Newsletter', external: true },
     { href: '/docs', label: 'Docs' },
   ]
 

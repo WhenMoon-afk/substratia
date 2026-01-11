@@ -33,7 +33,7 @@ export default function Home() {
 
       if (res.ok) {
         setStatus('success')
-        setMessage("You're on the list! We'll notify you when Pro launches.")
+        setMessage("You're in! Check your inbox for weekly tips.")
         setEmail('')
       } else {
         setStatus('error')
@@ -308,62 +308,79 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pro Teaser */}
-      <section id="waitlist" className="relative z-10 py-24">
+      {/* Consulting CTA */}
+      <section id="consulting" className="relative z-10 py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="gradient-border rounded-2xl p-8 md:p-12 text-center">
-              <div className="inline-block px-4 py-1 bg-forge-purple/20 border border-forge-purple/50 rounded-full text-sm text-forge-purple mb-6">
-                Coming Soon
+              <div className="inline-block px-4 py-1 bg-forge-cyan/20 border border-forge-cyan/50 rounded-full text-sm text-forge-cyan mb-6">
+                Expert Help Available
               </div>
               <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
-                Substratia <span className="text-forge-cyan">Pro</span>
+                Need Help with <span className="text-forge-cyan">Claude Code</span>?
               </h2>
-              <p className="text-gray-300 mb-4 max-w-xl mx-auto">
-                The free tier is free forever. Pro adds the convenience of managed infrastructure:
+              <p className="text-gray-300 mb-6 max-w-xl mx-auto">
+                From initial setup to team training, get expert guidance from someone who uses
+                Claude Code daily and builds tools for the community.
               </p>
               <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm text-gray-400">
-                <span className="px-3 py-1 bg-white/5 rounded-full">Cloud sync across devices</span>
-                <span className="px-3 py-1 bg-white/5 rounded-full">Memory dashboard</span>
-                <span className="px-3 py-1 bg-white/5 rounded-full">Automatic backups</span>
+                <span className="px-3 py-1 bg-white/5 rounded-full">Setup Sessions</span>
+                <span className="px-3 py-1 bg-white/5 rounded-full">Team Workshops</span>
+                <span className="px-3 py-1 bg-white/5 rounded-full">Ongoing Advisory</span>
               </div>
-              <p className="text-gray-400 mb-8 text-sm max-w-lg mx-auto">
-                Like Tailscale: fully functional locally, managed service for convenience.
-                Join the waitlist to help shape what we build.
-              </p>
-
-              {status === 'success' ? (
-                <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300 max-w-md mx-auto">
-                  {message}
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:border-forge-cyan transition-all"
-                  />
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-xl font-semibold transition-all disabled:opacity-50 glow-purple"
-                  >
-                    {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
-                  </button>
-                </form>
-              )}
-
-              {status === 'error' && (
-                <p className="mt-4 text-red-400 text-sm">{message}</p>
-              )}
-
-              <p className="mt-8 text-sm text-gray-500">
-                Pricing details when we launch
-              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/consulting"
+                  className="px-8 py-4 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:bg-forge-cyan/90 transition-all glow-cyan"
+                >
+                  View Services
+                </Link>
+                <Link
+                  href="/tools/cheat-sheet"
+                  className="px-8 py-4 glass hover:bg-white/10 rounded-xl font-semibold transition-all"
+                >
+                  Free Cheat Sheet
+                </Link>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section id="waitlist" className="relative z-10 py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
+            <p className="text-gray-400 mb-6">
+              Get weekly Claude Code tips, new tool announcements, and best practices.
+            </p>
+            {status === 'success' ? (
+              <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300">
+                {message}
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:border-forge-cyan transition-all"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-xl font-semibold transition-all disabled:opacity-50"
+                >
+                  {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                </button>
+              </form>
+            )}
+            {status === 'error' && (
+              <p className="mt-4 text-red-400 text-sm">{message}</p>
+            )}
           </div>
         </div>
       </section>
@@ -452,9 +469,8 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
               <Link href="/templates" className="hover:text-white transition-all">Memory</Link>
               <Link href="/tools" className="hover:text-white transition-all">Tools</Link>
-              <Link href="/builder" className="hover:text-white transition-all">Builder</Link>
+              <Link href="/consulting" className="hover:text-white transition-all">Consulting</Link>
               <Link href="/blog" className="hover:text-white transition-all">Blog</Link>
-              <a href="https://skyceres.substack.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all">Newsletter</a>
               <Link href="/docs" className="hover:text-white transition-all">Docs</Link>
               <a href="https://github.com/WhenMoon-afk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all">GitHub</a>
             </div>

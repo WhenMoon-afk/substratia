@@ -1,0 +1,21 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Best AI Image Generators 2026 - Midjourney vs DALL-E vs Stable Diffusion | Substratia',
+  description: 'Comprehensive comparison of AI image generators in 2026. Midjourney v6, DALL-E 3, Stable Diffusion XL, Grok, Flux, and more. Pricing, quality, features compared.',
+  keywords: 'best AI image generator 2026, Midjourney vs DALL-E, Stable Diffusion comparison, Grok image generator, Flux AI, AI art generator comparison, image generation AI',
+  openGraph: {
+    title: 'Best AI Image Generators 2026 - Complete Comparison',
+    description: 'Midjourney vs DALL-E 3 vs Stable Diffusion vs Grok. Which AI image generator is best for you?',
+    type: 'article',
+    url: 'https://substratia.io/reviews/ai-image-generators',
+  },
+}
+
+export default function AIImageGeneratorsLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return children
+}

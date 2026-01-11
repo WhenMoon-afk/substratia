@@ -2,12 +2,60 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Free AI Tools - Token Counter, Prompt Library | Substratia',
-  description: 'Free tools for AI developers: token counter, prompt library, CLAUDE.md builder. Estimate costs, manage context, improve your AI workflow.',
-  keywords: 'token counter, claude token counter, gpt token counter, AI tools, prompt library, context window calculator',
+  title: 'Free AI Tools - Stack Builder, Claude Code Calculator, Prompt Optimizer | Substratia',
+  description: 'Free tools for developers: stack builder, Claude Code cost calculator, prompt optimizer, token counter, image/video prompt builders, markdown tools. No signup required.',
+  keywords: 'stack builder, tech stack selector, Claude Code cost, Claude Code prompts, ultrathink, token counter, AI tools, full stack builder, web development stack',
 }
 
 const tools = [
+  {
+    name: 'Claude Code Cost Calculator',
+    description: 'Track session costs, compare API vs subscription pricing. Find your most cost-effective option.',
+    href: '/tools/cost-calculator',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+    color: 'cyan',
+    badge: 'New',
+  },
+  {
+    name: 'Claude Code Prompt Optimizer',
+    description: 'Build optimized prompts with thinking modes (ultrathink, thinkhard), autonomous loops, and snippets.',
+    href: '/tools/prompt-optimizer',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+    color: 'purple',
+    badge: 'New',
+  },
+  {
+    name: 'Claude Code Cheat Sheet',
+    description: 'Essential reference: slash commands, shortcuts, CLAUDE.md patterns, MCP config. Print or save as PDF.',
+    href: '/tools/cheat-sheet',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+    color: 'cyan',
+    badge: 'Free',
+  },
+  {
+    name: 'Stack Builder',
+    description: 'Build your full-stack visually. Select technologies, check compatibility, export for AI analysis.',
+    href: '/tools/stack-builder',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+    ),
+    color: 'cyan',
+    badge: 'New',
+  },
   {
     name: 'Token Counter',
     description: 'Count tokens, estimate costs, and check context window usage for Claude, GPT-4, and other models.',
@@ -17,7 +65,7 @@ const tools = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
       </svg>
     ),
-    color: 'cyan',
+    color: 'purple',
     badge: 'Popular',
   },
   {
@@ -53,6 +101,55 @@ const tools = [
       </svg>
     ),
     color: 'purple',
+  },
+  {
+    name: 'Image Prompt Generator',
+    description: 'Build AI image prompts visually. 50+ style presets, negative prompts, platform-specific output.',
+    href: '/tools/image-prompt-generator',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+    color: 'cyan',
+    badge: 'New',
+  },
+  {
+    name: 'Video Prompt Timeline',
+    description: 'Build video prompts scene-by-scene. 7 keyframes, moment library, platform export.',
+    href: '/tools/video-prompt-timeline',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+    ),
+    color: 'purple',
+    badge: 'New',
+  },
+  {
+    name: 'Markdown Preview',
+    description: 'Live markdown editor with instant preview. Edit on the left, see rendered output on the right.',
+    href: '/tools/markdown-preview',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      </svg>
+    ),
+    color: 'cyan',
+    badge: 'New',
+  },
+  {
+    name: 'Markdown Stripper',
+    description: 'Remove all markdown formatting instantly. Paste markdown, get clean plain text.',
+    href: '/tools/markdown-stripper',
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+      </svg>
+    ),
+    color: 'purple',
+    badge: 'New',
   },
 ]
 

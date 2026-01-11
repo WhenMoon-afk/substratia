@@ -9,6 +9,15 @@ export const metadata: Metadata = {
 
 const posts = [
   {
+    slug: 'context-management-guide',
+    title: 'The Ultimate Guide to Claude Code Context Management',
+    excerpt: 'Master context window management in Claude Code. Techniques for preserving context, avoiding compaction issues, and maximizing your AI coding sessions.',
+    date: '2026-01-11',
+    readTime: '12 min read',
+    tags: ['Guide', 'Claude Code', 'Deep Dive'],
+    featured: true,
+  },
+  {
     slug: 'mirror-demons',
     title: 'Mirror Demons: How AI Chatbots Can Amplify Delusions',
     excerpt: 'What happens when an AI\'s core directive to be "helpful and agreeable" meets a user losing their grip on reality? Our research reveals a disturbing answer.',

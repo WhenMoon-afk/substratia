@@ -33,9 +33,10 @@ git add -A && git commit -m "feat: description" && git push origin master
 
 ## Current Content (as of 2026-01-11)
 
-### Blog (10 posts)
+### Blog (11 posts)
 | Slug | Title | Type |
 |------|-------|------|
+| `context-management-guide` | The Ultimate Guide to Claude Code Context Management | Guide (Featured) |
 | `mirror-demons` | Mirror Demons: How AI Chatbots Can Amplify Delusions | Original Research |
 | `eleanor-chen-effect` | The Eleanor Chen Effect | Original Research |
 | `why-fts5-over-embeddings` | Why We Chose FTS5 Over Embeddings | Architecture |
@@ -47,22 +48,40 @@ git add -A && git commit -m "feat: description" && git push origin master
 | `how-to-build-claude-agents` | How to Build Claude Agents | Tutorial |
 | `agents-md-vs-claude-md` | AGENTS.md vs CLAUDE.md | Tutorial |
 
-### Tools (4 tools)
+### Tools (12 tools)
 | Tool | Path | Description |
 |------|------|-------------|
+| Claude Code Cheat Sheet | `/tools/cheat-sheet` | Commands, shortcuts, CLAUDE.md patterns, MCP config (print/PDF) |
+| Claude Code Cost Calculator | `/tools/cost-calculator` | Track session costs, compare API vs subscription pricing |
+| Claude Code Prompt Optimizer | `/tools/prompt-optimizer` | Build prompts with thinking modes, autonomous loops, snippets |
+| Stack Builder | `/tools/stack-builder` | Full-stack tech selector with compatibility checks, AI analysis export |
 | Token Counter | `/tools/token-counter` | Count tokens, estimate costs for Claude/GPT-4 |
 | Prompt Library | `/tools/prompts` | 20 curated prompts, click to copy |
 | Seed Maker | `/tools/seed-maker` | High-entropy random strings from mouse movements |
+| Image Prompt Generator | `/tools/image-prompt-generator` | Visual prompt builder for AI image generation (50+ presets) |
+| Video Prompt Timeline | `/tools/video-prompt-timeline` | Frame-by-frame video prompt storyboard (7 keyframes) |
+| Markdown Preview | `/tools/markdown-preview` | Live markdown editor with instant preview (Obsidian-style) |
+| Markdown Stripper | `/tools/markdown-stripper` | Remove all markdown formatting instantly |
 | AgentForge Builder | `/builder` | Drag-and-drop CLAUDE.md builder |
 
+### Reviews (4 comparisons)
+| Comparison | Path | Tools Compared |
+|------------|------|----------------|
+| AI Coding Assistants | `/reviews/ai-coding-assistants` | Claude Code, Cursor, Copilot, Codeium, Windsurf |
+| Markdown Editors | `/reviews/markdown-editors` | Obsidian, Notion, Typora, VS Code, iA Writer |
+| AI Image Generators | `/reviews/ai-image-generators` | Midjourney, DALL-E 3, Stable Diffusion, Grok, Flux |
+| AI Video Generators | `/reviews/ai-video-generators` | Runway, Pika, Luma, Kling, Grok |
+
 ### Pages
-- `/` - Landing page (memory infrastructure)
+- `/` - Landing page (memory infrastructure + consulting CTA)
+- `/consulting` - **Consulting services** (setup, training, advisory)
 - `/templates` - Memory tools (momentum, memory-mcp)
-- `/tools` - Free AI tools index
+- `/tools` - Free AI tools index (12 tools)
+- `/reviews` - AI tool comparisons index
 - `/builder` - AgentForge drag-and-drop builder
-- `/blog` - Blog index
+- `/blog` - Blog index (11 posts)
 - `/docs` - Documentation
-- `/pro` - Pro tier waitlist (exploratory, not launched)
+- `/pro` - Pro tier waitlist (de-emphasized)
 - `/pricing` - Pricing page (de-emphasized)
 
 ---
@@ -100,14 +119,20 @@ src/
 │   │   ├── page.tsx          # Tools index
 │   │   ├── token-counter/
 │   │   ├── prompts/
-│   │   └── seed-maker/
+│   │   ├── seed-maker/
+│   │   ├── image-prompt-generator/  # AI image prompt builder
+│   │   ├── video-prompt-timeline/   # Video storyboard builder
+│   │   ├── markdown-preview/        # Live markdown editor
+│   │   └── markdown-stripper/       # Markdown to plain text
 │   └── layout.tsx            # Root layout with metadata
 ├── components/
 │   ├── Nav.tsx               # Global navigation
 │   ├── AIAssistant.tsx       # Builder sidebar
 │   └── DraggableCapability.tsx
 ├── data/
-│   └── presets.ts            # 28 capabilities + 13 rulesets
+│   ├── presets.ts            # 28 capabilities + 13 rulesets
+│   ├── imagePromptPresets.ts # Image gen style presets (50+)
+│   └── videoPromptPresets.ts # Video timeline moment presets
 └── globals.css               # Tailwind + custom CSS variables
 ```
 
@@ -144,26 +169,38 @@ forge-cyan:   #00d9ff / #00d4ff (brand accent)
 Current nav links (src/components/Nav.tsx):
 1. Memory (/templates)
 2. Tools (/tools)
-3. Builder (/builder)
-4. Blog (/blog)
-5. Docs (/docs)
-6. GitHub (external)
+3. Reviews (/reviews)
+4. Consulting (/consulting) - **Primary monetization path**
+5. Blog (/blog)
+6. Docs (/docs)
+7. GitHub (external)
 
 Footer links:
-- Memory, Tools, Builder, Blog, Docs
+- Memory, Tools, Consulting, Blog, Docs, GitHub
 
 ---
 
-## Pro Tier Status
+## Business Strategy (Updated 2026-01-11)
 
-**Current State**: Exploratory / Waitlist only
+**Pivot Complete**: From "Pro tier SaaS" to "Consulting + Free Tools"
 
-The /pro page collects emails but makes no firm promises. Language is intentionally soft:
-- "We're exploring what Pro features would be most valuable"
-- "Potential Tiers" not "Pricing"
-- "What We're Exploring" not "What's Included"
+**Why the pivot:**
+- Mem0 has $24M funding and 41K GitHub stars (we have 48)
+- Pro tier features (cloud sync, backups) are easily DIY-able
+- Course market is saturated (Udemy, Coursera, Anthropic official)
+- Consulting can start immediately with no infrastructure
 
-**Why**: No backend infrastructure exists yet. Claims must be achievable before launch.
+**Revenue Model:**
+- Free tools drive traffic and establish authority
+- Consulting generates revenue ($150-500/hr)
+- Memory tools (momentum, memory-mcp) remain free forever as lead generation
+
+**Consulting Services (live at /consulting):**
+- Individual: Audit ($150), Setup ($200), Deep Dive ($350)
+- Team: Workshop ($1,500), Bootcamp ($3,000)
+- Advisory: Light ($500/mo), Standard ($1,200/mo), Premium ($2,500/mo)
+
+**Strategic Documents:** See `/planning/ACTION_PLAN_FINAL.md` for 90-day execution plan.
 
 ---
 
@@ -181,15 +218,141 @@ The /pro page collects emails but makes no firm promises. Language is intentiona
 
 ## Next Tasks (Session Continuity)
 
-1. Unify momentum + memory-mcp into single Bun-native package
-2. Add dynamic stats (GitHub stars, npm downloads)
-3. Add user testimonials section
-4. Cross-post Mirror Demons to Substack
-5. Execute traffic playbook (Reddit, HN)
+### Immediate Priority (Community Outreach)
+1. **Execute community posts** - See `/marketing/COMMUNITY_POSTS.md` for ready-to-post content
+2. **First consulting conversation** - Target 1 paid consultation within 2 weeks
+3. **Reddit presence** - Post helpful content to r/ClaudeAI (not promotional)
+
+### Content & Marketing
+4. **Product Hunt launch** - Submit substratia.io/tools
+5. **Twitter/X presence** - Daily Claude Code tips (see COMMUNITY_POSTS.md)
+6. **Discord presence** - Join Claude Code server, be helpful
+
+### Future Tool Enhancements
+**Video Prompt Timeline**: Drag-and-drop reordering, JSON export, URL sharing
+**Markdown Preview**: Bidirectional HTML→MD conversion, PDF export
+
+### Infrastructure
+7. Performance optimization pass (target: Lighthouse >90)
+8. Mobile responsiveness audit
+
+See `/planning/ACTION_PLAN_FINAL.md` for 90-day strategic plan.
 
 ---
 
 ## Session Log
+
+**2026-01-11** (Session 8 - Strategic Pivot + Consulting Launch):
+- **MAJOR PIVOT**: From "Pro tier SaaS" to "Consulting + Free Tools" model
+- Deep market research completed:
+  - Mem0 competitive analysis ($24M funding, 41K stars)
+  - Claude Code pain points analysis (context loss #1)
+  - Consulting opportunity validation ($150-500/hr rates)
+  - Course market saturation analysis
+- Created 7 strategic planning documents in `/planning/`:
+  - ACTION_PLAN_FINAL.md (90-day execution plan)
+  - STRATEGIC_SYNTHESIS.md, MONETIZATION_REALITY_CHECK.md, etc.
+- **New Pages Created:**
+  - `/consulting` - Full consulting services page with pricing, contact form
+  - `/tools/cheat-sheet` - Claude Code reference (commands, shortcuts, patterns)
+  - `/blog/context-management-guide` - 12-min deep dive (featured post)
+- **Landing Page Updated:**
+  - Replaced "Pro tier waitlist" with "Consulting CTA"
+  - Added newsletter signup section
+  - Footer updated with Consulting link
+- **Navigation Updated:**
+  - Added "Consulting" to main nav, removed "Builder"
+- Created community content in `/marketing/COMMUNITY_POSTS.md`:
+  - Reddit posts (r/ClaudeAI)
+  - Twitter/X threads and singles
+  - Discord introduction
+  - LinkedIn, HN, Dev.to outlines
+- Build verified: 41 pages total
+
+**2026-01-11** (Session 7 - Claude Code Toolkit + Stack Builder):
+- Added Stack Builder (`/tools/stack-builder`):
+  - 10 technology categories (Frontend, Styling, State, Backend, Database, ORM, Auth, Hosting, CI/CD, Monitoring)
+  - 60+ technology options with pros/cons/best-for
+  - Compatibility warnings system
+  - Export: AI analysis prompt, Markdown, CSV, JSON
+  - Visual step-through interface with progress bar
+  - Hover tooltips with detailed tech info
+- Added 2 new Claude Code tools:
+  - Claude Code Cost Calculator (`/tools/cost-calculator`):
+    - Session tracking with localStorage persistence
+    - 7-day history visualization
+    - API vs subscription comparison (Max Pro, Max, Pro)
+    - Claude 4.5 Opus, Sonnet, Haiku pricing
+    - Export sessions as JSON
+  - Claude Code Prompt Optimizer (`/tools/prompt-optimizer`):
+    - Thinking modes: normal, thinkhard, ultrathink
+    - 12 prompt snippets in 5 categories:
+      - Autonomous loops (3 patterns)
+      - Parallel execution (3 patterns)
+      - Simulator subagents (3 patterns)
+      - Structure templates (2 patterns)
+      - Interrupt patterns (2 patterns)
+    - Real-time prompt generation with copy to clipboard
+    - Character count and snippet stats
+- Updated tools index page with new tools at top
+- Updated sitemap with new pages
+- Added 2 new comparison pages:
+  - AI Coding Assistants (Claude Code, Cursor, Copilot, Codeium, Windsurf)
+  - Markdown Editors (Obsidian, Notion, Typora, VS Code, iA Writer)
+- Build verified: 38 pages total
+
+**2026-01-11** (Session 6 - Major Tools Expansion):
+- Added 4 new tools:
+  - Image Prompt Generator (50+ presets, 5 platforms)
+  - Video Prompt Timeline (7 keyframes, favorites system)
+  - Markdown Preview (dual-panel Obsidian-style editor)
+  - Markdown Stripper (instant formatting removal)
+- Created Reviews section with:
+  - Reviews index page
+  - AI Image Generators comparison (5 tools)
+  - AI Video Generators comparison (5 tools)
+- Added Reviews to main navigation
+- Created comprehensive strategic plan (`/planning/TOOLS_EXPANSION_PLAN.md`):
+  - Claude Code Prompt Optimizer (thinking modes, snippets)
+  - Claude Code Cost Calculator (session tracking, charts)
+  - Stack Builder (PC Part Picker for web apps)
+  - 3 YouTube video scripts outlined
+  - UX/performance optimization targets
+- Build verified: 33 pages total
+- All tools cross-linked with CTAs
+
+**2026-01-11** (Session 6 - Continued - AI Media & Markdown Tools):
+- Added Image Prompt Generator (`/tools/image-prompt-generator`):
+  - 50+ style presets across 5 categories (Photography, Art, Aesthetic, Lighting, Technical)
+  - Platform selector (nano-banana-pro default, Grok, Midjourney, DALL-E, Stable Diffusion)
+  - 5 intensity sliders (Style, Detail, Realism, Saturation, Contrast)
+  - 7 negative prompt presets
+  - Platform-specific output formatting
+  - Copy/download functionality
+- Added Video Prompt Timeline (`/tools/video-prompt-timeline`):
+  - 7 keyframe slots at 5-second intervals (0-30 seconds)
+  - Platform selector (Grok default, Runway, Pika, Luma, Kling)
+  - 30+ moment presets in 4 categories (Actions, Camera, Transitions, Atmosphere)
+  - Motion and transition controls per keyframe
+  - Save/load favorites (localStorage)
+  - Global style input
+- Added Markdown Preview (`/tools/markdown-preview`):
+  - Live dual-panel editor (Edit mode / Reading mode)
+  - View toggle (Edit / Split / Preview)
+  - Full markdown syntax support (headers, bold, italic, links, code, lists, blockquotes)
+  - Copy raw markdown or HTML output
+  - Word/character/line count stats
+- Added Markdown Stripper (`/tools/markdown-stripper`):
+  - Paste markdown, get clean plain text instantly
+  - Strips headers, bold, italic, links, code, lists, blockquotes, HTML
+  - Shows character reduction stats
+  - Copy/paste buttons
+- Created data files:
+  - `src/data/imagePromptPresets.ts` - Style presets, negative presets, formatters
+  - `src/data/videoPromptPresets.ts` - Moment presets, timeline helpers
+- Updated tools index page with all 4 new tools (marked as "New")
+- Updated sitemap.xml with new pages
+- Build verified: 30 pages total
 
 **2026-01-11** (Session 5 - SEO improvements):
 - Added SEO metadata layouts for all client-side pages:
