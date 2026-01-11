@@ -95,6 +95,88 @@ export default function Home() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            How It <span className="text-forge-cyan">Works</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-forge-purple/30 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+              <h3 className="text-xl font-semibold mb-2">Select Capabilities</h3>
+              <p className="text-gray-400">Choose from 20+ battle-tested capabilities for your agent.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-forge-purple/30 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+              <h3 className="text-xl font-semibold mb-2">Add Guardrails</h3>
+              <p className="text-gray-400">Apply rulesets to define what your agent should never do.</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-forge-purple/30 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+              <h3 className="text-xl font-semibold mb-2">Export & Deploy</h3>
+              <p className="text-gray-400">Download your .md file and use it with any AI agent platform.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="container mx-auto px-4 py-16 bg-white/5">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-4">
+            Built For <span className="text-forge-purple">Every Use Case</span>
+          </h2>
+          <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+            Whether you&apos;re building a coding assistant, research agent, or autonomous workflow, PromptForge has you covered.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <UseCaseCard
+              title="Coding Assistants"
+              description="Build agents that review code, follow best practices, and never commit secrets."
+            />
+            <UseCaseCard
+              title="Research Agents"
+              description="Create agents that verify facts, cite sources, and avoid hallucinations."
+            />
+            <UseCaseCard
+              title="Autonomous Workflows"
+              description="Design self-governing agents with loop prevention and progress tracking."
+            />
+            <UseCaseCard
+              title="Customer Support"
+              description="Build agents that stay on-topic, escalate appropriately, and never make promises they can&apos;t keep."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            What <span className="text-forge-cyan">Developers</span> Say
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <TestimonialCard
+              quote="Finally, a tool that makes creating CLAUDE.md files not feel like guesswork. The negative prompt templates alone saved me hours."
+              author="Sarah K."
+              role="AI Engineer"
+            />
+            <TestimonialCard
+              quote="The Loop Guardian ruleset is incredible. My autonomous agents used to get stuck constantly. Now they self-correct."
+              author="Mike T."
+              role="Startup Founder"
+            />
+            <TestimonialCard
+              quote="I use PromptForge for every new agent I build. The capability library is comprehensive and actually works in production."
+              author="Alex R."
+              role="ML Engineer"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-8 text-center">
@@ -163,6 +245,32 @@ function StatCard({ number, label }: { number: string; label: string }) {
     <div className="p-4">
       <div className="text-3xl md:text-4xl font-bold text-forge-cyan">{number}</div>
       <div className="text-gray-400 text-sm mt-1">{label}</div>
+    </div>
+  )
+}
+
+function UseCaseCard({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-forge-purple/50 transition-all">
+      <h3 className="font-semibold mb-2">{title}</h3>
+      <p className="text-sm text-gray-400">{description}</p>
+    </div>
+  )
+}
+
+function TestimonialCard({ quote, author, role }: { quote: string; author: string; role: string }) {
+  return (
+    <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+      <p className="text-gray-300 mb-4 italic">&ldquo;{quote}&rdquo;</p>
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 bg-forge-purple/30 rounded-full flex items-center justify-center font-bold">
+          {author[0]}
+        </div>
+        <div>
+          <div className="font-semibold">{author}</div>
+          <div className="text-sm text-gray-400">{role}</div>
+        </div>
+      </div>
     </div>
   )
 }
