@@ -15,7 +15,7 @@
 
 ### Free Tools
 - **Token Counter** - Estimate costs for Claude, GPT-4, and other models
-- **Prompt Library** - 16 curated prompts for productivity and creativity
+- **Prompt Library** - 20 curated prompts for productivity and creativity
 - **Seed Maker** - High-entropy random string generator
 
 ### Blog
