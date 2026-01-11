@@ -72,8 +72,8 @@ export default function ProPage() {
             </div>
 
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Cloud sync, memory dashboard, and team features for professionals
-              who rely on AI memory tools every day.
+              We&apos;re exploring what Pro features would be most valuable.
+              Join the waitlist to help shape what we build next.
             </p>
 
             {/* Email Capture */}
@@ -163,7 +163,7 @@ export default function ProPage() {
       <section className="relative z-10 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
-            What&apos;s <span className="text-forge-purple">Included</span>
+            What We&apos;re <span className="text-forge-purple">Exploring</span>
           </h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <FeatureCard
@@ -228,10 +228,10 @@ export default function ProPage() {
       <section className="relative z-10 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4">
-            Simple <span className="text-forge-cyan">Pricing</span>
+            Potential <span className="text-forge-cyan">Tiers</span>
           </h2>
           <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">
-            Free tools stay free forever. Pro adds cloud features for power users.
+            Free tools stay free forever. We&apos;re exploring what Pro features would be worth paying for.
           </p>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="glass rounded-2xl p-6">

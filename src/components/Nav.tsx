@@ -11,7 +11,7 @@ export default function Nav() {
     { href: '/templates', label: 'Memory' },
     { href: '/tools', label: 'Tools' },
     { href: '/builder', label: 'Builder' },
-    { href: '/pricing', label: 'Pricing' },
+    { href: '/blog', label: 'Blog' },
     { href: '/docs', label: 'Docs' },
   ]
 

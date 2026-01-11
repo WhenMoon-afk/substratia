@@ -320,8 +320,8 @@ export default function Home() {
                 Substratia <span className="text-forge-cyan">Pro</span>
               </h2>
               <p className="text-gray-300 mb-8 max-w-xl mx-auto">
-                Cloud sync across devices. Memory dashboard. Automatic backups.
-                Team features. Everything you need to scale.
+                We&apos;re exploring cloud sync, dashboards, and team features.
+                Join the waitlist to help shape what we build.
               </p>
 
               {status === 'success' ? (
@@ -352,10 +352,9 @@ export default function Home() {
                 <p className="mt-4 text-red-400 text-sm">{message}</p>
               )}
 
-              <div className="mt-8 flex justify-center gap-8 text-sm text-gray-500">
-                <span>$15/month Pro</span>
-                <span>$35/user Teams</span>
-              </div>
+              <p className="mt-8 text-sm text-gray-500">
+                Pricing details when we launch
+              </p>
             </div>
           </div>
         </div>
@@ -445,7 +444,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
               <Link href="/templates" className="hover:text-white transition-all">Tools</Link>
               <Link href="/builder" className="hover:text-white transition-all">Builder</Link>
-              <Link href="/pricing" className="hover:text-white transition-all">Pricing</Link>
+              <Link href="/blog" className="hover:text-white transition-all">Blog</Link>
               <Link href="/docs" className="hover:text-white transition-all">Docs</Link>
               <a href="https://github.com/WhenMoon-afk" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-all">GitHub</a>
             </div>
