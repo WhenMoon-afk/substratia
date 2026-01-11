@@ -2,8 +2,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Documentation - PromptForge',
-  description: 'Learn how to use PromptForge to build powerful AI agents. Quick start guide, tutorials, and reference documentation.',
+  title: 'Documentation - Substratia | Memory Infrastructure for AI',
+  description: 'Learn how to use Substratia tools: momentum for context recovery, memory-mcp for persistent memory, and AgentForge for visual agent configuration.',
 }
 
 interface ContentItem {
@@ -26,8 +26,8 @@ const sections: Section[] = [
     id: 'quick-start',
     content: [
       {
-        title: 'What is PromptForge?',
-        text: 'PromptForge is a visual builder for creating AI agent configuration files (CLAUDE.md and agents.md). These files define how AI agents behave, what they can do, and what they should avoid.',
+        title: 'What is AgentForge?',
+        text: 'AgentForge is a visual builder for creating AI agent configuration files (CLAUDE.md and agents.md). These files define how AI agents behave, what they can do, and what they should avoid.',
       },
       {
         title: 'Your First Agent',
@@ -48,7 +48,7 @@ const sections: Section[] = [
     content: [
       {
         title: 'CLAUDE.md vs agents.md',
-        text: 'Both file types serve the same purpose: defining agent behavior. CLAUDE.md is the convention for Claude-based agents, while agents.md is a more generic format. PromptForge supports both.',
+        text: 'Both file types serve the same purpose: defining agent behavior. CLAUDE.md is the convention for Claude-based agents, while agents.md is a more generic format. AgentForge supports both.',
       },
       {
         title: 'File Structure',
@@ -76,7 +76,7 @@ const sections: Section[] = [
     content: [
       {
         title: 'What are Capabilities?',
-        text: 'Capabilities define what your agent can do. They are positive instructions that guide behavior. PromptForge includes 20+ built-in capabilities across 5 categories.',
+        text: 'Capabilities define what your agent can do. They are positive instructions that guide behavior. AgentForge includes 20+ built-in capabilities across 5 categories.',
       },
       {
         title: 'Categories',
@@ -173,7 +173,7 @@ export default function DocsPage() {
           <div className="flex-1 min-w-0">
             <h1 className="text-4xl font-bold mb-4">Documentation</h1>
             <p className="text-xl text-gray-400 mb-12">
-              Everything you need to know about building AI agents with PromptForge.
+              Everything you need to know about Substratia&apos;s memory tools and AgentForge builder.
             </p>
 
             {sections.map((section) => (
@@ -222,6 +222,26 @@ export default function DocsPage() {
             <section className="mt-16 pt-8 border-t border-white/10">
               <h2 className="text-2xl font-bold mb-6">Related Resources</h2>
               <div className="grid md:grid-cols-2 gap-4">
+                <a
+                  href="https://github.com/WhenMoon-afk/momentum"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-cyan transition-all"
+                >
+                  <div className="text-forge-cyan text-sm mb-1">GitHub</div>
+                  <div className="font-semibold">momentum</div>
+                  <div className="text-sm text-gray-400 mt-1">Fast context recovery plugin</div>
+                </a>
+                <a
+                  href="https://github.com/WhenMoon-afk/claude-memory-mcp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
+                >
+                  <div className="text-forge-purple text-sm mb-1">GitHub</div>
+                  <div className="font-semibold">memory-mcp</div>
+                  <div className="text-sm text-gray-400 mt-1">Persistent memory MCP server</div>
+                </a>
                 <Link
                   href="/blog/how-to-build-claude-agents"
                   className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
@@ -231,28 +251,12 @@ export default function DocsPage() {
                   <div className="text-sm text-gray-400 mt-1">Complete guide to CLAUDE.md files</div>
                 </Link>
                 <Link
-                  href="/blog/mastering-negative-prompts"
-                  className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
-                >
-                  <div className="text-forge-cyan text-sm mb-1">Blog</div>
-                  <div className="font-semibold">Mastering Negative Prompts</div>
-                  <div className="text-sm text-gray-400 mt-1">Write effective guardrails</div>
-                </Link>
-                <Link
                   href="/templates"
                   className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
                 >
-                  <div className="text-forge-cyan text-sm mb-1">Templates</div>
-                  <div className="font-semibold">Premium Agent Templates</div>
-                  <div className="text-sm text-gray-400 mt-1">Battle-tested configurations</div>
-                </Link>
-                <Link
-                  href="/pricing"
-                  className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
-                >
-                  <div className="text-forge-cyan text-sm mb-1">Pricing</div>
-                  <div className="font-semibold">Plans & Templates</div>
-                  <div className="text-sm text-gray-400 mt-1">Free and Pro options</div>
+                  <div className="text-forge-cyan text-sm mb-1">Tools</div>
+                  <div className="font-semibold">Memory Tools</div>
+                  <div className="text-sm text-gray-400 mt-1">Explore the full ecosystem</div>
                 </Link>
               </div>
             </section>
