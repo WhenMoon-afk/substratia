@@ -201,6 +201,9 @@ The /pro page collects emails but makes no firm promises. Language is intentiona
 - Updated docs page: fixed branding (PromptForge → AgentForge), added memory tool links
 - Removed ALL PromptForge references across entire codebase (replaced with Substratia/AgentForge)
 - Updated blog post CTAs (Premium → Memory Tools)
+- Added JSON-LD structured data for SEO (Organization schema)
+- Fixed sitemap.xml: updated to substratia.io domain, added all pages
+- Fixed robots.txt: updated domain and branding
 
 **2026-01-11** (Session 1):
 - Added Mirror Demons blog post (original research on AI delusion amplification)
