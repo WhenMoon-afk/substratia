@@ -3,18 +3,22 @@ import './globals.css'
 import Nav from '@/components/Nav'
 
 export const metadata: Metadata = {
-  title: 'Substratia AgentForge - Build Powerful AI Agents',
-  description: 'Create agents.md and CLAUDE.md files with our free drag-and-drop builder. Production-ready templates for Claude, GPT, and more. Part of the Substratia plugin ecosystem.',
-  keywords: 'AI agents, CLAUDE.md, agents.md, prompt engineering, Claude Code, AI templates, Substratia, plugin marketplace',
+  title: 'Substratia - Memory Infrastructure for AI | momentum & memory-mcp',
+  description: 'Free, open-source tools that give AI a memory. momentum: context recovery in <5ms (46,000x faster). memory-mcp: persistent memory across sessions. AgentForge: visual agent config builder.',
+  keywords: 'AI memory, Claude memory, context recovery, momentum plugin, memory-mcp, CLAUDE.md, agents.md, AI tools, open source AI, Claude Code plugins, persistent AI memory, MCP server',
   openGraph: {
-    title: 'Substratia AgentForge - Build Powerful AI Agents',
-    description: 'Create agents.md and CLAUDE.md files with our free drag-and-drop builder. Part of Substratia.',
+    title: 'Substratia - Give Your AI a Memory That Works',
+    description: 'Free tools: momentum (46,000x faster context recovery) + memory-mcp (persistent memory). Open source, MIT licensed.',
     type: 'website',
+    url: 'https://substratia.io',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Substratia AgentForge - Build Powerful AI Agents',
-    description: 'Create agents.md and CLAUDE.md files with our free drag-and-drop builder. Part of Substratia.',
+    title: 'Substratia - Memory Infrastructure for AI',
+    description: 'Free, open-source: momentum (context recovery <5ms) + memory-mcp (persistent memory). Stop re-explaining context to Claude.',
+  },
+  alternates: {
+    canonical: 'https://substratia.io',
   },
 }
 
