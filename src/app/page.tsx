@@ -156,7 +156,7 @@ export default function Home() {
                 Snapshot your context, restore in milliseconds. Never lose your working state.
               </p>
               <div className="code-block text-xs mb-4">
-                <code className="text-forge-cyan">/plugin install momentum@whenmoon-afk</code>
+                <code className="text-forge-cyan">/plugin install momentum@substratia-marketplace</code>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-xs text-gray-500">SQLite persistence</span>
