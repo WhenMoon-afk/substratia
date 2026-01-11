@@ -2,12 +2,20 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog - PromptForge | AI Agent Building Tips & Tutorials',
-  description: 'Learn how to build powerful AI agents with our tutorials, tips, and best practices for Claude, GPT, and more.',
-  keywords: 'AI agents, CLAUDE.md, agents.md, prompt engineering, tutorials, Claude Code',
+  title: 'Blog - Substratia | AI Memory Tools & Agent Building',
+  description: 'Tutorials, comparisons, and best practices for AI memory tools, MCP servers, and agent configuration.',
+  keywords: 'MCP memory server, Claude memory, AI agents, CLAUDE.md, prompt engineering, memory-mcp',
 }
 
 const posts = [
+  {
+    slug: 'memory-mcp-vs-alternatives',
+    title: 'Best MCP Memory Servers Compared: memory-mcp vs Alternatives',
+    excerpt: 'Compare the top MCP memory servers for Claude and AI assistants. Find the best persistent memory solution for your needs.',
+    date: '2026-01-11',
+    readTime: '10 min read',
+    tags: ['MCP', 'Comparison', '2026'],
+  },
   {
     slug: 'mastering-negative-prompts',
     title: 'Mastering Negative Prompts: The Secret to Reliable AI Agents',
