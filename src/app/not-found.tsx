@@ -22,10 +22,16 @@ export default function NotFound() {
             Go Home
           </Link>
           <Link
-            href="/builder"
+            href="/tools"
             className="px-6 py-3 border border-white/30 hover:bg-white/10 rounded-lg font-semibold transition-all"
           >
-            Try the Builder
+            Browse Tools
+          </Link>
+          <Link
+            href="/start-here"
+            className="px-6 py-3 border border-white/30 hover:bg-white/10 rounded-lg font-semibold transition-all"
+          >
+            Start Here
           </Link>
         </div>
       </div>
