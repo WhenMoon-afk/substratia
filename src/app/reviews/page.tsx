@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import ShareButton from '@/components/ShareButton'
 
 const comparisons = [
   {
@@ -48,6 +51,9 @@ export default function ReviewsPage() {
   return (
     <main className="min-h-screen text-white">
       <div className="container mx-auto px-4 py-12">
+        <div className="flex justify-end mb-4">
+          <ShareButton title="AI Tool Reviews - Substratia" />
+        </div>
         {/* Header */}
         <div className="max-w-4xl mx-auto text-center mb-12">
           <div className="inline-block px-4 py-1 bg-forge-purple/20 border border-forge-purple/50 rounded-full text-sm text-forge-purple mb-4">

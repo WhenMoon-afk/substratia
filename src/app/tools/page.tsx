@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import ShareButton from '@/components/ShareButton'
 
 const tools = [
   {
@@ -180,6 +181,9 @@ export default function ToolsIndexPage() {
   return (
     <main className="min-h-screen text-white">
       <div className="container mx-auto px-4 py-12">
+        <div className="flex justify-end mb-4">
+          <ShareButton title="Free AI Tools - Substratia" />
+        </div>
         {/* Header */}
         <div className="max-w-4xl mx-auto text-center mb-12">
           <div className="inline-block px-4 py-1 bg-forge-cyan/20 border border-forge-cyan/50 rounded-full text-sm text-forge-cyan mb-4">

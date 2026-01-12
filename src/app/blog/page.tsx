@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
+import ShareButton from '@/components/ShareButton'
 
 const posts = [
   {
@@ -136,6 +137,9 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen text-white">
       <div className="container mx-auto px-4 py-12">
+        <div className="flex justify-end mb-4">
+          <ShareButton title="Blog - Substratia" />
+        </div>
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
