@@ -16,6 +16,15 @@ export const metadata: Metadata = {
   },
 }
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://substratia.io' },
+    { '@type': 'ListItem', position: 2, name: 'Pricing', item: 'https://substratia.io/pricing' },
+  ],
+}
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -60,6 +69,10 @@ export default function PricingLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       {children}
     </>
