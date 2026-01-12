@@ -1,7 +1,15 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import Link from 'next/link'
+import {
+  DndContext,
+  DragOverlay,
+  useDraggable,
+  useDroppable,
+  type DragStartEvent,
+  type DragEndEvent,
+} from '@dnd-kit/core'
 import {
   videoPlatforms,
   motionOptions,
@@ -25,6 +33,78 @@ import {
   type VideoAspectRatio,
 } from '@/data/videoPromptPresets'
 
+// Timeline slot component with drag-and-drop
+function TimelineSlot({
+  timestamp,
+  keyframe,
+  isSelected,
+  onSelect,
+  onRemove,
+  isDragging,
+}: {
+  timestamp: number
+  keyframe?: VideoKeyframe
+  isSelected: boolean
+  onSelect: () => void
+  onRemove: () => void
+  isDragging?: boolean
+}) {
+  const hasContent = keyframe && keyframe.prompt.trim()
+
+  const { attributes, listeners, setNodeRef: setDragRef, transform } = useDraggable({
+    id: timestamp,
+    disabled: !hasContent,
+  })
+
+  const { setNodeRef: setDropRef, isOver } = useDroppable({
+    id: timestamp,
+  })
+
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  } : undefined
+
+  return (
+    <div className="flex flex-col items-center" ref={setDropRef}>
+      <button
+        ref={setDragRef}
+        onClick={onSelect}
+        style={style}
+        {...(hasContent ? { ...attributes, ...listeners } : {})}
+        className={`w-14 h-14 rounded-xl border-2 flex items-center justify-center text-2xl transition-all ${
+          isDragging
+            ? 'opacity-50'
+            : isOver
+              ? 'border-forge-cyan bg-forge-cyan/30 scale-110'
+              : isSelected
+                ? 'border-forge-cyan bg-forge-cyan/20 scale-110'
+                : hasContent
+                  ? 'border-forge-purple bg-forge-purple/20 hover:border-forge-purple/80 cursor-grab active:cursor-grabbing'
+                  : 'border-white/20 bg-white/5 hover:border-white/40'
+        }`}
+      >
+        {keyframe?.emoji || '⬜'}
+      </button>
+
+      <span className={`text-xs mt-2 ${isSelected ? 'text-forge-cyan' : 'text-gray-500'}`}>
+        {timestamp}s
+      </span>
+
+      {hasContent && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            onRemove()
+          }}
+          className="text-xs text-red-400 hover:text-red-300 mt-1"
+        >
+          remove
+        </button>
+      )}
+    </div>
+  )
+}
+
 export default function VideoPromptTimelinePage() {
   const [timeline, setTimeline] = useState<VideoTimeline>(createEmptyTimeline)
   const [selectedSlot, setSelectedSlot] = useState<number | null>(null)
@@ -33,6 +113,26 @@ export default function VideoPromptTimelinePage() {
   const [showFavorites, setShowFavorites] = useState(false)
   const [copied, setCopied] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [shared, setShared] = useState(false)
+  const [jsonCopied, setJsonCopied] = useState(false)
+  const [activeDragId, setActiveDragId] = useState<number | null>(null)
+
+  // Load timeline from URL on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const stateParam = params.get('state')
+    if (stateParam) {
+      try {
+        const decoded = JSON.parse(atob(stateParam))
+        if (decoded && decoded.keyframes) {
+          setTimeline(decoded)
+        }
+      } catch {
+        // Invalid state param, ignore
+      }
+    }
+  }, [])
 
   // Get keyframe for a slot, or create empty placeholder
   const getKeyframeForSlot = useCallback((timestamp: number): VideoKeyframe | undefined => {
@@ -110,6 +210,72 @@ export default function VideoPromptTimelinePage() {
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }, [timeline])
+
+  // Export as JSON
+  const exportJSON = useCallback(async () => {
+    const json = JSON.stringify(timeline, null, 2)
+    await navigator.clipboard.writeText(json)
+    setJsonCopied(true)
+    setTimeout(() => setJsonCopied(false), 2000)
+  }, [timeline])
+
+  // Download as JSON file
+  const downloadJSON = useCallback(() => {
+    const json = JSON.stringify(timeline, null, 2)
+    const blob = new Blob([json], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${timeline.name.replace(/\s+/g, '-').toLowerCase()}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }, [timeline])
+
+  // Share via URL
+  const shareURL = useCallback(async () => {
+    const stateStr = btoa(JSON.stringify(timeline))
+    const shareUrl = `${window.location.origin}${window.location.pathname}?state=${stateStr}`
+    await navigator.clipboard.writeText(shareUrl)
+    setShared(true)
+    setTimeout(() => setShared(false), 2000)
+  }, [timeline])
+
+  // Drag handlers
+  const handleDragStart = useCallback((event: DragStartEvent) => {
+    setActiveDragId(event.active.id as number)
+  }, [])
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event
+    setActiveDragId(null)
+
+    if (!over || active.id === over.id) return
+
+    const fromTimestamp = active.id as number
+    const toTimestamp = over.id as number
+
+    const fromKeyframe = timeline.keyframes.find(k => k.timestamp === fromTimestamp)
+    const toKeyframe = timeline.keyframes.find(k => k.timestamp === toTimestamp)
+
+    if (!fromKeyframe) return
+
+    // Swap keyframes between slots
+    setTimeline(prev => {
+      const newKeyframes = prev.keyframes.filter(
+        k => k.timestamp !== fromTimestamp && k.timestamp !== toTimestamp
+      )
+
+      // Move the dragged keyframe to new timestamp
+      newKeyframes.push({ ...fromKeyframe, timestamp: toTimestamp })
+
+      // If there was a keyframe at the destination, move it to the source
+      if (toKeyframe) {
+        newKeyframes.push({ ...toKeyframe, timestamp: fromTimestamp })
+      }
+
+      return { ...prev, keyframes: newKeyframes }
+    })
+  }, [timeline.keyframes])
 
   // Load from favorites
   const loadFavorite = useCallback((fav: VideoTimeline) => {
@@ -271,58 +437,44 @@ export default function VideoPromptTimelinePage() {
           <h3 className="text-sm font-medium text-gray-400 mb-4 text-center">Timeline (30 seconds)</h3>
 
           {/* Timeline Track */}
-          <div className="relative">
-            {/* Connection Lines */}
-            <div className="absolute top-8 left-0 right-0 h-0.5 bg-white/20" />
+          <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+            <div className="relative">
+              {/* Connection Lines */}
+              <div className="absolute top-8 left-0 right-0 h-0.5 bg-white/20" />
 
-            {/* Keyframe Slots */}
-            <div className="flex justify-between relative z-10">
-              {timelineSlots.map((timestamp) => {
-                const keyframe = getKeyframeForSlot(timestamp)
-                const isSelected = selectedSlot === timestamp
-                const hasContent = keyframe && keyframe.prompt.trim()
+              {/* Keyframe Slots */}
+              <div className="flex justify-between relative z-10">
+                {timelineSlots.map((timestamp) => {
+                  const keyframe = getKeyframeForSlot(timestamp)
+                  const isSelected = selectedSlot === timestamp
 
-                return (
-                  <div key={timestamp} className="flex flex-col items-center">
-                    {/* Slot Button */}
-                    <button
-                      onClick={() => setSelectedSlot(isSelected ? null : timestamp)}
-                      className={`w-14 h-14 rounded-xl border-2 flex items-center justify-center text-2xl transition-all ${
-                        isSelected
-                          ? 'border-forge-cyan bg-forge-cyan/20 scale-110'
-                          : hasContent
-                            ? 'border-forge-purple bg-forge-purple/20 hover:border-forge-purple/80'
-                            : 'border-white/20 bg-white/5 hover:border-white/40'
-                      }`}
-                    >
-                      {keyframe?.emoji || '⬜'}
-                    </button>
-
-                    {/* Timestamp Label */}
-                    <span className={`text-xs mt-2 ${isSelected ? 'text-forge-cyan' : 'text-gray-500'}`}>
-                      {timestamp}s
-                    </span>
-
-                    {/* Remove Button (if has content) */}
-                    {hasContent && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          removeKeyframe(timestamp)
-                        }}
-                        className="text-xs text-red-400 hover:text-red-300 mt-1"
-                      >
-                        remove
-                      </button>
-                    )}
-                  </div>
-                )
-              })}
+                  return (
+                    <TimelineSlot
+                      key={timestamp}
+                      timestamp={timestamp}
+                      keyframe={keyframe}
+                      isSelected={isSelected}
+                      isDragging={activeDragId === timestamp}
+                      onSelect={() => setSelectedSlot(isSelected ? null : timestamp)}
+                      onRemove={() => removeKeyframe(timestamp)}
+                    />
+                  )
+                })}
+              </div>
             </div>
-          </div>
+
+            {/* Drag Overlay */}
+            <DragOverlay>
+              {activeDragId !== null && (
+                <div className="w-14 h-14 rounded-xl border-2 border-forge-cyan bg-forge-cyan/30 flex items-center justify-center text-2xl shadow-lg">
+                  {getKeyframeForSlot(activeDragId)?.emoji || '⬜'}
+                </div>
+              )}
+            </DragOverlay>
+          </DndContext>
 
           <p className="text-center text-gray-500 text-xs mt-4">
-            Click a slot to edit. Filled slots show purple.
+            Click a slot to edit. Drag filled slots to reorder.
           </p>
         </div>
 
@@ -507,7 +659,7 @@ export default function VideoPromptTimelinePage() {
               disabled={!generatedPrompt}
               className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Download
+              Download .txt
             </button>
             <button
               onClick={saveToFavorites}
@@ -519,6 +671,35 @@ export default function VideoPromptTimelinePage() {
               }`}
             >
               {saved ? 'Saved!' : 'Save to Favorites'}
+            </button>
+            <button
+              onClick={shareURL}
+              disabled={timeline.keyframes.length === 0}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                shared
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed'
+              }`}
+            >
+              {shared ? 'Link Copied!' : 'Share URL'}
+            </button>
+            <button
+              onClick={exportJSON}
+              disabled={timeline.keyframes.length === 0}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                jsonCopied
+                  ? 'bg-green-500 text-white'
+                  : 'bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed'
+              }`}
+            >
+              {jsonCopied ? 'JSON Copied!' : 'Export JSON'}
+            </button>
+            <button
+              onClick={downloadJSON}
+              disabled={timeline.keyframes.length === 0}
+              className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Download .json
             </button>
           </div>
         </div>
