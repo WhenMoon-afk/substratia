@@ -20,10 +20,42 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'The Ultimate Guide to Claude Code Context Management',
+  description: 'Master context window management in Claude Code. Learn techniques for preserving context, avoiding compaction issues, and maximizing your AI coding sessions.',
+  author: {
+    '@type': 'Organization',
+    name: 'Substratia',
+    url: 'https://substratia.io',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Substratia',
+    url: 'https://substratia.io',
+  },
+  datePublished: '2026-01-11',
+  dateModified: '2026-01-11',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': 'https://substratia.io/blog/context-management-guide',
+  },
+  keywords: ['Claude Code', 'context management', 'AI coding', 'compaction', 'CLAUDE.md'],
+}
+
 export default function ContextGuideLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  )
 }
