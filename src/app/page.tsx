@@ -89,10 +89,16 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <Link
-                  href="/templates"
+                  href="/start-here"
                   className="px-8 py-4 bg-forge-cyan text-forge-dark font-semibold text-lg rounded-xl hover:bg-forge-cyan/90 transition-all glow-cyan text-center"
                 >
-                  Explore Tools
+                  Start Here
+                </Link>
+                <Link
+                  href="/tools"
+                  className="px-8 py-4 bg-white/10 font-semibold text-lg rounded-xl hover:bg-white/20 transition-all text-center"
+                >
+                  Free Tools
                 </Link>
                 <a
                   href="https://github.com/WhenMoon-afk"
