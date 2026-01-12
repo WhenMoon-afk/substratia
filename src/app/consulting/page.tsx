@@ -399,6 +399,35 @@ export default function ConsultingPage() {
         </div>
       </section>
 
+      {/* Free Resources */}
+      <section className="relative z-10 py-16 bg-white/5">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4">Not Ready for Consulting?</h2>
+            <p className="text-gray-400 mb-8">
+              Start with our free resources. When you&apos;re ready for personalized help, I&apos;ll be here.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Link href="/tools/cheat-sheet" className="glass rounded-xl p-6 hover:border-forge-cyan/50 transition-all text-left">
+                <div className="text-forge-cyan text-2xl mb-3">📋</div>
+                <h3 className="font-semibold mb-2">Cheat Sheet</h3>
+                <p className="text-sm text-gray-400">Commands, shortcuts, and CLAUDE.md patterns on one page.</p>
+              </Link>
+              <Link href="/blog/context-management-guide" className="glass rounded-xl p-6 hover:border-forge-cyan/50 transition-all text-left">
+                <div className="text-forge-cyan text-2xl mb-3">📖</div>
+                <h3 className="font-semibold mb-2">Context Guide</h3>
+                <p className="text-sm text-gray-400">12-min deep dive on managing context and avoiding compaction.</p>
+              </Link>
+              <Link href="/faq" className="glass rounded-xl p-6 hover:border-forge-cyan/50 transition-all text-left">
+                <div className="text-forge-cyan text-2xl mb-3">❓</div>
+                <h3 className="font-semibold mb-2">FAQ</h3>
+                <p className="text-sm text-gray-400">Common questions about Claude Code, tools, and consulting.</p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="relative z-10 py-16">
         <div className="container mx-auto px-4">

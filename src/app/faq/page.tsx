@@ -209,6 +209,28 @@ export default function FAQPage() {
               ))}
             </div>
 
+            {/* Related Resources */}
+            <div className="mt-16 pt-12 border-t border-white/10">
+              <h2 className="text-2xl font-bold text-center mb-8">Explore More</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                <Link href="/tools/cheat-sheet" className="glass rounded-xl p-6 hover:border-forge-cyan/50 transition-all text-center">
+                  <div className="text-3xl mb-3">📋</div>
+                  <h3 className="font-semibold mb-2">Cheat Sheet</h3>
+                  <p className="text-sm text-gray-400">Commands, shortcuts, patterns</p>
+                </Link>
+                <Link href="/blog/context-management-guide" className="glass rounded-xl p-6 hover:border-forge-cyan/50 transition-all text-center">
+                  <div className="text-3xl mb-3">📖</div>
+                  <h3 className="font-semibold mb-2">Context Guide</h3>
+                  <p className="text-sm text-gray-400">Deep dive on context management</p>
+                </Link>
+                <Link href="/tools" className="glass rounded-xl p-6 hover:border-forge-cyan/50 transition-all text-center">
+                  <div className="text-3xl mb-3">🛠️</div>
+                  <h3 className="font-semibold mb-2">Free Tools</h3>
+                  <p className="text-sm text-gray-400">12 tools, no signup required</p>
+                </Link>
+              </div>
+            </div>
+
             {/* Still Have Questions */}
             <div className="mt-16 text-center">
               <h2 className="text-2xl font-bold mb-4">Still Have Questions?</h2>
