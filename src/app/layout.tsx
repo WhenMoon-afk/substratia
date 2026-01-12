@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
+const organizationLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Substratia',
@@ -50,6 +50,28 @@ const jsonLd = {
     'https://github.com/WhenMoon-afk',
     'https://skyceres.substack.com',
   ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    url: 'https://substratia.io/consulting',
+  },
+}
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Substratia',
+  url: 'https://substratia.io',
+  description: 'Memory infrastructure for AI. Free open-source tools: momentum, memory-mcp, AgentForge.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Substratia',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://substratia.io/tools?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
 }
 
 export default function RootLayout({
@@ -62,9 +84,14 @@ export default function RootLayout({
       <head>
         <link rel="alternate" type="application/rss+xml" title="Substratia Blog" href="/feed.xml" />
         <Script
-          id="json-ld"
+          id="organization-ld"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
+        />
+        <Script
+          id="website-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
         />
       </head>
       {/* Analytics: Enable Cloudflare Web Analytics in dashboard (free) */}
