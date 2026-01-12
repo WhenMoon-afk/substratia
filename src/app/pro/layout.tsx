@@ -12,10 +12,42 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Substratia Pro',
+  description: 'Cloud sync across devices, memory dashboard, automatic backups, and team features.',
+  brand: {
+    '@type': 'Brand',
+    name: 'Substratia',
+  },
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/PreOrder',
+    price: '15',
+    priceCurrency: 'USD',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '15',
+      priceCurrency: 'USD',
+      billingDuration: 'P1M',
+    },
+  },
+  url: 'https://substratia.io/pro',
+}
+
 export default function ProLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  )
 }

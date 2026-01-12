@@ -3,6 +3,46 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Pricing - Substratia',
   description: 'Free open-source memory tools. Pro tier with cloud sync, dashboard, and team features starting at $15/month.',
+  openGraph: {
+    title: 'Substratia Pricing',
+    description: 'Free open-source tools. Pro tier starting at $15/month.',
+    type: 'website',
+    url: 'https://substratia.io/pricing',
+  },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Substratia Memory Tools',
+  description: 'Memory infrastructure for AI. Free open-source tools with optional Pro tier.',
+  brand: {
+    '@type': 'Brand',
+    name: 'Substratia',
+  },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Free Tier',
+      price: '0',
+      priceCurrency: 'USD',
+      description: 'Open-source tools: momentum, memory-mcp, AgentForge',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Pro Tier',
+      price: '15',
+      priceCurrency: 'USD',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: '15',
+        priceCurrency: 'USD',
+        billingDuration: 'P1M',
+      },
+      description: 'Cloud sync, memory dashboard, automatic backups',
+    },
+  ],
+  url: 'https://substratia.io/pricing',
 }
 
 export default function PricingLayout({
@@ -10,5 +50,13 @@ export default function PricingLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  )
 }

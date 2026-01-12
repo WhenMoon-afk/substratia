@@ -12,10 +12,31 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Claude Code Consulting Testimonials',
+  description: 'Success stories from developers and teams who improved their Claude Code workflows.',
+  url: 'https://substratia.io/testimonials',
+  mainEntity: {
+    '@type': 'ItemList',
+    name: 'Client Success Stories',
+    description: 'Testimonials from Claude Code consulting clients.',
+  },
+}
+
 export default function TestimonialsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {children}
+    </>
+  )
 }
