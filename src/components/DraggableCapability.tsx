@@ -39,7 +39,7 @@ export function DraggableCapability({ capability, isSelected, onToggle }: Dragga
       {...listeners}
     >
       <div className="flex items-start gap-3">
-        <div className="mt-1 text-gray-500">
+        <div className="mt-1 text-gray-500" aria-hidden="true">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
           </svg>
@@ -96,6 +96,7 @@ export function SelectedCapabilityChip({
           e.stopPropagation()
           onRemove()
         }}
+        aria-label={`Remove ${capability.name}`}
         className="text-gray-400 hover:text-red-400 transition-colors"
       >
         &times;
