@@ -475,6 +475,7 @@ export default function Home() {
             <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
               <Link href="/templates" className="hover:text-white transition-all">Memory</Link>
               <Link href="/tools" className="hover:text-white transition-all">Tools</Link>
+              <Link href="/reviews" className="hover:text-white transition-all">Reviews</Link>
               <Link href="/consulting" className="hover:text-white transition-all">Consulting</Link>
               <Link href="/blog" className="hover:text-white transition-all">Blog</Link>
               <Link href="/docs" className="hover:text-white transition-all">Docs</Link>
