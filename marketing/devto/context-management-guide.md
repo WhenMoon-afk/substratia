@@ -257,4 +257,18 @@ Context management is the hidden skill of Claude Code productivity. Master it, a
 
 ---
 
+## Coming Soon: Substratia Cloud
+
+Use Claude Code on multiple machines? Each device has its own separate memory database. We're building cloud sync to solve this:
+
+- **Automatic backups** - Never lose your Claude Code memories
+- **Cross-device sync** - Laptop, desktop, work machine - all in sync
+- **Web dashboard** - Browse and search your memories from any browser
+
+Free tools stay free. Cloud is for those who want the convenience.
+
+**[Join the waitlist →](https://substratia.io/cloud)**
+
+---
+
 *What context management techniques work for you? Drop them in the comments—I'm always looking for new approaches.*
