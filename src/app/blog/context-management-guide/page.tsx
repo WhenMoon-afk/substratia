@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ShareButton from '@/components/ShareButton'
 
 export default function ContextManagementGuidePage() {
   return (
@@ -6,9 +7,12 @@ export default function ContextManagementGuidePage() {
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <Link href="/blog" className="text-forge-cyan hover:underline text-sm mb-6 inline-block">
-            ← Back to Blog
-          </Link>
+          <div className="flex items-center justify-between mb-6">
+            <Link href="/blog" className="text-forge-cyan hover:underline text-sm">
+              ← Back to Blog
+            </Link>
+            <ShareButton title="The Ultimate Guide to Claude Code Context Management" />
+          </div>
 
           <div className="mb-8">
             <div className="flex gap-2 mb-4">

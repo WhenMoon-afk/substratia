@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import ShareButton from '@/components/ShareButton'
 
 export const metadata: Metadata = {
   title: 'Mastering Negative Prompts: The Secret to Reliable AI Agents | Substratia',
@@ -15,10 +16,11 @@ export default function NegativePromptsPage() {
     <main className="min-h-screen text-white py-12">
       <article className="container mx-auto px-4 max-w-3xl">
         {/* Breadcrumb */}
-        <div className="mb-8">
+        <div className="flex items-center justify-between mb-8">
           <Link href="/blog" className="text-forge-cyan hover:underline">
             &larr; Back to Blog
           </Link>
+          <ShareButton title="Mastering Negative Prompts: The Secret to Reliable AI Agents" />
         </div>
 
         {/* Header */}

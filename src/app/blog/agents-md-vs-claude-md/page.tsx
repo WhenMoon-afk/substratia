@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import ShareButton from '@/components/ShareButton'
 
 export const metadata: Metadata = {
   title: 'AGENTS.md vs CLAUDE.md: Complete Guide to AI Agent Configuration | Substratia AgentForge',
@@ -17,10 +18,13 @@ export default function AgentsMdVsClaudeMd() {
     <main className="min-h-screen text-white">
       <article className="container mx-auto px-4 py-16 max-w-4xl">
         {/* Breadcrumb */}
-        <nav className="text-sm text-gray-400 mb-8">
-          <Link href="/blog" className="hover:text-white">Blog</Link>
-          <span className="mx-2">/</span>
-          <span>AGENTS.md vs CLAUDE.md</span>
+        <nav className="flex items-center justify-between text-sm text-gray-400 mb-8">
+          <div>
+            <Link href="/blog" className="hover:text-white">Blog</Link>
+            <span className="mx-2">/</span>
+            <span>AGENTS.md vs CLAUDE.md</span>
+          </div>
+          <ShareButton title="AGENTS.md vs CLAUDE.md: Complete Guide to AI Agent Configuration" />
         </nav>
 
         {/* Header */}

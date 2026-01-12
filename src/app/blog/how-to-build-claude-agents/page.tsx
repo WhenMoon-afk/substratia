@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import ShareButton from '@/components/ShareButton'
 
 export const metadata: Metadata = {
   title: 'How to Build Claude Agents: A Complete Guide to CLAUDE.md | Substratia',
@@ -12,12 +13,12 @@ export default function BlogPost() {
     <main className="min-h-screen text-white">
       <article className="container mx-auto px-4 py-12 max-w-3xl">
         {/* Back link */}
-        <Link
-          href="/blog"
-          className="text-forge-cyan hover:underline mb-8 inline-block"
-        >
-          ← Back to Blog
-        </Link>
+        <div className="flex items-center justify-between mb-8">
+          <Link href="/blog" className="text-forge-cyan hover:underline">
+            ← Back to Blog
+          </Link>
+          <ShareButton title="How to Build Claude Agents: A Complete Guide to CLAUDE.md" />
+        </div>
 
         {/* Header */}
         <header className="mb-8">
