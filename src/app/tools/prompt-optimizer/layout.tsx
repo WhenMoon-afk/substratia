@@ -32,6 +32,16 @@ const jsonLd = {
   url: 'https://substratia.io/tools/prompt-optimizer',
 }
 
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://substratia.io' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://substratia.io/tools' },
+    { '@type': 'ListItem', position: 3, name: 'Prompt Optimizer', item: 'https://substratia.io/tools/prompt-optimizer' },
+  ],
+}
+
 export default function PromptOptimizerLayout({
   children,
 }: {
@@ -42,6 +52,10 @@ export default function PromptOptimizerLayout({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       {children}
     </>
