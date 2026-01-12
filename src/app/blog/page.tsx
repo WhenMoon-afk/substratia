@@ -1,11 +1,7 @@
-import Link from 'next/link'
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Blog - Substratia | AI Memory Tools & Agent Building',
-  description: 'Tutorials, comparisons, and best practices for AI memory tools, MCP servers, and agent configuration.',
-  keywords: 'MCP memory server, Claude memory, AI agents, CLAUDE.md, prompt engineering, memory-mcp',
-}
+import { useState } from 'react'
+import Link from 'next/link'
 
 const posts = [
   {
@@ -102,6 +98,33 @@ const posts = [
 ]
 
 export default function BlogPage() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mreezwlv'
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setStatus('loading')
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email, source: 'blog', interest: 'claude-code-articles' }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setEmail('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <main className="min-h-screen text-white">
       <div className="container mx-auto px-4 py-12">
@@ -144,16 +167,50 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Newsletter Section */}
+        <div className="max-w-xl mx-auto text-center mt-16 pt-12 border-t border-white/10">
+          <h2 className="text-2xl font-bold mb-4">Get New Articles</h2>
+          <p className="text-gray-400 mb-6">
+            Subscribe for Claude Code tips, tutorials, and new releases.
+          </p>
+          {status === 'success' ? (
+            <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300">
+              You&apos;re subscribed! Check your inbox.
+            </div>
+          ) : (
+            <form onSubmit={handleSubscribe} className="flex gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:border-forge-cyan transition-all"
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="px-6 py-3 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:bg-forge-cyan/90 transition-all disabled:opacity-50"
+              >
+                {status === 'loading' ? '...' : 'Subscribe'}
+              </button>
+            </form>
+          )}
+          {status === 'error' && (
+            <p className="text-red-400 text-sm mt-2">Something went wrong. Please try again.</p>
+          )}
+        </div>
+
+        {/* Consulting CTA */}
         <div className="max-w-3xl mx-auto mt-12 text-center">
           <p className="text-gray-400 mb-4">
-            Ready to build your own AI agent?
+            Need personalized help with Claude Code?
           </p>
           <Link
-            href="/builder"
+            href="/consulting"
             className="inline-block px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-lg font-semibold transition-all"
           >
-            Try the Free Builder
+            Book a Consulting Session
           </Link>
         </div>
       </div>

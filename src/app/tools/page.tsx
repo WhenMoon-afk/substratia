@@ -1,11 +1,7 @@
-import Link from 'next/link'
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Free AI Tools - Stack Builder, Claude Code Calculator, Prompt Optimizer | Substratia',
-  description: 'Free tools for developers: stack builder, Claude Code cost calculator, prompt optimizer, token counter, image/video prompt builders, markdown tools. No signup required.',
-  keywords: 'stack builder, tech stack selector, Claude Code cost, Claude Code prompts, ultrathink, token counter, AI tools, full stack builder, web development stack',
-}
+import { useState } from 'react'
+import Link from 'next/link'
 
 const tools = [
   {
@@ -154,6 +150,33 @@ const tools = [
 ]
 
 export default function ToolsIndexPage() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mreezwlv'
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setStatus('loading')
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email, source: 'tools-index', interest: 'ai-tools' }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setEmail('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <main className="min-h-screen text-white">
       <div className="container mx-auto px-4 py-12">
@@ -216,6 +239,51 @@ export default function ToolsIndexPage() {
               Documentation
             </Link>
           </div>
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="max-w-xl mx-auto text-center mt-20 pt-12 border-t border-white/10">
+          <h2 className="text-2xl font-bold mb-4">Stay Updated</h2>
+          <p className="text-gray-400 mb-6">
+            Get notified when we release new tools and Claude Code tips.
+          </p>
+          {status === 'success' ? (
+            <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300">
+              You&apos;re in! We&apos;ll let you know when new tools drop.
+            </div>
+          ) : (
+            <form onSubmit={handleSubscribe} className="flex gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:border-forge-cyan transition-all"
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="px-6 py-3 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:bg-forge-cyan/90 transition-all disabled:opacity-50"
+              >
+                {status === 'loading' ? '...' : 'Subscribe'}
+              </button>
+            </form>
+          )}
+          {status === 'error' && (
+            <p className="text-red-400 text-sm mt-2">Something went wrong. Please try again.</p>
+          )}
+        </div>
+
+        {/* Consulting CTA */}
+        <div className="text-center mt-12">
+          <p className="text-gray-400 mb-4">Need personalized help with Claude Code?</p>
+          <Link
+            href="/consulting"
+            className="inline-block px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-xl font-semibold transition-all"
+          >
+            Book a Consulting Session
+          </Link>
         </div>
       </div>
     </main>
