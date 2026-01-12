@@ -1,0 +1,16 @@
+/* TEAM */
+Creator: Substratia
+Site: https://substratia.io
+Location: Earth
+
+/* THANKS */
+Claude Code: https://claude.ai/code
+Next.js: https://nextjs.org
+Tailwind CSS: https://tailwindcss.com
+Cloudflare: https://cloudflare.com
+
+/* SITE */
+Last update: 2026-01-12
+Standards: HTML5, CSS3, ES6+
+Components: React, Next.js 14
+Software: Bun, TypeScript

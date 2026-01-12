@@ -1,0 +1,7 @@
+# Security Contact for Substratia
+# https://securitytxt.org/
+
+Contact: https://substratia.io/consulting
+Expires: 2027-01-12T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://substratia.io/.well-known/security.txt
