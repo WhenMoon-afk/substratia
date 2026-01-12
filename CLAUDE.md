@@ -75,11 +75,13 @@ git add -A && git commit -m "feat: description" && git push origin master
 ### Pages
 - `/` - Landing page (memory infrastructure + consulting CTA)
 - `/consulting` - **Consulting services** (setup, training, advisory)
+- `/faq` - Frequently asked questions (15 questions, 4 categories)
+- `/testimonials` - Client success stories (coming soon)
 - `/templates` - Memory tools (momentum, memory-mcp)
-- `/tools` - Free AI tools index (12 tools)
+- `/tools` - Free AI tools index (12 tools, with email capture)
 - `/reviews` - AI tool comparisons index
 - `/builder` - AgentForge drag-and-drop builder
-- `/blog` - Blog index (11 posts)
+- `/blog` - Blog index (11 posts, with email capture)
 - `/docs` - Documentation
 - `/pro` - Pro tier waitlist (de-emphasized)
 - `/pricing` - Pricing page (de-emphasized)
@@ -241,6 +243,28 @@ See `/planning/ACTION_PLAN_FINAL.md` for 90-day strategic plan.
 ---
 
 ## Session Log
+
+**2026-01-11** (Session 9 - Lead Generation Infrastructure):
+- **Email Capture Expansion:**
+  - Added newsletter signup to `/tools` index page
+  - Added newsletter signup to `/blog` index page
+  - Converted pages to client components with layout.tsx for SEO
+  - Source tracking for Formspree (tools-index, blog, testimonials)
+- **New Pages Created:**
+  - `/faq` - 15 FAQ questions across 4 categories (General, Tools, Consulting, Technical)
+  - `/testimonials` - Client success stories page (coming soon state)
+- **SEO Improvements:**
+  - JSON-LD structured data for consulting (Service schema)
+  - JSON-LD structured data for FAQ (FAQPage schema)
+  - Added layout.tsx metadata files for client component pages
+- **Marketing Content:**
+  - Created Dev.to article draft: "The Complete Guide to Claude Code Context Management"
+  - Located at `/marketing/devto/context-management-guide.md`
+- **Documentation:**
+  - Updated parent CLAUDE.md with consulting pivot strategy
+  - Updated substratia.io CLAUDE.md with new pages
+- Build verified: 43 pages total
+- All changes deployed to Cloudflare Pages
 
 **2026-01-11** (Session 8 - Strategic Pivot + Consulting Launch):
 - **MAJOR PIVOT**: From "Pro tier SaaS" to "Consulting + Free Tools" model
