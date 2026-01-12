@@ -82,7 +82,8 @@ export default function PricingPage() {
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className={`rounded-2xl p-8 ${
+              id={tier.name.toLowerCase()}
+              className={`rounded-2xl p-8 scroll-mt-24 ${
                 tier.featured
                   ? 'bg-gradient-to-b from-forge-purple/30 to-forge-dark border-2 border-forge-purple relative'
                   : 'bg-white/5 border border-white/10'
@@ -161,27 +162,32 @@ export default function PricingPage() {
           <div className="space-y-6">
             {[
               {
+                id: 'faq-free',
                 q: 'Are the free tools actually free?',
                 a: 'Yes! momentum and memory-mcp are open source under MIT license. You can use, modify, and distribute them freely. The source code is on GitHub.',
               },
               {
+                id: 'faq-pro',
                 q: 'What does Pro add over Free?',
                 a: 'Pro adds cloud sync so your memories work across devices, a web dashboard to view and manage memories, automatic backups, and priority support. The core tools remain the same.',
               },
               {
+                id: 'faq-availability',
                 q: 'When will Pro be available?',
                 a: 'Pro is currently in development. Join the waitlist to get early access and help shape the features.',
               },
               {
+                id: 'faq-selfhost',
                 q: 'Can I self-host instead of using Pro?',
                 a: 'Absolutely! All tools are open source. Pro is a convenience layer for those who want cloud sync and managed infrastructure without self-hosting.',
               },
               {
+                id: 'faq-payment',
                 q: 'What payment methods will you accept?',
                 a: 'When Pro launches, we\'ll accept all major credit cards. Enterprise/Teams customers will be able to pay via invoice.',
               },
             ].map((faq) => (
-              <div key={faq.q} className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <div key={faq.id} id={faq.id} className="bg-white/5 border border-white/10 rounded-xl p-6 scroll-mt-24">
                 <h3 className="font-semibold mb-2">{faq.q}</h3>
                 <p className="text-gray-400">{faq.a}</p>
               </div>

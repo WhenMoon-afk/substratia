@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function ConsultingPage() {
@@ -13,8 +13,28 @@ export default function ConsultingPage() {
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [responseMessage, setResponseMessage] = useState('')
+  const [sharedSection, setSharedSection] = useState<string | null>(null)
 
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mreezwlv'
+
+  // Handle URL hash navigation on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash)
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+    }
+  }, [])
+
+  const shareSection = useCallback(async (sectionId: string) => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}#${sectionId}`
+    await navigator.clipboard.writeText(shareUrl)
+    setSharedSection(sectionId)
+    setTimeout(() => setSharedSection(null), 2000)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -107,8 +127,20 @@ export default function ConsultingPage() {
           </p>
 
           {/* Individual Services */}
-          <div className="mb-12">
-            <h3 className="text-xl font-semibold text-center mb-6 text-forge-purple">Individual Sessions</h3>
+          <div id="individual" className="mb-12 scroll-mt-24">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <h3 className="text-xl font-semibold text-forge-purple">Individual Sessions</h3>
+              <button
+                onClick={() => shareSection('individual')}
+                className={`px-2 py-1 text-xs rounded-lg transition-all ${
+                  sharedSection === 'individual'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-forge-cyan/20 hover:bg-forge-cyan/30 text-forge-cyan'
+                }`}
+              >
+                {sharedSection === 'individual' ? 'Copied!' : 'Share'}
+              </button>
+            </div>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <ServiceCard
                 title="Claude Code Audit"
@@ -151,8 +183,20 @@ export default function ConsultingPage() {
           </div>
 
           {/* Team Services */}
-          <div className="mb-12">
-            <h3 className="text-xl font-semibold text-center mb-6 text-forge-cyan">Team Training</h3>
+          <div id="team" className="mb-12 scroll-mt-24">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <h3 className="text-xl font-semibold text-forge-cyan">Team Training</h3>
+              <button
+                onClick={() => shareSection('team')}
+                className={`px-2 py-1 text-xs rounded-lg transition-all ${
+                  sharedSection === 'team'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-forge-cyan/20 hover:bg-forge-cyan/30 text-forge-cyan'
+                }`}
+              >
+                {sharedSection === 'team' ? 'Copied!' : 'Share'}
+              </button>
+            </div>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <div className="glass rounded-2xl p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -221,8 +265,20 @@ export default function ConsultingPage() {
           </div>
 
           {/* Ongoing Support */}
-          <div>
-            <h3 className="text-xl font-semibold text-center mb-6 text-forge-purple">Ongoing Advisory</h3>
+          <div id="advisory" className="scroll-mt-24">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <h3 className="text-xl font-semibold text-forge-purple">Ongoing Advisory</h3>
+              <button
+                onClick={() => shareSection('advisory')}
+                className={`px-2 py-1 text-xs rounded-lg transition-all ${
+                  sharedSection === 'advisory'
+                    ? 'bg-green-500 text-white'
+                    : 'bg-forge-cyan/20 hover:bg-forge-cyan/30 text-forge-cyan'
+                }`}
+              >
+                {sharedSection === 'advisory' ? 'Copied!' : 'Share'}
+              </button>
+            </div>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               <div className="glass rounded-2xl p-6">
                 <h4 className="text-lg font-bold mb-2">Light</h4>
