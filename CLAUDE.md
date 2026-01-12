@@ -31,11 +31,12 @@ git add -A && git commit -m "feat: description" && git push origin master
 
 ---
 
-## Current Content (as of 2026-01-11)
+## Current Content (as of 2026-01-12)
 
-### Blog (11 posts)
+### Blog (12 posts)
 | Slug | Title | Type |
 |------|-------|------|
+| `announcing-substratia-cloud` | Announcing Substratia Cloud | Announcement (Featured) |
 | `context-management-guide` | The Ultimate Guide to Claude Code Context Management | Guide (Featured) |
 | `mirror-demons` | Mirror Demons: How AI Chatbots Can Amplify Delusions | Original Research |
 | `eleanor-chen-effect` | The Eleanor Chen Effect | Original Research |
@@ -73,7 +74,8 @@ git add -A && git commit -m "feat: description" && git push origin master
 | AI Video Generators | `/reviews/ai-video-generators` | Runway, Pika, Luma, Kling, Grok |
 
 ### Pages
-- `/` - Landing page (memory infrastructure + consulting CTA)
+- `/` - Landing page (memory infrastructure + consulting CTA + Cloud waitlist)
+- `/cloud` - **Substratia Cloud** landing page (waitlist, features, pricing preview)
 - `/consulting` - **Consulting services** (setup, training, advisory)
 - `/faq` - Frequently asked questions (15 questions, 4 categories)
 - `/testimonials` - Client success stories (coming soon)
@@ -81,7 +83,7 @@ git add -A && git commit -m "feat: description" && git push origin master
 - `/tools` - Free AI tools index (12 tools, with email capture)
 - `/reviews` - AI tool comparisons index
 - `/builder` - AgentForge drag-and-drop builder
-- `/blog` - Blog index (11 posts, with email capture)
+- `/blog` - Blog index (12 posts, with email capture)
 - `/docs` - Documentation
 - `/pro` - Pro tier waitlist (de-emphasized)
 - `/pricing` - Pricing page (de-emphasized)
@@ -244,6 +246,29 @@ See `/planning/ACTION_PLAN_FINAL.md` for 90-day strategic plan.
 ---
 
 ## Session Log
+
+**2026-01-12** (Session 11 - Substratia Cloud Launch):
+- **Strategic Pivot**: From "Consulting + Free Tools" to "Hybrid - Free Tools + Cloud SaaS + Consulting"
+- **Market Research**: Analyzed Tailwind's 80% revenue collapse from AI disruption
+- **Key Insight**: Consulting/templates have no compounding revenue, are AI-vulnerable
+- **New Pages Created:**
+  - `/cloud` - Full Substratia Cloud landing page with waitlist, features, pricing
+  - `/blog/announcing-substratia-cloud` - Cloud announcement blog post
+- **Homepage Updates:**
+  - Added Cloud sync waitlist section with email capture
+  - Updated hero: "Memory Tools for Claude Code"
+  - Added social proof: "575+ developers monthly"
+  - Added "Learn more" link to Cloud section
+- **Navigation Updates:**
+  - Added Cloud link with "Soon" badge to main nav
+  - Updated mobile menu with Cloud link
+- **Pricing Strategy:**
+  - Free tier: momentum + memory-mcp (forever free, open source)
+  - Pro: ~$9/mo (personal cloud sync)
+  - Team: ~$19/seat/mo (shared knowledge bases)
+  - Break-even: 23 Pro subs OR 11 Team seats
+- Build verified: 46 pages total
+- Key validation metric: 100+ waitlist signups before building MVP
 
 **2026-01-12** (Session 10 - Comprehensive SEO & PWA Enhancement):
 - **BreadcrumbList Schema** (38 pages total):

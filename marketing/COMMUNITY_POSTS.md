@@ -334,7 +334,9 @@ I built momentum and memory-mcp (free Claude Code plugins for context recovery a
 **Planned pricing:** $9/mo (early access gets a discount)
 
 If you're interested in beta testing, you can join the waitlist:
-https://substratia.io/#cloud
+https://substratia.io/cloud
+
+Full announcement with feature details: https://substratia.io/blog/announcing-substratia-cloud
 
 The free tools (momentum + memory-mcp) work great standalone. Cloud is for people who want the convenience of sync across devices.
 
@@ -384,7 +386,7 @@ Your local tools stay free forever. Cloud is optional.
 Planned: $9/month
 Early access: discount for first users
 
-Join the waitlist: substratia.io/#cloud
+Join the waitlist: substratia.io/cloud
 
 4/5
 ```
@@ -415,7 +417,7 @@ Solution: Cloud backup + cross-device sync + web dashboard.
 
 Free tools stay free. Cloud is $9/mo (early access discount).
 
-Waitlist: substratia.io/#cloud
+Waitlist: substratia.io/cloud
 ```
 
 ---

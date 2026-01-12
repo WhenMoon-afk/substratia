@@ -454,6 +454,9 @@ export default function Home() {
                     </svg>
                     Early access discount
                   </span>
+                  <Link href="/cloud" className="text-forge-cyan hover:underline">
+                    Learn more
+                  </Link>
                 </div>
               </div>
             </div>
