@@ -27,8 +27,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-# convex
-convex/_generated
+# convex - _generated is committed for Vercel builds
 
 # typescript
 *.tsbuildinfo
