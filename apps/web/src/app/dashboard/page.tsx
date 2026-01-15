@@ -252,14 +252,14 @@ export default function DashboardPage() {
           <div className="bg-gray-700/30 rounded-lg p-4">
             <h3 className="text-white font-medium">1. Install momentum</h3>
             <code className="text-cyan-400 text-sm block mt-2">
-              /plugin install momentum@substratia-marketplace
+              /install-github WhenMoon-afk/momentum
             </code>
           </div>
           <div className="bg-gray-700/30 rounded-lg p-4">
-            <h3 className="text-white font-medium">2. Install memory-mcp</h3>
-            <code className="text-cyan-400 text-sm block mt-2">
-              npx @whenmoon-afk/memory-mcp
-            </code>
+            <h3 className="text-white font-medium">2. Connect to cloud</h3>
+            <p className="text-gray-400 text-sm mt-2">
+              Create an API key below and click &quot;Connect Claude Code&quot;
+            </p>
           </div>
           <div className="bg-gray-700/30 rounded-lg p-4">
             <h3 className="text-white font-medium">3. Save your work</h3>
@@ -301,7 +301,7 @@ export default function DashboardPage() {
                   <div>
                     <h3 className="text-green-400 font-medium">API Key Created</h3>
                     <p className="text-green-300/70 text-sm mt-1">
-                      Copy this key now. You won&apos;t be able to see it again.
+                      Connect your Claude Code in one click, or copy the key manually.
                     </p>
                   </div>
                   <button
@@ -311,17 +311,43 @@ export default function DashboardPage() {
                     ×
                   </button>
                 </div>
-                <div className="mt-3 flex items-center gap-2">
-                  <code className="bg-gray-900 px-3 py-2 rounded text-cyan-400 font-mono text-sm flex-1 overflow-x-auto">
-                    {newKeyValue}
-                  </code>
+
+                {/* One-Click Connect Button */}
+                <div className="mt-4 mb-3">
                   <button
-                    onClick={() => copyToClipboard(newKeyValue)}
-                    className="px-3 py-2 bg-cyan-500/20 text-cyan-400 rounded hover:bg-cyan-500/30 transition-colors text-sm"
+                    onClick={() => {
+                      copyToClipboard(`Connect momentum to Substratia Cloud with this API key: ${newKeyValue}`);
+                      alert("Copied! Paste this into Claude Code to connect.");
+                    }}
+                    className="w-full px-4 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium flex items-center justify-center gap-2"
                   >
-                    Copy
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                    Connect Claude Code (Copy Command)
                   </button>
+                  <p className="text-gray-500 text-xs text-center mt-2">
+                    Paste the copied text into your Claude Code chat
+                  </p>
                 </div>
+
+                {/* Manual Key Copy */}
+                <details className="mt-3">
+                  <summary className="text-gray-400 text-sm cursor-pointer hover:text-gray-300">
+                    Or copy key manually
+                  </summary>
+                  <div className="mt-2 flex items-center gap-2">
+                    <code className="bg-gray-900 px-3 py-2 rounded text-cyan-400 font-mono text-sm flex-1 overflow-x-auto">
+                      {newKeyValue}
+                    </code>
+                    <button
+                      onClick={() => copyToClipboard(newKeyValue)}
+                      className="px-3 py-2 bg-cyan-500/20 text-cyan-400 rounded hover:bg-cyan-500/30 transition-colors text-sm"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </details>
               </div>
             )}
 
@@ -388,19 +414,14 @@ export default function DashboardPage() {
             {/* Setup Instructions */}
             {apiKeys && apiKeys.length > 0 && (
               <div className="mt-6 bg-gray-700/20 rounded-lg p-4">
-                <h3 className="text-white font-medium mb-2">Configure momentum for cloud sync</h3>
+                <h3 className="text-white font-medium mb-2">Connect momentum to cloud</h3>
                 <p className="text-gray-400 text-sm mb-3">
-                  Add this to your <code className="text-cyan-400">~/.config/momentum/config.json</code>:
+                  Create a new API key above, then paste the copied command into Claude Code.
                 </p>
-                <pre className="bg-gray-900 rounded p-3 text-sm text-gray-300 overflow-x-auto">
-{`{
-  "cloudSync": {
-    "enabled": true,
-    "apiKey": "YOUR_API_KEY",
-    "endpoint": "https://agreeable-chameleon-83.convex.site/api/snapshots/sync"
-  }
-}`}
-                </pre>
+                <p className="text-gray-500 text-sm">
+                  Claude will automatically configure momentum to sync your snapshots to Substratia Cloud.
+                  Config is saved to <code className="text-cyan-400">~/.config/substratia/credentials.json</code>
+                </p>
               </div>
             )}
           </>
