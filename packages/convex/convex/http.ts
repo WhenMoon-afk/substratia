@@ -226,7 +226,7 @@ http.route({
       });
     }
 
-    const { content, context, importance, tags, createdAt } = body;
+    const { content, summary, type, context, importance, tags, metadata, createdAt, lastAccessed, accessCount } = body;
 
     if (!content) {
       return new Response(
@@ -238,13 +238,19 @@ http.route({
     const validImportance = ["critical", "high", "normal", "low"];
     const safeImportance = validImportance.includes(importance) ? importance : "normal";
 
+    // Build context from summary and type if not provided
+    const finalContext = context || (summary ? `[${type || 'memory'}] ${summary}` : undefined);
+
+    // Extract tags from metadata if not provided directly
+    const finalTags = tags || (metadata?.tags as string[] | undefined);
+
     try {
       const memoryId = await ctx.runMutation(internal.memoriesInternal.insertFromApi, {
         userId: auth.userId,
         content,
-        context: context || undefined,
+        context: finalContext,
         importance: safeImportance,
-        tags: tags || undefined,
+        tags: finalTags,
         createdAt: createdAt || Date.now(),
       });
 
@@ -259,6 +265,81 @@ http.route({
         { status: 500, headers: { "Content-Type": "application/json" } }
       );
     }
+  }),
+});
+
+// Bulk sync memories from memory-mcp
+http.route({
+  path: "/api/memories/bulk-sync",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    const auth = await validateApiKey(ctx, request);
+    if (!auth) {
+      return new Response(JSON.stringify({ error: "Invalid API key" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return new Response(JSON.stringify({ error: "Invalid JSON" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const { memories } = body;
+    if (!Array.isArray(memories)) {
+      return new Response(
+        JSON.stringify({ error: "memories must be an array" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    // Limit batch size
+    if (memories.length > 100) {
+      return new Response(
+        JSON.stringify({ error: "Maximum 100 memories per request" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    const validImportance = ["critical", "high", "normal", "low"];
+    let synced = 0;
+
+    for (const mem of memories) {
+      if (!mem.content) {
+        continue; // Skip invalid memories
+      }
+
+      // Build context from summary and type if not provided
+      const finalContext = mem.context || (mem.summary ? `[${mem.type || 'memory'}] ${mem.summary}` : undefined);
+
+      // Extract tags from metadata if not provided directly
+      const finalTags = mem.tags || (mem.metadata?.tags as string[] | undefined);
+
+      try {
+        await ctx.runMutation(internal.memoriesInternal.insertFromApi, {
+          userId: auth.userId,
+          content: mem.content,
+          context: finalContext,
+          importance: validImportance.includes(mem.importance) ? mem.importance : "normal",
+          tags: finalTags,
+          createdAt: mem.createdAt || Date.now(),
+        });
+        synced++;
+      } catch (error) {
+        console.error("Failed to sync memory:", error);
+      }
+    }
+
+    return new Response(
+      JSON.stringify({ success: true, synced, total: memories.length }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
   }),
 });
 
