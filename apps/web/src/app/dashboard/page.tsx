@@ -51,8 +51,16 @@ export default function DashboardPage() {
   const [newKeyName, setNewKeyName] = useState("");
   const [newKeyValue, setNewKeyValue] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
-  const [showApiSection, setShowApiSection] = useState(false);
+  // Show API section by default if user has no keys yet (detected after load)
+  const [showApiSection, setShowApiSection] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Auto-fill default key name for first-time users
+  useEffect(() => {
+    if (apiKeys !== undefined && apiKeys.length === 0 && !newKeyName) {
+      setNewKeyName("default");
+    }
+  }, [apiKeys, newKeyName]);
 
   // Ensure user exists in Convex when dashboard loads
   useEffect(() => {
@@ -269,7 +277,22 @@ export default function DashboardPage() {
           <div className="bg-gray-700/30 rounded-lg p-4">
             <h3 className="text-white font-medium">2. Connect to cloud</h3>
             <p className="text-gray-400 text-sm mt-2">
-              Create an API key below and click &quot;Connect Claude Code&quot;
+              {apiKeys && apiKeys.length > 0 ? (
+                <span className="text-green-400">✓ You have {apiKeys.length} API key{apiKeys.length !== 1 ? 's' : ''}</span>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setShowApiSection(true);
+                      document.getElementById('api-keys-section')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-cyan-400 hover:text-cyan-300 underline"
+                  >
+                    Create an API key
+                  </button>
+                  {' '}below, then click &quot;Create Key&quot;
+                </>
+              )}
             </p>
           </div>
           <div className="bg-gray-700/30 rounded-lg p-4">
@@ -288,22 +311,44 @@ export default function DashboardPage() {
       </div>
 
       {/* API Keys Section */}
-      <div className="mt-8 bg-gray-800/50 rounded-xl p-6 border border-gray-700">
+      <div
+        id="api-keys-section"
+        className={`mt-8 rounded-xl p-6 border ${
+          apiKeys && apiKeys.length === 0
+            ? 'bg-cyan-500/10 border-cyan-500/30'
+            : 'bg-gray-800/50 border-gray-700'
+        }`}
+      >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-white">API Keys</h2>
-          <button
-            onClick={() => setShowApiSection(!showApiSection)}
-            className="text-gray-400 hover:text-white transition-colors text-sm"
-          >
-            {showApiSection ? "Hide" : "Show"} API Keys
-          </button>
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            API Keys
+            {apiKeys && apiKeys.length === 0 && (
+              <span className="text-xs px-2 py-1 bg-cyan-500 text-white rounded-full">
+                Required
+              </span>
+            )}
+          </h2>
+          {apiKeys && apiKeys.length > 0 && (
+            <button
+              onClick={() => setShowApiSection(!showApiSection)}
+              className="text-gray-400 hover:text-white transition-colors text-sm"
+            >
+              {showApiSection ? "Hide" : "Show"} API Keys
+            </button>
+          )}
         </div>
 
         {showApiSection && (
           <>
-            <p className="text-gray-400 text-sm mb-4">
-              API keys allow momentum and memory-mcp to sync data to Substratia Cloud.
-            </p>
+            {apiKeys && apiKeys.length === 0 ? (
+              <div className="text-cyan-300/80 text-sm mb-4">
+                <strong>Next step:</strong> Create an API key to connect momentum and memory-mcp to cloud sync.
+              </div>
+            ) : (
+              <p className="text-gray-400 text-sm mb-4">
+                API keys allow momentum and memory-mcp to sync data to Substratia Cloud.
+              </p>
+            )}
 
             {/* New Key Created - Show Once */}
             {newKeyValue && (
@@ -364,18 +409,25 @@ export default function DashboardPage() {
 
             {/* Create New Key */}
             <div className="flex gap-2 mb-6">
-              <input
-                type="text"
-                placeholder="Key name (e.g., 'work-laptop')"
-                value={newKeyName}
-                onChange={(e) => setNewKeyName(e.target.value)}
-                className="flex-1 bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none"
-                onKeyDown={(e) => e.key === "Enter" && handleCreateKey()}
-              />
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  placeholder="Key name (e.g., 'work-laptop', 'home-desktop')"
+                  value={newKeyName}
+                  onChange={(e) => setNewKeyName(e.target.value)}
+                  className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none"
+                  onKeyDown={(e) => e.key === "Enter" && handleCreateKey()}
+                />
+                {apiKeys && apiKeys.length === 0 && newKeyName === "default" && (
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs">
+                    Edit or press Create
+                  </span>
+                )}
+              </div>
               <button
                 onClick={handleCreateKey}
                 disabled={isCreating || !newKeyName.trim()}
-                className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
               >
                 {isCreating ? "Creating..." : "Create Key"}
               </button>
