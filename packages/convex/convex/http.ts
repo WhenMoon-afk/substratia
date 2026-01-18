@@ -50,6 +50,28 @@ async function validateApiKey(
   };
 }
 
+/**
+ * Map numeric importance (0-10) to string literal
+ * Used for memory-mcp which uses numeric importance scores
+ */
+function mapImportance(importance: unknown): "critical" | "high" | "normal" | "low" {
+  // If already a valid string, return it
+  const validStrings = ["critical", "high", "normal", "low"];
+  if (typeof importance === "string" && validStrings.includes(importance)) {
+    return importance as "critical" | "high" | "normal" | "low";
+  }
+
+  // Map numeric values (0-10 scale)
+  if (typeof importance === "number") {
+    if (importance >= 8) return "critical";
+    if (importance >= 5) return "high";
+    if (importance >= 3) return "normal";
+    return "low";
+  }
+
+  return "normal";
+}
+
 const http = httpRouter();
 
 // Health check endpoint
@@ -235,8 +257,8 @@ http.route({
       );
     }
 
-    const validImportance = ["critical", "high", "normal", "low"];
-    const safeImportance = validImportance.includes(importance) ? importance : "normal";
+    // Map importance (supports both numeric 0-10 and string literals)
+    const safeImportance = mapImportance(importance);
 
     // Build context from summary and type if not provided
     const finalContext = context || (summary ? `[${type || 'memory'}] ${summary}` : undefined);
@@ -307,7 +329,6 @@ http.route({
       );
     }
 
-    const validImportance = ["critical", "high", "normal", "low"];
     let synced = 0;
 
     for (const mem of memories) {
@@ -326,7 +347,7 @@ http.route({
           userId: auth.userId,
           content: mem.content,
           context: finalContext,
-          importance: validImportance.includes(mem.importance) ? mem.importance : "normal",
+          importance: mapImportance(mem.importance),
           tags: finalTags,
           createdAt: mem.createdAt || Date.now(),
         });
