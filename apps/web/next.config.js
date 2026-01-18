@@ -9,6 +9,56 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.substratia.io https://*.clerk.accounts.dev https://challenges.cloudflare.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https: blob:",
+              "font-src 'self' data:",
+              "connect-src 'self' https://*.convex.cloud https://clerk.substratia.io https://*.clerk.accounts.dev wss://*.convex.cloud https://formspree.io",
+              "frame-src 'self' https://clerk.substratia.io https://*.clerk.accounts.dev https://challenges.cloudflare.com",
+              "frame-ancestors 'self'",
+              "base-uri 'self'",
+              "form-action 'self' https://formspree.io",
+            ].join('; '),
+          },
+        ],
+      },
+    ];
+  },
 }
 
 module.exports = nextConfig
