@@ -270,9 +270,14 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-gray-700/30 rounded-lg p-4">
             <h3 className="text-white font-medium">1. Install momentum</h3>
-            <code className="text-cyan-400 text-sm block mt-2">
-              /install-github WhenMoon-afk/momentum
-            </code>
+            <div className="mt-2 space-y-1">
+              <code className="text-cyan-400 text-sm block">
+                /plugin marketplace add WhenMoon-afk/momentum
+              </code>
+              <code className="text-cyan-400 text-sm block">
+                /plugin install momentum
+              </code>
+            </div>
           </div>
           <div className="bg-gray-700/30 rounded-lg p-4">
             <h3 className="text-white font-medium">2. Connect to cloud</h3>
