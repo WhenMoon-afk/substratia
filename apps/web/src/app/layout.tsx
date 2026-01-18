@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 import Nav from '@/components/Nav'
 
@@ -113,8 +115,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
         />
       </head>
-      {/* Analytics: Enable Cloudflare Web Analytics in dashboard (free) */}
-      {/* Or add Plausible/Umami script here if using external analytics */}
       <body className="antialiased">
         <a href="#main-content" className="skip-link">
           Skip to main content
@@ -123,6 +123,8 @@ export default function RootLayout({
         <main id="main-content">
           {children}
         </main>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
