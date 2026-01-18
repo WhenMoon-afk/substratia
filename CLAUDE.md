@@ -200,6 +200,7 @@ Footer links:
 
 ### Security Headers (next.config.js)
 All responses include:
+- `Strict-Transport-Security` - HSTS with 1-year max-age
 - `Content-Security-Policy` - Script/style/connect-src restrictions
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: SAMEORIGIN`
@@ -207,15 +208,22 @@ All responses include:
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `Permissions-Policy` - Camera/mic/geolocation disabled
 
+### Route Protection (middleware.ts)
+- Server-side auth protection for `/dashboard` routes
+- Unauthenticated users redirected to sign-in at edge
+- Defense-in-depth beyond client-side checks
+
 ### API Security
 - Rate limiting on `/api/subscribe` (5 req/min per IP)
 - API keys are SHA-256 hashed before storage
 - All mutations require authenticated sessions (Clerk)
 - User data is scoped and isolated per account
+- Sensitive admin functions are internal-only (not client-callable)
 
 ### Authentication (Clerk)
 - HttpOnly, Secure, SameSite=Strict cookies
 - Google OAuth via custom domain (clerk.substratia.io)
+- JWT-based auth with Convex validation
 - Session management with secure defaults
 
 ### CI/CD Security
