@@ -67,16 +67,10 @@ export default function PricingPage() {
   const { isSignedIn, isLoaded } = useAuth()
   const [loading, setLoading] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [autoCheckoutTriggered, setAutoCheckoutTriggered] = useState(false)
 
-  const handleSubscribe = async (tier: string) => {
-    if (!isLoaded) return
-
-    if (!isSignedIn) {
-      // Redirect to sign in with return URL
-      window.location.href = `/sign-in?redirect_url=/pricing`
-      return
-    }
-
+  // Function to start checkout process
+  const startCheckout = async (tier: string) => {
     setLoading(tier)
     setError(null)
 
@@ -102,6 +96,32 @@ export default function PricingPage() {
     } finally {
       setLoading(null)
     }
+  }
+
+  // Auto-trigger checkout if user just signed in with subscribe intent
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn || autoCheckoutTriggered) return
+
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('intent') === 'subscribe') {
+      // Remove intent from URL to prevent re-triggering
+      window.history.replaceState({}, '', '/pricing')
+      // Mark as triggered and start checkout
+      setAutoCheckoutTriggered(true)
+      startCheckout('pro')
+    }
+  }, [isLoaded, isSignedIn, autoCheckoutTriggered])
+
+  const handleSubscribe = async (tier: string) => {
+    if (!isLoaded) return
+
+    if (!isSignedIn) {
+      // Redirect to sign in with return URL including subscribe intent
+      window.location.href = `/sign-in?redirect_url=${encodeURIComponent('/pricing?intent=subscribe')}`
+      return
+    }
+
+    startCheckout(tier)
   }
 
   return (
