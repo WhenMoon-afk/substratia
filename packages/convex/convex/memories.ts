@@ -1,6 +1,9 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
+// Free tier memory limit (also defined in bulkSync, keep in sync)
+const MEMORY_LIMIT_FREE = 100;
+
 // Store a new memory
 export const store = mutation({
   args: {
@@ -26,6 +29,20 @@ export const store = mutation({
       .first();
 
     if (!user) throw new Error("User not found");
+
+    // Tier enforcement: check memory limit for free users
+    if (user.tier === "free") {
+      const existingMemories = await ctx.db
+        .query("memories")
+        .withIndex("by_user", (q) => q.eq("userId", user._id))
+        .collect();
+
+      if (existingMemories.length >= MEMORY_LIMIT_FREE) {
+        throw new Error(
+          `Free tier limit reached (${MEMORY_LIMIT_FREE} memories). Upgrade to Pro for unlimited.`
+        );
+      }
+    }
 
     const now = Date.now();
     return await ctx.db.insert("memories", {
@@ -214,6 +231,29 @@ export const bulkSync = mutation({
       .first();
 
     if (!user) throw new Error("User not found");
+
+    // Tier enforcement: check memory limit for free users
+    if (user.tier === "free") {
+      const existingMemories = await ctx.db
+        .query("memories")
+        .withIndex("by_user", (q) => q.eq("userId", user._id))
+        .collect();
+
+      const currentCount = existingMemories.length;
+      const remaining = MEMORY_LIMIT_FREE - currentCount;
+
+      if (remaining <= 0) {
+        throw new Error(
+          `Free tier limit reached (${MEMORY_LIMIT_FREE} memories). Upgrade to Pro for unlimited.`
+        );
+      }
+
+      if (args.memories.length > remaining) {
+        throw new Error(
+          `Only ${remaining} memories remaining on free tier. Upgrade to Pro for unlimited.`
+        );
+      }
+    }
 
     const ids = [];
     for (const memory of args.memories) {
