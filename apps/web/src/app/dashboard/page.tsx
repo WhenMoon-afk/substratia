@@ -329,48 +329,51 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Quick Actions */}
+      {/* Quick Setup */}
       <div className="mt-8 bg-gray-800/50 rounded-xl p-6 border border-gray-700">
-        <h2 className="text-xl font-bold text-white mb-4">Quick Setup</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h2 className="text-xl font-bold text-white mb-2">Get Started</h2>
+        <p className="text-gray-400 text-sm mb-4">Install the free memory plugin, then connect to cloud for backup and sync.</p>
+
+        <div className="space-y-4">
+          {/* Step 1: Install */}
           <div className="bg-gray-700/30 rounded-lg p-4">
-            <h3 className="text-white font-medium">1. Add Marketplace</h3>
-            <div className="mt-2 flex items-center gap-2 group">
-              <code className="text-cyan-400 text-sm flex-1">
-                /plugin marketplace add whenmoon-afk/substratia-marketplace
-              </code>
-              <button
-                onClick={() => copyToClipboard('/plugin marketplace add whenmoon-afk/substratia-marketplace', true)}
-                className="px-2 py-1 text-xs rounded bg-gray-600/50 text-gray-400 hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
-              >
-                {copiedCommand === '/plugin marketplace add whenmoon-afk/substratia-marketplace' ? (
-                  <span className="text-green-400">Copied!</span>
-                ) : 'Copy'}
-              </button>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 text-sm flex items-center justify-center">1</span>
+              <h3 className="text-white font-medium">Install Memory Plugin</h3>
+              <span className="text-xs text-green-400 bg-green-400/10 px-2 py-0.5 rounded">Free</span>
+            </div>
+            <div className="space-y-2 ml-8">
+              <div className="flex items-center gap-2 group">
+                <code className="text-cyan-400 text-sm flex-1">/plugin marketplace add whenmoon-afk/substratia-marketplace</code>
+                <button
+                  onClick={() => copyToClipboard('/plugin marketplace add whenmoon-afk/substratia-marketplace', true)}
+                  className="px-2 py-1 text-xs rounded bg-gray-600/50 text-gray-400 hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors"
+                >
+                  {copiedCommand === '/plugin marketplace add whenmoon-afk/substratia-marketplace' ? <span className="text-green-400">Copied!</span> : 'Copy'}
+                </button>
+              </div>
+              <div className="flex items-center gap-2 group">
+                <code className="text-cyan-400 text-sm flex-1">/plugin install memory-mcp@substratia-marketplace</code>
+                <button
+                  onClick={() => copyToClipboard('/plugin install memory-mcp@substratia-marketplace', true)}
+                  className="px-2 py-1 text-xs rounded bg-gray-600/50 text-gray-400 hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors"
+                >
+                  {copiedCommand === '/plugin install memory-mcp@substratia-marketplace' ? <span className="text-green-400">Copied!</span> : 'Copy'}
+                </button>
+              </div>
             </div>
           </div>
+
+          {/* Step 2: Connect Cloud */}
           <div className="bg-gray-700/30 rounded-lg p-4">
-            <h3 className="text-white font-medium">2. Install Memory Plugin</h3>
-            <div className="mt-2 flex items-center gap-2 group">
-              <code className="text-cyan-400 text-sm flex-1">
-                /plugin install memory-mcp@substratia-marketplace
-              </code>
-              <button
-                onClick={() => copyToClipboard('/plugin install memory-mcp@substratia-marketplace', true)}
-                className="px-2 py-1 text-xs rounded bg-gray-600/50 text-gray-400 hover:bg-cyan-500/20 hover:text-cyan-400 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
-              >
-                {copiedCommand === '/plugin install memory-mcp@substratia-marketplace' ? (
-                  <span className="text-green-400">Copied!</span>
-                ) : 'Copy'}
-              </button>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 text-sm flex items-center justify-center">2</span>
+              <h3 className="text-white font-medium">Connect to Cloud</h3>
+              <span className="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded">Pro</span>
             </div>
-            <p className="text-gray-500 text-xs mt-1">Persistent memory across sessions</p>
-          </div>
-          <div className="bg-gray-700/30 rounded-lg p-4">
-            <h3 className="text-white font-medium">3. Connect to Cloud</h3>
-            <p className="text-gray-400 text-sm mt-2">
+            <p className="text-gray-400 text-sm ml-8">
               {apiKeys && apiKeys.length > 0 ? (
-                <span className="text-green-400">✓ You have {apiKeys.length} API key{apiKeys.length !== 1 ? 's' : ''}</span>
+                <span className="text-green-400">✓ Ready! Create an API key below and copy the connect command.</span>
               ) : (
                 <>
                   <button
@@ -382,15 +385,9 @@ export default function DashboardPage() {
                   >
                     Create an API key
                   </button>
-                  {' '}below to enable cloud sync
+                  {' '}below to enable cloud backup, cross-device sync, and this dashboard.
                 </>
               )}
-            </p>
-          </div>
-          <div className="bg-gray-700/30 rounded-lg p-4">
-            <h3 className="text-white font-medium">4. Start Using</h3>
-            <p className="text-gray-400 text-sm mt-2">
-              Memory automatically saves learnings. Use <code className="text-cyan-400">memory_recall</code> to retrieve context.
             </p>
           </div>
         </div>
@@ -454,9 +451,8 @@ export default function DashboardPage() {
                   </button>
                 </div>
 
-                {/* Connect Commands */}
-                <div className="mt-4 mb-3 space-y-2">
-                  <p className="text-gray-400 text-sm mb-2">Copy a connect command:</p>
+                {/* Connect Command */}
+                <div className="mt-4 mb-3">
                   <button
                     onClick={() => {
                       copyToClipboard(`memory_cloud action:connect api_key:${newKeyValue}`);
@@ -465,24 +461,12 @@ export default function DashboardPage() {
                     className="w-full px-4 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium flex items-center justify-center gap-2"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                     </svg>
-                    Copy Memory-MCP Command
-                  </button>
-                  <button
-                    onClick={() => {
-                      copyToClipboard(`momentum action:connect api_key:${newKeyValue}`);
-                      alert("Copied! Paste this command into Claude Code.");
-                    }}
-                    className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-lg hover:bg-gray-600 transition-colors text-sm flex items-center justify-center gap-2"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    Copy Momentum Command
+                    Copy Connect Command
                   </button>
                   <p className="text-gray-500 text-xs text-center mt-2">
-                    Paste the command into Claude Code to enable cloud sync
+                    Paste into Claude Code to enable cloud sync
                   </p>
                 </div>
 
