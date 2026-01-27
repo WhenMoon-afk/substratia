@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const viewport: Viewport = {
   themeColor: [
@@ -97,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Preconnect to Google Fonts for faster font loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -125,22 +126,24 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
         />
       </head>
-      <body className="antialiased">
-        <ClerkProvider
-          publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-          dynamic
-        >
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          <Nav />
-          <main id="main-content">
-            {children}
-          </main>
-          <Footer />
-          <Analytics />
-          <SpeedInsights />
-        </ClerkProvider>
+      <body className="antialiased bg-forge-dark text-white">
+        <ThemeProvider>
+          <ClerkProvider
+            publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+            dynamic
+          >
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+            <Nav />
+            <main id="main-content">
+              {children}
+            </main>
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

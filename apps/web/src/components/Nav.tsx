@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import ThemeToggle from './ThemeToggle'
 
 export default function Nav() {
   const pathname = usePathname()
@@ -64,6 +65,7 @@ export default function Nav() {
             >
               GitHub
             </a>
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
@@ -115,6 +117,10 @@ export default function Nav() {
               >
                 GitHub →
               </a>
+              <div className="px-2 py-2 flex items-center gap-2">
+                <span className="text-sm text-gray-400">Theme:</span>
+                <ThemeToggle />
+              </div>
             </div>
           </div>
         )}
