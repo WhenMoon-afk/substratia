@@ -1,127 +1,11 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import ShareButton from '@/components/ShareButton'
-
-// Sanitize URLs to prevent javascript: and other dangerous protocols
-function sanitizeUrl(url: string): string {
-  const trimmed = url.trim().toLowerCase()
-  if (trimmed.startsWith('javascript:') ||
-      trimmed.startsWith('vbscript:') ||
-      trimmed.startsWith('data:')) {
-    return '#'
-  }
-  return url
-}
-
-// Simple markdown to HTML converter (no dependencies)
-function markdownToHtml(text: string): string {
-  if (!text) return ''
-
-  let html = text
-
-  // Escape HTML entities first (but preserve our markdown)
-  html = html
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-
-  // Code blocks (``` ... ```) - must be before other processing
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
-    return `<pre class="code-block"><code class="language-${lang || 'text'}">${code.trim()}</code></pre>`
-  })
-
-  // Inline code (`code`)
-  html = html.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
-
-  // Headers
-  html = html.replace(/^######\s+(.+)$/gm, '<h6>$1</h6>')
-  html = html.replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>')
-  html = html.replace(/^####\s+(.+)$/gm, '<h4>$1</h4>')
-  html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>')
-  html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>')
-  html = html.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>')
-
-  // Horizontal rules
-  html = html.replace(/^[-*_]{3,}\s*$/gm, '<hr />')
-
-  // Images ![alt](url) - sanitize URLs
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, url) => {
-    return `<img src="${sanitizeUrl(url)}" alt="${alt}" class="markdown-img" />`
-  })
-
-  // Links [text](url) - sanitize URLs
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, url) => {
-    return `<a href="${sanitizeUrl(url)}" target="_blank" rel="noopener noreferrer" class="markdown-link">${text}</a>`
-  })
-
-  // Bold and italic combined (***text*** or ___text___)
-  html = html.replace(/(\*\*\*|___)(.*?)\1/g, '<strong><em>$2</em></strong>')
-
-  // Bold (**text** or __text__)
-  html = html.replace(/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>')
-
-  // Italic (*text* or _text_)
-  html = html.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>')
-
-  // Strikethrough ~~text~~
-  html = html.replace(/~~(.*?)~~/g, '<del>$1</del>')
-
-  // Blockquotes (> text) - handle multiple lines
-  html = html.replace(/^&gt;\s*(.+)$/gm, '<blockquote>$1</blockquote>')
-  // Merge consecutive blockquotes
-  html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n')
-
-  // Task lists [ ] and [x]
-  html = html.replace(/^(\s*)[-*+]\s+\[x\]\s+(.+)$/gim, '$1<div class="task-item"><input type="checkbox" checked disabled /> $2</div>')
-  html = html.replace(/^(\s*)[-*+]\s+\[\s\]\s+(.+)$/gim, '$1<div class="task-item"><input type="checkbox" disabled /> $2</div>')
-
-  // Unordered lists (-, *, +)
-  html = html.replace(/^[-*+]\s+(.+)$/gm, '<li>$1</li>')
-
-  // Ordered lists (1., 2., etc)
-  html = html.replace(/^\d+\.\s+(.+)$/gm, '<li class="ordered">$1</li>')
-
-  // Wrap consecutive <li> in <ul> or <ol>
-  html = html.replace(/(<li>[\s\S]*?<\/li>)+/g, (match) => {
-    if (match.includes('class="ordered"')) {
-      return `<ol>${match.replace(/ class="ordered"/g, '')}</ol>`
-    }
-    return `<ul>${match}</ul>`
-  })
-
-  // Paragraphs - wrap remaining lines that aren't already wrapped
-  const lines = html.split('\n')
-  const processedLines = lines.map(line => {
-    const trimmed = line.trim()
-    if (!trimmed) return ''
-    if (trimmed.startsWith('<')) return line // Already HTML
-    return `<p>${line}</p>`
-  })
-  html = processedLines.join('\n')
-
-  // Clean up empty paragraphs
-  html = html.replace(/<p>\s*<\/p>/g, '')
-
-  // Fix double-wrapped elements
-  html = html.replace(/<p>(<h[1-6]>)/g, '$1')
-  html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1')
-  html = html.replace(/<p>(<ul>)/g, '$1')
-  html = html.replace(/(<\/ul>)<\/p>/g, '$1')
-  html = html.replace(/<p>(<ol>)/g, '$1')
-  html = html.replace(/(<\/ol>)<\/p>/g, '$1')
-  html = html.replace(/<p>(<blockquote>)/g, '$1')
-  html = html.replace(/(<\/blockquote>)<\/p>/g, '$1')
-  html = html.replace(/<p>(<pre)/g, '$1')
-  html = html.replace(/(<\/pre>)<\/p>/g, '$1')
-  html = html.replace(/<p>(<hr)/g, '$1')
-  html = html.replace(/(\/&gt;)<\/p>/g, '$1')
-  html = html.replace(/<p>(<div class="task-item">)/g, '$1')
-  html = html.replace(/(<\/div>)<\/p>/g, '$1')
-
-  return html
-}
+import ReactMarkdown from 'react-markdown'
+import rehypeSanitize from 'rehype-sanitize'
+import remarkGfm from 'remark-gfm'
 
 const defaultMarkdown = `# Welcome to Markdown Preview
 
@@ -161,8 +45,15 @@ export default function MarkdownPreviewPage() {
   const [copiedRaw, setCopiedRaw] = useState(false)
   const [copiedHtml, setCopiedHtml] = useState(false)
   const [viewMode, setViewMode] = useState<'split' | 'edit' | 'preview'>('split')
+  const previewRef = useRef<HTMLDivElement>(null)
 
-  const html = useMemo(() => markdownToHtml(markdown), [markdown])
+  // Get HTML from the rendered preview for copy/export
+  const getRenderedHtml = useCallback(() => {
+    if (previewRef.current) {
+      return previewRef.current.innerHTML
+    }
+    return ''
+  }, [])
 
   const copyRaw = useCallback(async () => {
     await navigator.clipboard.writeText(markdown)
@@ -171,10 +62,11 @@ export default function MarkdownPreviewPage() {
   }, [markdown])
 
   const copyHtml = useCallback(async () => {
+    const html = getRenderedHtml()
     await navigator.clipboard.writeText(html)
     setCopiedHtml(true)
     setTimeout(() => setCopiedHtml(false), 2000)
-  }, [html])
+  }, [getRenderedHtml])
 
   const clearAll = useCallback(() => {
     setMarkdown('')
@@ -197,6 +89,7 @@ export default function MarkdownPreviewPage() {
 
   // Download as .html file
   const downloadHtml = useCallback(() => {
+    const html = getRenderedHtml()
     const fullHtml = `<!DOCTYPE html>
 <html>
 <head>
@@ -212,6 +105,9 @@ export default function MarkdownPreviewPage() {
     a { color: #0066cc; }
     hr { border: none; border-top: 1px solid #eee; margin: 2em 0; }
     ul, ol { padding-left: 2em; }
+    table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
   </style>
 </head>
 <body>
@@ -225,10 +121,11 @@ ${html}
     a.download = 'document.html'
     a.click()
     URL.revokeObjectURL(url)
-  }, [html])
+  }, [getRenderedHtml])
 
   // Export as PDF (via print dialog)
   const exportPdf = useCallback(() => {
+    const html = getRenderedHtml()
     const printWindow = window.open('', '_blank')
     if (!printWindow) {
       alert('Please allow popups to export PDF')
@@ -250,6 +147,9 @@ ${html}
       a { color: #0066cc; text-decoration: underline; }
       hr { border: none; border-top: 1px solid #ccc; margin: 2em 0; }
       ul, ol { padding-left: 2em; }
+      table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background: #f5f5f5; }
     }
   </style>
 </head>
@@ -259,7 +159,14 @@ ${html}
 </body>
 </html>`)
     printWindow.document.close()
-  }, [html])
+  }, [getRenderedHtml])
+
+  // Calculate stats
+  const stats = useMemo(() => ({
+    characters: markdown.length,
+    words: markdown.split(/\s+/).filter(Boolean).length,
+    lines: markdown.split('\n').length,
+  }), [markdown])
 
   return (
     <main className="min-h-screen text-white">
@@ -393,31 +300,78 @@ ${html}
                 </button>
               </div>
               <div
+                ref={previewRef}
                 className="w-full h-[500px] px-4 py-3 bg-black/30 border border-white/10 rounded-lg overflow-auto markdown-preview"
-                dangerouslySetInnerHTML={{ __html: html }}
-              />
+              >
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeSanitize]}
+                  components={{
+                    // Custom link component to open in new tab
+                    a: ({ href, children }) => (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="markdown-link"
+                      >
+                        {children}
+                      </a>
+                    ),
+                    // Custom code block component
+                    code: ({ className, children, ...props }) => {
+                      const isInline = !className
+                      if (isInline) {
+                        return <code className="inline-code" {...props}>{children}</code>
+                      }
+                      return (
+                        <code className={className} {...props}>
+                          {children}
+                        </code>
+                      )
+                    },
+                    // Custom pre component for code blocks
+                    pre: ({ children }) => (
+                      <pre className="code-block">{children}</pre>
+                    ),
+                    // Custom checkbox for task lists
+                    input: ({ type, checked, ...props }) => {
+                      if (type === 'checkbox') {
+                        return (
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            disabled
+                            className="task-checkbox"
+                            {...props}
+                          />
+                        )
+                      }
+                      return <input type={type} {...props} />
+                    },
+                  }}
+                >
+                  {markdown}
+                </ReactMarkdown>
+              </div>
             </div>
           )}
         </div>
 
         {/* Stats */}
         <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
-          <div className="grid grid-cols-4 gap-4 text-center">
+          <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-2xl font-bold text-white">{markdown.length.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-white">{stats.characters.toLocaleString()}</div>
               <div className="text-xs text-gray-500">Characters</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-forge-cyan">{markdown.split(/\s+/).filter(Boolean).length.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-forge-cyan">{stats.words.toLocaleString()}</div>
               <div className="text-xs text-gray-500">Words</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-forge-purple">{markdown.split('\n').length}</div>
+              <div className="text-2xl font-bold text-forge-purple">{stats.lines}</div>
               <div className="text-xs text-gray-500">Lines</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-green-400">{html.length.toLocaleString()}</div>
-              <div className="text-xs text-gray-500">HTML Chars</div>
             </div>
           </div>
         </div>
@@ -564,22 +518,36 @@ ${html}
           font-family: monospace;
           font-size: 0.9em;
           color: #e5e7eb;
+          background: none;
+          padding: 0;
         }
-        .markdown-preview .task-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5em;
-          margin: 0.25em 0;
-        }
-        .markdown-preview .task-item input {
+        .markdown-preview .task-checkbox {
           width: 1em;
           height: 1em;
+          margin-right: 0.5em;
           accent-color: #00d9ff;
         }
-        .markdown-preview img.markdown-img {
+        .markdown-preview img {
           max-width: 100%;
           border-radius: 8px;
           margin: 1em 0;
+        }
+        .markdown-preview table {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 1em 0;
+        }
+        .markdown-preview th, .markdown-preview td {
+          border: 1px solid rgba(255,255,255,0.2);
+          padding: 8px 12px;
+          text-align: left;
+        }
+        .markdown-preview th {
+          background: rgba(255,255,255,0.1);
+          font-weight: bold;
+        }
+        .markdown-preview tr:nth-child(even) {
+          background: rgba(255,255,255,0.05);
         }
       `}</style>
     </main>

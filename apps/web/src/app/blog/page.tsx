@@ -226,16 +226,16 @@ export default function BlogPage() {
           )}
         </div>
 
-        {/* Consulting CTA */}
+        {/* Documentation CTA */}
         <div className="max-w-3xl mx-auto mt-12 text-center">
           <p className="text-gray-400 mb-4">
-            Need personalized help with Claude Code?
+            Ready to master Claude Code?
           </p>
           <Link
-            href="/consulting"
+            href="/docs"
             className="inline-block px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-lg font-semibold transition-all"
           >
-            Book a Consulting Session
+            Explore Documentation
           </Link>
         </div>
       </div>

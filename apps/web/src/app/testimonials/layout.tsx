@@ -1,19 +1,19 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Testimonials - Claude Code Consulting Success Stories | Substratia',
-  description: 'See how teams and developers have improved their Claude Code workflows with our consulting services. Real results from real users.',
-  keywords: ['Claude Code consulting', 'testimonials', 'case studies', 'AI consulting results', 'Claude Code training'],
+  title: 'Testimonials - Claude Code Success Stories | Substratia',
+  description: 'See how teams and developers have improved their Claude Code workflows with our free tools. Real results from real users.',
+  keywords: ['Claude Code tools', 'testimonials', 'case studies', 'AI workflow results', 'Claude Code success'],
   openGraph: {
-    title: 'Claude Code Consulting Testimonials',
+    title: 'Claude Code Success Stories',
     description: 'Real results from developers and teams who improved their Claude Code workflows.',
     type: 'website',
     url: 'https://substratia.io/testimonials',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Claude Code Consulting Testimonials',
-    description: 'Success stories from Claude Code consulting clients.',
+    title: 'Claude Code Success Stories',
+    description: 'Success stories from developers using our free Claude Code tools.',
   },
 }
 
@@ -29,13 +29,13 @@ const breadcrumbLd = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Claude Code Consulting Testimonials',
+  name: 'Claude Code Success Stories',
   description: 'Success stories from developers and teams who improved their Claude Code workflows.',
   url: 'https://substratia.io/testimonials',
   mainEntity: {
     '@type': 'ItemList',
-    name: 'Client Success Stories',
-    description: 'Testimonials from Claude Code consulting clients.',
+    name: 'User Success Stories',
+    description: 'Testimonials from developers using our free Claude Code tools.',
   },
 }
 

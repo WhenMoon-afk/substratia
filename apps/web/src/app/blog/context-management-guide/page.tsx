@@ -413,8 +413,8 @@ that we identified from the TypeError: Cannot read property 'email' of null"`}</
             <h3 className="text-xl font-bold mb-4">Want More Help?</h3>
             <p className="text-gray-300 mb-6">
               Get the <Link href="/tools/cheat-sheet" className="text-forge-cyan hover:underline">Claude Code Cheat Sheet</Link> for
-              a quick reference, or <Link href="/consulting" className="text-forge-cyan hover:underline">book a consulting session</Link> for
-              personalized help with your workflow.
+              a quick reference, or explore the <Link href="/docs" className="text-forge-cyan hover:underline">full documentation</Link> for
+              in-depth guides.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -424,10 +424,10 @@ that we identified from the TypeError: Cannot read property 'email' of null"`}</
                 Get the Cheat Sheet
               </Link>
               <Link
-                href="/consulting"
+                href="/docs"
                 className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl font-semibold transition-all"
               >
-                Book Consulting
+                Read the Docs
               </Link>
             </div>
           </div>

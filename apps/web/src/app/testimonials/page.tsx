@@ -15,7 +15,7 @@ interface Testimonial {
   image?: string
 }
 
-// Placeholder testimonials - will be replaced with real ones from consulting clients
+// Placeholder testimonials - will be replaced with real ones from tool users
 const testimonials: Testimonial[] = [
   // When we get real testimonials, they'll go here
   // {
@@ -44,7 +44,7 @@ export default function TestimonialsPage() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email, source: 'testimonials', interest: 'consulting' }),
+        body: JSON.stringify({ email, source: 'testimonials', interest: 'tools' }),
       })
       if (res.ok) {
         setStatus('success')
@@ -134,22 +134,22 @@ export default function TestimonialsPage() {
                 </div>
                 <h2 className="text-2xl font-bold mb-4">Coming Soon</h2>
                 <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-                  We&apos;re just getting started with consulting. Testimonials from early clients will appear here soon.
+                  We&apos;re collecting success stories from developers using our free tools. Your story could be featured here.
                 </p>
 
                 <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
                   <Link
-                    href="/consulting"
+                    href="/tools"
                     className="px-6 py-3 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:bg-forge-cyan/90 transition-all"
                   >
-                    Become an Early Client
+                    Explore Free Tools
                   </Link>
                   <span className="text-gray-500">or</span>
                   <Link
                     href="/blog/context-management-guide"
                     className="text-forge-cyan hover:underline"
                   >
-                    Read our free resources
+                    Read our guides
                   </Link>
                 </div>
               </div>
@@ -178,7 +178,7 @@ export default function TestimonialsPage() {
             <div className="mt-16 text-center pt-12 border-t border-white/10">
               <h2 className="text-2xl font-bold mb-4">Get Updates</h2>
               <p className="text-gray-400 mb-6">
-                Be the first to hear about new case studies and consulting offers.
+                Be the first to hear about new case studies and tool updates.
               </p>
               {status === 'success' ? (
                 <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300 max-w-md mx-auto">

@@ -292,14 +292,14 @@ export default function ToolsIndexPage() {
           )}
         </div>
 
-        {/* Consulting CTA */}
+        {/* Start Here CTA */}
         <div className="text-center mt-12">
-          <p className="text-gray-400 mb-4">Need personalized help with Claude Code?</p>
+          <p className="text-gray-400 mb-4">New to Claude Code?</p>
           <Link
-            href="/consulting"
+            href="/start-here"
             className="inline-block px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-xl font-semibold transition-all"
           >
-            Book a Consulting Session
+            Start Here Guide
           </Link>
         </div>
       </div>

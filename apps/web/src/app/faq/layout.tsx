@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'FAQ - Claude Code & Memory Tools | Substratia',
-  description: 'Frequently asked questions about Claude Code, momentum, memory-mcp, and our consulting services. Get answers to common questions.',
+  description: 'Frequently asked questions about Claude Code, momentum, memory-mcp, and MCP tools. Get answers to common questions.',
   keywords: ['Claude Code FAQ', 'momentum FAQ', 'memory-mcp FAQ', 'MCP server questions', 'Claude Code help'],
   openGraph: {
     title: 'FAQ - Claude Code & Memory Tools',
@@ -64,10 +64,10 @@ const jsonLd = {
     },
     {
       '@type': 'Question',
-      name: 'Do you offer consulting?',
+      name: 'How do I get started?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, we offer Claude Code consulting services including setup sessions ($200), team workshops ($1,500), and ongoing advisory packages. Visit substratia.io/consulting for details.',
+        text: 'Visit substratia.io/start-here for a beginner-friendly guide, or check out the cheat sheet at substratia.io/tools/cheat-sheet for a quick reference.',
       },
     },
   ],
