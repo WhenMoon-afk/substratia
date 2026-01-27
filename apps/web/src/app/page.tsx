@@ -4,23 +4,40 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+// Loading skeleton component for stats
+function StatSkeleton() {
+  return <span className="inline-block w-12 h-4 bg-gray-700 rounded animate-pulse" />
+}
+
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [npmDownloads, setNpmDownloads] = useState<number | null>(null)
+  const [githubStars, setGithubStars] = useState<number | null>(null)
+  const [statsLoading, setStatsLoading] = useState(true)
 
   useEffect(() => {
     setMounted(true)
-    // Fetch npm download count
-    fetch('https://api.npmjs.org/downloads/point/last-month/claude-memory-mcp')
-      .then(res => res.json())
-      .then(data => {
-        if (data.downloads) {
-          setNpmDownloads(data.downloads)
-        }
-      })
-      .catch(() => {
-        // Silently fail, will show nothing
-      })
+    // Fetch npm download count and GitHub stars in parallel
+    Promise.all([
+      fetch('https://api.npmjs.org/downloads/point/last-month/claude-memory-mcp')
+        .then(res => res.json())
+        .then(data => {
+          if (data.downloads) {
+            setNpmDownloads(data.downloads)
+          }
+        })
+        .catch(() => {}),
+      fetch('https://api.github.com/repos/WhenMoon-afk/claude-memory-mcp')
+        .then(res => res.json())
+        .then(data => {
+          if (data.stargazers_count) {
+            setGithubStars(data.stargazers_count)
+          }
+        })
+        .catch(() => {})
+    ]).finally(() => {
+      setStatsLoading(false)
+    })
   }, [])
 
   return (
@@ -73,7 +90,15 @@ export default function Home() {
               </div>
 
               <p className="text-sm text-gray-500">
-                Free &amp; open source{npmDownloads && <> &bull; <span className="text-forge-cyan">{npmDownloads.toLocaleString()}+</span> monthly npm downloads</>}
+                Free &amp; open source
+                {statsLoading ? (
+                  <> &bull; <StatSkeleton /></>
+                ) : (
+                  <>
+                    {githubStars && <> &bull; <span className="text-forge-purple">{githubStars}</span> GitHub stars</>}
+                    {npmDownloads && <> &bull; <span className="text-forge-cyan">{npmDownloads.toLocaleString()}+</span> npm downloads</>}
+                  </>
+                )}
               </p>
             </div>
 
@@ -231,11 +256,17 @@ export default function Home() {
               </a>
             ))}
           </div>
-          {npmDownloads && (
-            <p className="text-center text-gray-500 text-sm mt-8">
-              {npmDownloads.toLocaleString()}+ npm downloads in the last 30 days
-            </p>
-          )}
+          <p className="text-center text-gray-500 text-sm mt-8">
+            {statsLoading ? (
+              <StatSkeleton />
+            ) : (
+              <>
+                {githubStars && <><span className="text-forge-purple">{githubStars}</span> GitHub stars</>}
+                {githubStars && npmDownloads && ' · '}
+                {npmDownloads && <><span className="text-forge-cyan">{npmDownloads.toLocaleString()}+</span> npm downloads/month</>}
+              </>
+            )}
+          </p>
         </div>
       </section>
 
