@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Build your perfect tech stack with compatibility checks and AI analysis export.',
     type: 'website',
     url: 'https://substratia.io/tools/stack-builder',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Stack%20Builder&subtitle=Full-Stack%20Tech%20Selector',
+        width: 1200,
+        height: 630,
+        alt: 'Stack Builder',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

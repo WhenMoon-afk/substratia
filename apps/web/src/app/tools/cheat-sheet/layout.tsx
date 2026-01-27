@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'The ultimate Claude Code reference. Slash commands, shortcuts, CLAUDE.md tips, and more.',
     type: 'website',
     url: 'https://substratia.io/tools/cheat-sheet',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Claude%20Code%20Cheat%20Sheet&subtitle=Commands%2C%20Shortcuts%20%26%20Tips',
+        width: 1200,
+        height: 630,
+        alt: 'Claude Code Cheat Sheet',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

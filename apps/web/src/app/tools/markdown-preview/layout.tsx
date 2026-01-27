@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Free live markdown preview tool. Edit markdown on the left, see rendered output on the right. Instant rendering.',
     type: 'website',
     url: 'https://substratia.io/tools/markdown-preview',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Markdown%20Preview&subtitle=Live%20Editor%20%26%20Renderer',
+        width: 1200,
+        height: 630,
+        alt: 'Markdown Preview',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Generate cryptographically strong random strings from mouse movements. 100% client-side, private.',
     type: 'website',
     url: 'https://substratia.io/tools/seed-maker',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Seed%20Maker&subtitle=High-Entropy%20Random%20Generator',
+        width: 1200,
+        height: 630,
+        alt: 'Seed Maker',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Free tool to create video generation prompts. 7 keyframes at 5-second intervals, drag-and-drop moment library, platform-specific output. Works with Grok, Runway, Pika, Luma.',
     type: 'website',
     url: 'https://substratia.io/tools/video-prompt-timeline',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Video%20Prompt%20Timeline&subtitle=AI%20Video%20Storyboard%20Builder',
+        width: 1200,
+        height: 630,
+        alt: 'Video Prompt Timeline',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Calculate your Claude Code costs. Compare API pricing vs subscription plans. Find the most cost-effective option.',
     type: 'website',
     url: 'https://substratia.io/tools/cost-calculator',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Claude%20Code%20Cost%20Calculator&subtitle=API%20vs%20Subscription%20Comparison',
+        width: 1200,
+        height: 630,
+        alt: 'Claude Code Cost Calculator',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

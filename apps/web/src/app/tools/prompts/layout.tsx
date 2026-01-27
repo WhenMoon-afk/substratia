@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Battle-tested prompts for communication, creativity, and productivity. Click to copy. Works with any AI.',
     type: 'website',
     url: 'https://substratia.io/tools/prompts',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Prompt%20Library&subtitle=24%20Curated%20AI%20Prompts',
+        width: 1200,
+        height: 630,
+        alt: 'Prompt Library',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

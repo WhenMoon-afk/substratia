@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Count tokens and estimate costs for Claude 4.5, GPT-4, and other AI models. 100% free, no signup.',
     type: 'website',
     url: 'https://substratia.io/tools/token-counter',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Token%20Counter&subtitle=Count%20tokens%20for%20Claude%20%26%20GPT-4',
+        width: 1200,
+        height: 630,
+        alt: 'Token Counter',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

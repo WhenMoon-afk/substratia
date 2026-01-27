@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Optimize your Claude Code prompts with thinking modes, autonomous patterns, and parallel execution snippets.',
     type: 'website',
     url: 'https://substratia.io/tools/prompt-optimizer',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Prompt%20Optimizer&subtitle=Build%20Better%20Claude%20Code%20Prompts',
+        width: 1200,
+        height: 630,
+        alt: 'Claude Code Prompt Optimizer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

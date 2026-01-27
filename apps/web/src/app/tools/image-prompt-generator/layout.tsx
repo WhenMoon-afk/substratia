@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Free tool to create image generation prompts. 50+ style presets, negative prompts, platform-specific output. Works with Midjourney, DALL-E, Stable Diffusion.',
     type: 'website',
     url: 'https://substratia.io/tools/image-prompt-generator',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Image%20Prompt%20Generator&subtitle=Build%20AI%20Art%20Prompts%20Visually',
+        width: 1200,
+        height: 630,
+        alt: 'Image Prompt Generator',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

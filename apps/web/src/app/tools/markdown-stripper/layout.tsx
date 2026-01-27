@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     description: 'Free tool to strip markdown formatting from text. Paste markdown, get clean plain text instantly.',
     type: 'website',
     url: 'https://substratia.io/tools/markdown-stripper',
+    images: [
+      {
+        url: 'https://substratia.io/api/og?title=Markdown%20Stripper&subtitle=Remove%20Formatting%20Instantly',
+        width: 1200,
+        height: 630,
+        alt: 'Markdown Stripper',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
