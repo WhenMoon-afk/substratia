@@ -14,6 +14,7 @@ updates:
         patterns:
           - "*"
         update-types:
+          - "major"
           - "minor"
           - "patch"
     # Prioritize security updates (these bypass grouping)
