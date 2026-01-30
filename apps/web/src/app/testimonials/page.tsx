@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import ShareButton from '@/components/ShareButton'
 
 interface Testimonial {
@@ -86,9 +87,11 @@ export default function TestimonialsPage() {
                   <div key={testimonial.id} className="glass rounded-xl p-8">
                     <div className="flex items-start gap-4">
                       {testimonial.image ? (
-                        <img
+                        <Image
                           src={testimonial.image}
                           alt={testimonial.author}
+                          width={64}
+                          height={64}
                           className="w-16 h-16 rounded-full object-cover"
                         />
                       ) : (

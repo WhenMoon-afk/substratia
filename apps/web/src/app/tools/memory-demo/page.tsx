@@ -209,7 +209,7 @@ export default function MemoryDemoPage() {
               {/* Messages */}
               <div className="p-4 min-h-[350px] space-y-3">
                 <div className="text-center text-gray-500 text-sm mb-4">
-                  New session: "Help me write a test for the auth component"
+                  New session: &quot;Help me write a test for the auth component&quot;
                 </div>
 
                 {messages.slice(0, visibleMessages).map((msg, i) => (

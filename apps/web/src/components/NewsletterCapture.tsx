@@ -45,7 +45,7 @@ export default function NewsletterCapture({
   if (status === 'success') {
     return (
       <div className={`${compact ? 'p-4' : 'p-6'} bg-green-500/10 border border-green-500/20 rounded-xl text-center`}>
-        <p className="text-green-400 font-medium">You're subscribed!</p>
+        <p className="text-green-400 font-medium">You&apos;re subscribed!</p>
         <p className="text-sm text-gray-400 mt-1">Check your inbox for a welcome email.</p>
       </div>
     )

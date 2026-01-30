@@ -429,7 +429,7 @@ export default function CloudPage() {
               <div className="glass-strong rounded-xl p-6">
                 <h3 className="font-semibold mb-2">When will Substratia Cloud launch?</h3>
                 <p className="text-gray-400 text-sm">
-                  We're validating demand now. If enough people join the waitlist, we'll build
+                  We&apos;re validating demand now. If enough people join the waitlist, we&apos;ll build
                   and ship an MVP within 2-3 months. Early access members get a permanent discount.
                 </p>
               </div>

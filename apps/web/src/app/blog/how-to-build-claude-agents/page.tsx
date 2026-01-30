@@ -46,7 +46,7 @@ export default function BlogPost() {
         <div className="prose prose-invert prose-lg max-w-none">
           <p className="text-xl text-gray-300 mb-8">
             CLAUDE.md files are the secret to building powerful, reliable AI agents with Claude Code.
-            In this guide, you'll learn everything you need to create your first agent configuration.
+            In this guide, you&apos;ll learn everything you need to create your first agent configuration.
           </p>
 
           <h2 className="text-2xl font-bold mt-8 mb-4 text-forge-cyan">
@@ -54,11 +54,11 @@ export default function BlogPost() {
           </h2>
           <p className="text-gray-300 mb-4">
             A CLAUDE.md file is a configuration file that defines how an AI agent should behave.
-            It includes instructions, capabilities, rules, and constraints that shape the agent's responses
+            It includes instructions, capabilities, rules, and constraints that shape the agent&apos;s responses
             and actions.
           </p>
           <p className="text-gray-300 mb-4">
-            Think of it as a "personality profile" for your AI agent - it tells Claude what it can do,
+            Think of it as a &quot;personality profile&quot; for your AI agent - it tells Claude what it can do,
             what it should never do, and how it should approach tasks.
           </p>
 
@@ -154,7 +154,7 @@ Brief description of the agent's purpose.
               stop and ask for help instead of continuing.
             </li>
             <li>
-              <strong className="text-white">Test and iterate</strong> - Your first CLAUDE.md won't be perfect.
+              <strong className="text-white">Test and iterate</strong> - Your first CLAUDE.md won&apos;t be perfect.
               Observe behavior and refine over time.
             </li>
           </ol>
