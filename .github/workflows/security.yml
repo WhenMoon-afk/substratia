@@ -22,26 +22,36 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: |
+          # Use --frozen-lockfile on push to master (lockfile must be committed)
+          # Use regular install on PRs (dependabot PRs update deps without lockfile)
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            bun install
+          else
+            bun install --frozen-lockfile
+          fi
 
       - name: Run security audit
-        run: bun audit || true
-        continue-on-error: true
-
-      - name: Check for high/critical vulnerabilities
         run: |
           AUDIT_OUTPUT=$(bun audit 2>&1 || true)
           echo "$AUDIT_OUTPUT"
+
           # Count individual high/critical vulnerability lines (format: "  high: ..." or "  critical: ...")
           HIGH_CRIT=$(echo "$AUDIT_OUTPUT" | grep -cE "^\s+(high|critical):" || true)
           if [ "$HIGH_CRIT" -gt "0" ]; then
             echo "::error::Found $HIGH_CRIT high/critical vulnerabilities — these must be resolved"
             exit 1
           fi
+
           # Warn on moderate but don't fail the build
           MODERATE=$(echo "$AUDIT_OUTPUT" | grep -cE "^\s+moderate:" || true)
           if [ "$MODERATE" -gt "0" ]; then
             echo "::warning::Found $MODERATE moderate vulnerabilities (non-blocking)"
+          fi
+
+          # Report clean bill of health
+          if [ "$HIGH_CRIT" -eq "0" ] && [ "$MODERATE" -eq "0" ]; then
+            echo "✅ No vulnerabilities found"
           fi
 
   secrets-scan:
