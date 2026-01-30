@@ -212,13 +212,7 @@ export default function DashboardPage() {
             {stats?.tier ?? "Free"}
           </p>
           <p className="text-gray-500 text-sm mt-1">
-            {stats?.tier === "free" ? (
-              <Link href="/pricing" className="text-cyan-400 hover:underline">
-                Upgrade →
-              </Link>
-            ) : (
-              "Thank you for your support!"
-            )}
+            Free & open source
           </p>
         </div>
       </div>
