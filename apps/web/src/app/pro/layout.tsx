@@ -1,19 +1,19 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Substratia Pro - Cloud Sync & Memory Dashboard | Coming Soon',
-  description: 'Join the waitlist for Substratia Pro. Cloud sync across devices, memory dashboard, automatic backups, and team features. Early access pricing available.',
-  keywords: 'substratia pro, AI memory cloud sync, memory dashboard, Claude memory, persistent AI memory, team AI memory',
+  title: 'Substratia - Free & Open Source Developer Tools',
+  description: 'All Substratia tools are free and open source. No paid tiers, no subscriptions needed. MIT licensed developer tools for Claude Code.',
+  keywords: 'substratia, free developer tools, open source, Claude Code tools, AI memory, MIT licensed',
   openGraph: {
-    title: 'Substratia Pro - Coming Soon',
-    description: 'Cloud sync, memory dashboard, automatic backups. Join the waitlist for early access.',
+    title: 'Substratia - All Tools Are Free',
+    description: 'All Substratia tools are free and open source. No paid tiers, no subscriptions.',
     type: 'website',
     url: 'https://substratia.io/pro',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Substratia Pro - Coming Soon',
-    description: 'Cloud sync, memory dashboard, automatic backups. Join the waitlist.',
+    title: 'Substratia - All Tools Are Free',
+    description: 'All Substratia tools are free and open source. No paid tiers, no subscriptions.',
   },
 }
 
@@ -28,25 +28,9 @@ const breadcrumbLd = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: 'Substratia Pro',
-  description: 'Cloud sync across devices, memory dashboard, automatic backups, and team features.',
-  brand: {
-    '@type': 'Brand',
-    name: 'Substratia',
-  },
-  offers: {
-    '@type': 'Offer',
-    availability: 'https://schema.org/PreOrder',
-    price: '15',
-    priceCurrency: 'USD',
-    priceSpecification: {
-      '@type': 'UnitPriceSpecification',
-      price: '15',
-      priceCurrency: 'USD',
-      billingDuration: 'P1M',
-    },
-  },
+  '@type': 'WebPage',
+  name: 'Substratia - Free Developer Tools',
+  description: 'All Substratia tools are free and open source. MIT licensed developer tools for Claude Code.',
   url: 'https://substratia.io/pro',
 }
 

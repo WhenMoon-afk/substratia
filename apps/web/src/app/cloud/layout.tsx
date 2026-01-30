@@ -1,27 +1,27 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Substratia Cloud - Cross-Device Memory Sync for Claude Code',
-  description: 'Sync your Claude Code memories across all your devices. Cloud backup, cross-device sync, and web dashboard. Coming soon.',
+  title: 'Substratia - Open Source Developer Tools for Claude Code',
+  description: 'Free, open source developer tools for Claude Code. memory-mcp, momentum, AgentForge, and more. All MIT licensed.',
   keywords: [
-    'Claude Code cloud',
-    'memory sync',
-    'cross-device',
-    'cloud backup',
     'Claude Code tools',
+    'open source',
+    'developer tools',
+    'memory-mcp',
+    'momentum',
     'AI memory',
-    'Substratia Cloud'
+    'Substratia'
   ],
   openGraph: {
-    title: 'Substratia Cloud - Cross-Device Memory Sync',
-    description: 'Your Claude Code memories, synced everywhere. Never lose context when switching devices.',
+    title: 'Substratia - Open Source Developer Tools',
+    description: 'Free, open source developer tools for Claude Code. Built by developers, for developers.',
     type: 'website',
     url: 'https://substratia.io/cloud',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Substratia Cloud - Cross-Device Memory Sync',
-    description: 'Your Claude Code memories, synced everywhere. Never lose context when switching devices.',
+    title: 'Substratia - Open Source Developer Tools',
+    description: 'Free, open source developer tools for Claude Code. Built by developers, for developers.',
   },
 }
 

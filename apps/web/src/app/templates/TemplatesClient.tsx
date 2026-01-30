@@ -241,19 +241,21 @@ export default function TemplatesClient() {
           ))}
         </div>
 
-        {/* Pro Teaser */}
+        {/* Open Source CTA */}
         <div className="max-w-3xl mx-auto text-center bg-gradient-to-r from-forge-purple/20 to-forge-cyan/20 rounded-2xl p-8 mb-16">
-          <h2 className="text-2xl font-bold mb-4">Want Cloud Sync?</h2>
+          <h2 className="text-2xl font-bold mb-4">Free & Open Source</h2>
           <p className="text-gray-400 mb-6">
-            Pro tier adds cloud sync, memory dashboard, automatic backups, and team features.
-            Join the waitlist to get early access.
+            All Substratia tools are MIT licensed and free forever.
+            Contribute, customize, or just use them as-is.
           </p>
-          <Link
-            href="/pricing"
+          <a
+            href="https://github.com/WhenMoon-afk"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-lg font-semibold transition-all"
           >
-            View Pricing
-          </Link>
+            View on GitHub
+          </a>
         </div>
 
         {/* How They Work Together */}
