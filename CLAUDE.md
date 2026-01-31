@@ -36,7 +36,7 @@ Manual deploy: `npx vercel --prod --token $VERCEL_TOKEN`
 
 ## Current Content (as of 2026-01-18)
 
-### Blog (12 posts)
+### Blog (11 posts)
 | Slug | Title | Type |
 |------|-------|------|
 | `context-management-guide` | The Ultimate Guide to Claude Code Context Management | Guide (Featured) |
@@ -85,7 +85,7 @@ Manual deploy: `npx vercel --prod --token $VERCEL_TOKEN`
 - `/templates` - Memory tools (momentum, memory-mcp)
 - `/tools` - Free AI tools index (12 tools, with email capture)
 - `/reviews` - AI tool comparisons index
-- `/blog` - Blog index (12 posts, with email capture)
+- `/blog` - Blog index (11 posts, with email capture)
 - `/docs` - Documentation
 - `/start-here` - Getting started guide
 - `/privacy` - Privacy policy (GDPR compliance)
@@ -121,7 +121,7 @@ src/
 │   ├── page.tsx              # Landing page
 │   ├── templates/page.tsx    # Memory tools listings
 │   ├── docs/page.tsx         # Documentation
-│   ├── blog/                  # Blog posts (10 posts)
+│   ├── blog/                  # Blog posts (11 posts)
 │   │   ├── page.tsx          # Blog index
 │   │   ├── mirror-demons/    # Original research
 │   │   ├── eleanor-chen-effect/
@@ -208,7 +208,6 @@ All responses include:
 - Defense-in-depth beyond client-side checks
 
 ### API Security
-- Rate limiting on `/api/subscribe` (5 req/min per IP)
 - API keys are SHA-256 hashed before storage
 - All mutations require authenticated sessions (Clerk)
 - User data is scoped and isolated per account
