@@ -109,7 +109,7 @@ Manual deploy: `npx vercel --prod --token $VERCEL_TOKEN`
 - **Hosting**: Vercel (SSR required for auth)
 - **DNS**: Cloudflare
 - **Domain**: substratia.io
-- **Email Capture**: Formspree (https://formspree.io/f/mreezwlv)
+- **Newsletter**: Substack (skyceres.substack.com)
 
 ### Path Alias
 `@/*` → `./src/*` (configured in tsconfig.json)
@@ -147,7 +147,7 @@ src/
 
 ### Build Configuration (next.config.js)
 
-- `images.unoptimized: true` - Using Vercel image optimization
+- `images.formats: ['image/avif', 'image/webp']` - Vercel image optimization enabled
 - `trailingSlash: true` - URL consistency
 - **No static export** - SSR required for Clerk auth pages
 
