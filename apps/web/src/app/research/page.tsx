@@ -46,9 +46,14 @@ export default function ResearchPage() {
         </div>
 
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Research</h1>
-          <p className="text-xl text-gray-300 mb-6">
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <div className="inline-block px-4 py-1 bg-forge-purple/20 border border-forge-purple/50 rounded-full text-sm text-forge-purple mb-4">
+            Original Investigations
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-forge-purple">Research</span>
+          </h1>
+          <p className="text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
             Original investigations into AI behavior, safety, and emergent phenomena.
           </p>
           <p className="text-gray-400">
