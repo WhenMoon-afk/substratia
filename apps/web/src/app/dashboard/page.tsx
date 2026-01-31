@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useUser, UserButton } from "@clerk/nextjs";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@substratia/convex";
+import type { Id } from "@substratia/convex/convex/_generated/dataModel";
 import Link from "next/link";
 
 // Types for Convex data (matches schema)
@@ -106,7 +107,7 @@ export default function DashboardPage() {
   const handleRevokeKey = async (keyId: string) => {
     if (!confirm("Are you sure you want to revoke this API key? This cannot be undone.")) return;
     try {
-      await revokeApiKey({ keyId: keyId as any });
+      await revokeApiKey({ keyId: keyId as Id<"apiKeys"> });
     } catch (error) {
       console.error("Failed to revoke API key:", error);
     }
@@ -115,7 +116,7 @@ export default function DashboardPage() {
   const handleDeleteMemory = async (memoryId: string) => {
     if (!confirm("Delete this memory?")) return;
     try {
-      await forgetMemory({ memoryId: memoryId as any });
+      await forgetMemory({ memoryId: memoryId as Id<"memories"> });
     } catch (error) {
       console.error("Failed to delete memory:", error);
     }
