@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,7 +38,7 @@ html {
 }
 
 body {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   background: var(--bg-primary);
   min-height: 100vh;
   color: var(--text-primary);
@@ -119,12 +117,12 @@ body {
 
 /* Typography */
 .font-display {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: var(--font-outfit), system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 
 .font-mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-ibm-plex-mono), monospace;
 }
 
 /* Glow effects */
@@ -252,7 +250,7 @@ body {
 
 /* Code blocks */
 .code-block {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-ibm-plex-mono), monospace;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;

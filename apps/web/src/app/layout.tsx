@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Outfit, IBM_Plex_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -8,6 +9,20 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { siteConfig, siteUrl } from '@/lib/site-config'
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-outfit',
+})
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+  variable: '--font-ibm-plex-mono',
+})
 
 export const viewport: Viewport = {
   themeColor: [
@@ -99,11 +114,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${outfit.variable} ${ibmPlexMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Preconnect to Google Fonts for faster font loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* DNS prefetch for external links */}
         <link rel="dns-prefetch" href="https://github.com" />
         <link rel="dns-prefetch" href={siteConfig.links.newsletter} />

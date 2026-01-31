@@ -14,8 +14,8 @@ module.exports = {
         'forge-cyan': '#00d9ff',
       },
       fontFamily: {
-        sans: ['Outfit', 'system-ui', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
+        sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-ibm-plex-mono)', 'monospace'],
       },
     },
   },
