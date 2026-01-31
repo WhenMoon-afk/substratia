@@ -47,7 +47,7 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="px-5 py-2.5 bg-gradient-to-r from-forge-purple to-forge-cyan text-white font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
+                className="px-5 py-2.5 bg-gradient-to-r from-forge-purple to-forge-cyan text-white font-medium rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
               >
                 {status === 'loading' ? 'Opening...' : 'Subscribe'}
               </button>

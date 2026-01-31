@@ -67,7 +67,7 @@ export default function NewsletterCapture({
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-4 py-2 bg-forge-cyan text-forge-dark font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
+            className="px-4 py-2 bg-forge-cyan text-forge-dark font-medium rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
           >
             {status === 'loading' ? '...' : 'Subscribe'}
           </button>
@@ -95,7 +95,7 @@ export default function NewsletterCapture({
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="px-5 py-2.5 bg-gradient-to-r from-forge-purple to-forge-cyan text-white font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
+          className="px-5 py-2.5 bg-gradient-to-r from-forge-purple to-forge-cyan text-white font-medium rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
         >
           {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
         </button>

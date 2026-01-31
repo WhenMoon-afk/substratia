@@ -25,7 +25,7 @@ export default function ShareButton({ title, url, className = '' }: ShareButtonP
       <button
         onClick={handleShare}
         aria-label={shared ? 'Link copied to clipboard' : 'Copy page link to clipboard'}
-        className={`px-3 py-1 text-xs rounded-lg transition-all ${
+        className={`px-3 py-1 text-xs rounded-xl transition-all ${
           shared
             ? 'bg-green-500 text-white'
             : 'bg-forge-cyan/20 hover:bg-forge-cyan/30 text-forge-cyan'

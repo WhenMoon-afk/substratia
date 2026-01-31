@@ -131,7 +131,7 @@ export default function ReviewsPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center">
+        <div className="max-w-4xl mx-auto mt-16 pt-12 border-t border-white/10 text-center">
           <p className="text-gray-400 mb-4">
             Want to try our free AI tools?
           </p>

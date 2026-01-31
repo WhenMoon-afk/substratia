@@ -38,7 +38,7 @@ export default function CopyButton({
     }
   }, [text, disabled, successMessage, showToast])
 
-  const baseStyles = 'font-medium transition-all rounded-lg flex items-center justify-center gap-2'
+  const baseStyles = 'font-medium transition-all rounded-xl flex items-center justify-center gap-2'
 
   const variantStyles = {
     primary: copied

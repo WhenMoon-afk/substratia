@@ -69,12 +69,8 @@ const learningPath: Step[] = [
 ]
 
 export default function StartHerePage() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
   const [sharedProgress, setSharedProgress] = useState(false)
-
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mreezwlv'
 
   // Load progress from localStorage on mount
   useEffect(() => {
@@ -111,28 +107,6 @@ export default function StartHerePage() {
     setCompletedSteps(new Set())
     localStorage.removeItem('substratia-start-here-progress')
   }, [])
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email) return
-
-    setStatus('loading')
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email, source: 'start-here', interest: 'claude-code-learning' }),
-      })
-      if (res.ok) {
-        setStatus('success')
-        setEmail('')
-      } else {
-        setStatus('error')
-      }
-    } catch {
-      setStatus('error')
-    }
-  }
 
   const toggleStep = (stepNumber: number) => {
     const newCompleted = new Set(completedSteps)
@@ -267,7 +241,7 @@ export default function StartHerePage() {
               <div className="flex justify-center gap-3">
                 <button
                   onClick={shareProgress}
-                  className={`px-4 py-2 text-sm rounded-lg transition-all ${
+                  className={`px-4 py-2 text-sm rounded-xl transition-all ${
                     sharedProgress
                       ? 'bg-green-500 text-white'
                       : 'bg-forge-cyan/20 hover:bg-forge-cyan/30 text-forge-cyan'
@@ -278,52 +252,13 @@ export default function StartHerePage() {
                 {completedSteps.size > 0 && (
                   <button
                     onClick={resetProgress}
-                    className="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-all text-gray-400"
+                    className="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 rounded-xl transition-all text-gray-400"
                   >
                     Reset
                   </button>
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter */}
-      <section className="relative z-10 py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-4">Get Weekly Tips</h2>
-            <p className="text-gray-400 mb-6">
-              Subscribe for Claude Code tips, new resources, and advanced techniques.
-            </p>
-            {status === 'success' ? (
-              <div className="bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-green-300">
-                You&apos;re subscribed! Check your inbox.
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  aria-label="Email address for newsletter subscription"
-                  required
-                  className="flex-1 px-4 py-3 bg-white/5 border border-white/20 rounded-xl focus:outline-none focus:border-forge-cyan transition-all"
-                />
-                <button
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="px-6 py-3 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:bg-forge-cyan/90 transition-all disabled:opacity-50"
-                >
-                  {status === 'loading' ? '...' : 'Subscribe'}
-                </button>
-              </form>
-            )}
-            {status === 'error' && (
-              <p className="text-red-400 text-sm mt-2">Something went wrong. Please try again.</p>
-            )}
           </div>
         </div>
       </section>
