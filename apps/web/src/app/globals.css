@@ -96,7 +96,7 @@ body {
 
 /* Neural pattern overlay */
 .neural-bg {
-  background-image: url('/brand/pattern.png');
+  background-image: url('/brand/pattern.webp');
   background-size: 400px;
   background-repeat: repeat;
   opacity: 0.08;
