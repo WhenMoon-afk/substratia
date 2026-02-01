@@ -1,3 +1,5 @@
+'use client'
+
 /** Global styles for the markdown preview rendering */
 export default function MarkdownStyles() {
   return (

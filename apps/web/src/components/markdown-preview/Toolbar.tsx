@@ -1,3 +1,5 @@
+'use client'
+
 export type ViewMode = 'split' | 'edit' | 'preview'
 
 interface ToolbarProps {

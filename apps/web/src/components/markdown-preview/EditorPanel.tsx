@@ -1,3 +1,5 @@
+'use client'
+
 import CopyButton from '@/components/CopyButton'
 
 interface EditorPanelProps {
