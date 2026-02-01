@@ -1,66 +1,20 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { siteConfig } from '@/lib/site-config'
+import NewsletterCapture from '@/components/NewsletterCapture'
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email) return
-
-    setStatus('loading')
-
-    // Open Substack subscription in new tab with email pre-filled
-    const substackUrl = `${siteConfig.links.newsletter}/subscribe?email=${encodeURIComponent(email)}`
-    window.open(substackUrl, '_blank', 'noopener,noreferrer')
-
-    setStatus('success')
-    setEmail('')
-    setTimeout(() => setStatus('idle'), 3000)
-  }
-
   return (
     <footer className="relative z-10 border-t border-white/10 py-12 bg-[#0a0a14]">
       <div className="container mx-auto px-4">
         {/* Newsletter Section */}
         <div className="mb-10 pb-10 border-b border-white/5">
-          <div className="max-w-xl mx-auto text-center">
-            <h3 className="text-lg font-semibold mb-2">
-              Stay updated on <span className="text-forge-cyan">AI memory</span> research
-            </h3>
-            <p className="text-sm text-gray-400 mb-4">
-              Get notified about new tools, research papers, and Claude Code tips.
-            </p>
-            <form onSubmit={handleSubscribe} className="flex gap-2 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                aria-label="Email address for newsletter subscription"
-                required
-                className="flex-1 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-forge-cyan/50 transition-colors text-sm"
-              />
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className="px-5 py-2.5 bg-gradient-to-r from-forge-purple to-forge-cyan text-white font-medium rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
-              >
-                {status === 'loading' ? 'Opening...' : 'Subscribe'}
-              </button>
-            </form>
-            {status === 'success' && (
-              <p className="text-green-400 text-xs mt-2">Complete signup in Substack tab!</p>
-            )}
-            {status === 'error' && (
-              <p className="text-red-400 text-xs mt-2">Something went wrong. Try again.</p>
-            )}
-          </div>
+          <NewsletterCapture
+            source="footer"
+            heading={<>Stay updated on <span className="text-forge-cyan">AI memory</span> research</>}
+            description="Get notified about new tools, research papers, and Claude Code tips."
+            centered
+          />
         </div>
 
         {/* Main Footer Content */}

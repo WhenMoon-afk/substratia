@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { type ReactNode, useState } from 'react'
 import { newsletterUrl } from '@/lib/site-config'
 
 interface NewsletterCaptureProps {
   source?: string
-  heading?: string
+  heading?: ReactNode
   description?: string
   compact?: boolean
+  /** Centered layout without background — for use in Footer or other embedded contexts */
+  centered?: boolean
 }
 
 export default function NewsletterCapture({
@@ -15,6 +17,7 @@ export default function NewsletterCapture({
   heading = 'Get Claude Code tips weekly',
   description = 'Join developers getting AI coding insights, tool updates, and practical tips.',
   compact = false,
+  centered = false,
 }: NewsletterCaptureProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -33,7 +36,7 @@ export default function NewsletterCapture({
     setTimeout(() => setStatus('idle'), 3000)
   }
 
-  if (status === 'success') {
+  if (status === 'success' && !centered) {
     return (
       <div className={`${compact ? 'p-4' : 'p-6'} bg-green-500/10 border border-green-500/20 rounded-xl text-center`}>
         <p className="text-green-400 font-medium">Almost there!</p>
@@ -64,6 +67,39 @@ export default function NewsletterCapture({
             {status === 'loading' ? '...' : 'Subscribe'}
           </button>
         </form>
+        {status === 'error' && (
+          <p className="text-red-400 text-xs mt-2">Something went wrong. Try again.</p>
+        )}
+      </div>
+    )
+  }
+
+  if (centered) {
+    return (
+      <div className="max-w-xl mx-auto text-center">
+        <h3 className="text-lg font-semibold mb-2">{heading}</h3>
+        <p className="text-sm text-gray-400 mb-4">{description}</p>
+        <form onSubmit={handleSubmit} className="flex gap-2 max-w-md mx-auto">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
+            aria-label="Email address for newsletter subscription"
+            required
+            className="flex-1 px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:border-forge-cyan/50 transition-colors text-sm"
+          />
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="px-5 py-2.5 bg-gradient-to-r from-forge-purple to-forge-cyan text-white font-medium rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 text-sm whitespace-nowrap"
+          >
+            {status === 'loading' ? 'Opening...' : 'Subscribe'}
+          </button>
+        </form>
+        {status === 'success' && (
+          <p className="text-green-400 text-xs mt-2">Complete signup in Substack tab!</p>
+        )}
         {status === 'error' && (
           <p className="text-red-400 text-xs mt-2">Something went wrong. Try again.</p>
         )}
