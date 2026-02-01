@@ -1,12 +1,16 @@
-'use client'
+"use client";
 
-import { useState, useCallback, useMemo, useEffect } from 'react'
-import Link from 'next/link'
-import ShareButton from '@/components/ShareButton'
-import NewsletterCapture from '@/components/NewsletterCapture'
-import CopyButton from '@/components/CopyButton'
-import RelatedTools from '@/components/RelatedTools'
-import { downloadFile } from '@/lib/file-utils'
+import { useState, useCallback, useMemo, useEffect } from "react";
+import Link from "next/link";
+import ShareButton from "@/components/ShareButton";
+import NewsletterCapture from "@/components/NewsletterCapture";
+import RelatedTools from "@/components/RelatedTools";
+import ProgressBar from "@/components/stack-builder/ProgressBar";
+import CategorySelector from "@/components/stack-builder/CategorySelector";
+import OptionDetails from "@/components/stack-builder/OptionDetails";
+import StackSummary from "@/components/stack-builder/StackSummary";
+import ExportPanel from "@/components/stack-builder/ExportPanel";
+import { downloadFile } from "@/lib/file-utils";
 import {
   categories,
   getCompatibilityWarnings,
@@ -15,120 +19,129 @@ import {
   generateCSV,
   generateJSON,
   type TechOption,
-} from '@/data/stackBuilderPresets'
-
-type ExportFormat = 'ai' | 'markdown' | 'csv' | 'json'
+} from "@/data/stackBuilderPresets";
 
 export default function StackBuilderPage() {
-  const [selections, setSelections] = useState<Record<string, string>>({})
-  const [skipped, setSkipped] = useState<Record<string, boolean>>({})
-  const [activeCategory, setActiveCategory] = useState(0)
-  const [hoveredOption, setHoveredOption] = useState<TechOption | null>(null)
-  const [shared, setShared] = useState(false)
-  const [urlTooLong, setUrlTooLong] = useState(false)
+  const [selections, setSelections] = useState<Record<string, string>>({});
+  const [skipped, setSkipped] = useState<Record<string, boolean>>({});
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [hoveredOption, setHoveredOption] = useState<TechOption | null>(null);
+  const [shared, setShared] = useState(false);
+  const [urlTooLong, setUrlTooLong] = useState(false);
 
   // Load state from URL on mount
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    const stateParam = params.get('stack')
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const stateParam = params.get("stack");
     if (stateParam) {
       try {
-        const decoded = JSON.parse(atob(stateParam))
-        if (decoded && typeof decoded === 'object') {
-          setSelections(decoded)
+        const decoded = JSON.parse(atob(stateParam));
+        if (decoded && typeof decoded === "object") {
+          setSelections(decoded);
         }
       } catch {
         // Invalid state param, ignore
       }
     }
-  }, [])
+  }, []);
 
   // Share via URL (with length validation)
-  const MAX_URL_LENGTH = 2000
+  const MAX_URL_LENGTH = 2000;
   const shareStack = useCallback(async () => {
-    const stateStr = btoa(JSON.stringify(selections))
-    const shareUrl = `${window.location.origin}${window.location.pathname}?stack=${stateStr}`
+    const stateStr = btoa(JSON.stringify(selections));
+    const shareUrl = `${window.location.origin}${window.location.pathname}?stack=${stateStr}`;
     if (shareUrl.length > MAX_URL_LENGTH) {
-      setUrlTooLong(true)
-      setTimeout(() => setUrlTooLong(false), 4000)
-      return
+      setUrlTooLong(true);
+      setTimeout(() => setUrlTooLong(false), 4000);
+      return;
     }
-    await navigator.clipboard.writeText(shareUrl)
-    setShared(true)
-    setTimeout(() => setShared(false), 2000)
-  }, [selections])
+    await navigator.clipboard.writeText(shareUrl);
+    setShared(true);
+    setTimeout(() => setShared(false), 2000);
+  }, [selections]);
 
-  const currentCategory = categories[activeCategory]
-  const warnings = useMemo(() => getCompatibilityWarnings(selections), [selections])
+  const currentCategory = categories[activeCategory];
+  const warnings = useMemo(
+    () => getCompatibilityWarnings(selections),
+    [selections],
+  );
 
-  const selectOption = useCallback((optionId: string) => {
-    setSelections(prev => ({
-      ...prev,
-      [currentCategory.id]: prev[currentCategory.id] === optionId ? '' : optionId,
-    }))
-    setSkipped(prev => ({ ...prev, [currentCategory.id]: false }))
-  }, [currentCategory.id])
+  const selectOption = useCallback(
+    (optionId: string) => {
+      setSelections((prev) => ({
+        ...prev,
+        [currentCategory.id]:
+          prev[currentCategory.id] === optionId ? "" : optionId,
+      }));
+      setSkipped((prev) => ({ ...prev, [currentCategory.id]: false }));
+    },
+    [currentCategory.id],
+  );
 
   const skipCategory = useCallback(() => {
-    setSelections(prev => ({ ...prev, [currentCategory.id]: '' }))
-    setSkipped(prev => ({ ...prev, [currentCategory.id]: true }))
-  }, [currentCategory.id])
+    setSelections((prev) => ({ ...prev, [currentCategory.id]: "" }));
+    setSkipped((prev) => ({ ...prev, [currentCategory.id]: true }));
+  }, [currentCategory.id]);
 
   const nextCategory = useCallback(() => {
     if (activeCategory < categories.length - 1) {
-      setActiveCategory(prev => prev + 1)
+      setActiveCategory((prev) => prev + 1);
     }
-  }, [activeCategory])
+  }, [activeCategory]);
 
   const prevCategory = useCallback(() => {
     if (activeCategory > 0) {
-      setActiveCategory(prev => prev - 1)
+      setActiveCategory((prev) => prev - 1);
     }
-  }, [activeCategory])
+  }, [activeCategory]);
 
   const selectedCount = useMemo(() => {
-    return Object.values(selections).filter(Boolean).length
-  }, [selections])
+    return Object.values(selections).filter(Boolean).length;
+  }, [selections]);
 
-  const getAIPrompt = useCallback(() => {
-    return generateAIPrompt(selections)
-  }, [selections])
+  const aiPrompt = useMemo(() => generateAIPrompt(selections), [selections]);
 
-  const downloadStack = useCallback((format: 'markdown' | 'csv' | 'json') => {
-    let content: string
-    let filename: string
+  const downloadStack = useCallback(
+    (format: "markdown" | "csv" | "json") => {
+      let content: string;
+      let filename: string;
 
-    switch (format) {
-      case 'markdown':
-        content = generateMarkdown(selections)
-        filename = 'stack.md'
-        break
-      case 'csv':
-        content = generateCSV(selections)
-        filename = 'stack.csv'
-        break
-      case 'json':
-        content = generateJSON(selections)
-        filename = 'stack.json'
-        break
-    }
+      switch (format) {
+        case "markdown":
+          content = generateMarkdown(selections);
+          filename = "stack.md";
+          break;
+        case "csv":
+          content = generateCSV(selections);
+          filename = "stack.csv";
+          break;
+        case "json":
+          content = generateJSON(selections);
+          filename = "stack.json";
+          break;
+      }
 
-    downloadFile(content, filename)
-  }, [selections])
+      downloadFile(content, filename);
+    },
+    [selections],
+  );
 
   const clearAll = useCallback(() => {
-    setSelections({})
-    setSkipped({})
-    setActiveCategory(0)
-  }, [])
+    setSelections({});
+    setSkipped({});
+    setActiveCategory(0);
+  }, []);
 
-  const isOptionIncompatible = useCallback((option: TechOption) => {
-    if (!option.incompatibleWith) return false
-    return option.incompatibleWith.some(id =>
-      Object.values(selections).includes(id)
-    )
-  }, [selections])
+  const isOptionIncompatible = useCallback(
+    (option: TechOption) => {
+      if (!option.incompatibleWith) return false;
+      return option.incompatibleWith.some((id) =>
+        Object.values(selections).includes(id),
+      );
+    },
+    [selections],
+  );
 
   return (
     <main className="min-h-screen text-white">
@@ -136,7 +149,10 @@ export default function StackBuilderPage() {
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <Link href="/tools" className="text-forge-cyan hover:underline text-sm">
+            <Link
+              href="/tools"
+              className="text-forge-cyan hover:underline text-sm"
+            >
               &larr; Back to Tools
             </Link>
             <ShareButton title="Stack Builder - Substratia" />
@@ -145,182 +161,55 @@ export default function StackBuilderPage() {
             Stack <span className="text-forge-cyan">Builder</span>
           </h1>
           <p className="text-gray-400">
-            Build your perfect full-stack. Select technologies, check compatibility, export for AI analysis.
+            Build your perfect full-stack. Select technologies, check
+            compatibility, export for AI analysis.
           </p>
         </div>
 
         {/* Progress */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm text-gray-400">Progress:</span>
-            <span className="text-sm font-medium">{activeCategory + 1} / {categories.length}</span>
-          </div>
-          <div className="flex gap-1">
-            {categories.map((cat, i) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(i)}
-                className={`flex-1 h-2 rounded-full transition-all ${
-                  i < activeCategory ? 'bg-forge-cyan' :
-                  i === activeCategory ? 'bg-forge-purple' :
-                  selections[cat.id] ? 'bg-forge-cyan/50' :
-                  skipped[cat.id] ? 'bg-white/20' :
-                  'bg-white/10'
-                }`}
-                title={cat.name}
-              />
-            ))}
-          </div>
-        </div>
+        <ProgressBar
+          activeCategory={activeCategory}
+          selections={selections}
+          skipped={skipped}
+          onCategoryClick={setActiveCategory}
+        />
 
         {/* Main Grid */}
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Column 1: Category Selector */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Current Category */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-bold">{currentCategory.name}</h2>
-                  <p className="text-sm text-gray-400">{currentCategory.description}</p>
-                </div>
-                {currentCategory.skippable && (
-                  <button
-                    onClick={skipCategory}
-                    className={`px-3 py-1 text-sm rounded-lg transition-all ${
-                      skipped[currentCategory.id]
-                        ? 'bg-white/20 text-white'
-                        : 'bg-white/5 text-gray-400 hover:bg-white/10'
-                    }`}
-                  >
-                    {skipped[currentCategory.id] ? 'Skipped' : 'Skip'}
-                  </button>
-                )}
-              </div>
-
-              {/* Options Grid */}
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {currentCategory.options.map(option => {
-                  const isSelected = selections[currentCategory.id] === option.id
-                  const incompatible = isOptionIncompatible(option)
-
-                  return (
-                    <button
-                      key={option.id}
-                      onClick={() => selectOption(option.id)}
-                      onMouseEnter={() => setHoveredOption(option)}
-                      onMouseLeave={() => setHoveredOption(null)}
-                      className={`p-4 rounded-xl text-left transition-all relative ${
-                        isSelected
-                          ? 'bg-forge-cyan/20 border-2 border-forge-cyan'
-                          : incompatible
-                          ? 'bg-white/5 border border-red-500/30 opacity-60'
-                          : 'bg-white/5 border border-white/10 hover:border-white/30'
-                      }`}
-                    >
-                      {incompatible && (
-                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-xs">
-                          !
-                        </span>
-                      )}
-                      <div className="font-medium mb-1">{option.name}</div>
-                      <div className="text-xs text-gray-500 line-clamp-2">{option.description}</div>
-                    </button>
-                  )
-                })}
-              </div>
-
-              {/* Navigation */}
-              <div className="flex justify-between mt-6">
-                <button
-                  onClick={prevCategory}
-                  disabled={activeCategory === 0}
-                  className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  &larr; Previous
-                </button>
-                <button
-                  onClick={nextCategory}
-                  disabled={activeCategory === categories.length - 1}
-                  className="px-4 py-2 bg-forge-cyan text-forge-dark hover:bg-forge-cyan/80 rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-                >
-                  Next &rarr;
-                </button>
-              </div>
-            </div>
+            <CategorySelector
+              category={currentCategory}
+              selections={selections}
+              skipped={skipped}
+              activeCategory={activeCategory}
+              totalCategories={categories.length}
+              isOptionIncompatible={isOptionIncompatible}
+              onSelectOption={selectOption}
+              onSkipCategory={skipCategory}
+              onNext={nextCategory}
+              onPrev={prevCategory}
+              onHoverOption={setHoveredOption}
+            />
 
             {/* Option Details (Hover) */}
-            {hoveredOption && (
-              <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                <h3 className="font-bold mb-2">{hoveredOption.name}</h3>
-                <p className="text-sm text-gray-400 mb-3">{hoveredOption.description}</p>
-                <div className="grid sm:grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <div className="text-green-400 font-medium mb-1">Pros</div>
-                    <ul className="text-gray-400 space-y-1">
-                      {hoveredOption.pros.map((pro, i) => (
-                        <li key={i}>+ {pro}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="text-red-400 font-medium mb-1">Cons</div>
-                    <ul className="text-gray-400 space-y-1">
-                      {hoveredOption.cons.map((con, i) => (
-                        <li key={i}>- {con}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="text-forge-cyan font-medium mb-1">Best For</div>
-                    <p className="text-gray-400">{hoveredOption.bestFor}</p>
-                  </div>
-                </div>
-              </div>
-            )}
+            {hoveredOption && <OptionDetails option={hoveredOption} />}
           </div>
 
           {/* Column 2: Selections Summary */}
           <div className="space-y-4">
-            {/* Your Stack */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold">Your Stack</h3>
-                <button
-                  onClick={clearAll}
-                  className="text-xs text-red-400 hover:text-red-300"
-                >
-                  Clear All
-                </button>
-              </div>
-
-              <div className="space-y-2 max-h-[300px] overflow-y-auto">
-                {categories.map(cat => {
-                  const selection = selections[cat.id]
-                  const option = selection ? cat.options.find(o => o.id === selection) : null
-                  const isSkipped = skipped[cat.id]
-
-                  return (
-                    <div
-                      key={cat.id}
-                      className={`p-2 rounded-lg text-sm ${
-                        option ? 'bg-forge-cyan/10' : isSkipped ? 'bg-white/5' : 'bg-white/5 opacity-50'
-                      }`}
-                    >
-                      <div className="text-xs text-gray-500">{cat.name}</div>
-                      <div className={option ? 'text-white' : 'text-gray-500'}>
-                        {option?.name || (isSkipped ? '(skipped)' : '(not selected)')}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
+            <StackSummary
+              selections={selections}
+              skipped={skipped}
+              onClearAll={clearAll}
+            />
 
             {/* Warnings */}
             {warnings.length > 0 && (
               <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
-                <h3 className="font-bold text-red-400 mb-2">Compatibility Notes</h3>
+                <h3 className="font-bold text-red-400 mb-2">
+                  Compatibility Notes
+                </h3>
                 <ul className="text-sm text-red-300 space-y-1">
                   {warnings.map((warning, i) => (
                     <li key={i}>- {warning}</li>
@@ -333,66 +222,29 @@ export default function StackBuilderPage() {
             <div className="bg-white/5 border border-white/10 rounded-xl p-4">
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-forge-cyan">{selectedCount}</div>
+                  <div className="text-2xl font-bold text-forge-cyan">
+                    {selectedCount}
+                  </div>
                   <div className="text-xs text-gray-500">Selected</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-forge-purple">{warnings.length}</div>
+                  <div className="text-2xl font-bold text-forge-purple">
+                    {warnings.length}
+                  </div>
                   <div className="text-xs text-gray-500">Warnings</div>
                 </div>
               </div>
             </div>
 
             {/* Export Options */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-              <h3 className="font-bold mb-3">Export</h3>
-              <div className="space-y-2">
-                <CopyButton
-                  text={getAIPrompt()}
-                  label="Copy AI Analysis Prompt"
-                  successMessage="AI prompt copied to clipboard!"
-                  disabled={selectedCount === 0}
-                  variant="primary"
-                  className="w-full bg-forge-purple hover:bg-forge-purple/80"
-                />
-                <div className="grid grid-cols-3 gap-2">
-                  <button
-                    onClick={() => downloadStack('markdown')}
-                    disabled={selectedCount === 0}
-                    className="px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    .md
-                  </button>
-                  <button
-                    onClick={() => downloadStack('csv')}
-                    disabled={selectedCount === 0}
-                    className="px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    .csv
-                  </button>
-                  <button
-                    onClick={() => downloadStack('json')}
-                    disabled={selectedCount === 0}
-                    className="px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    .json
-                  </button>
-                  <button
-                    onClick={shareStack}
-                    disabled={selectedCount === 0}
-                    className={`px-3 py-2 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
-                      urlTooLong
-                        ? 'bg-amber-500 text-white'
-                        : shared
-                        ? 'bg-green-500 text-white'
-                        : 'bg-forge-cyan/30 hover:bg-forge-cyan/50 text-forge-cyan'
-                    }`}
-                  >
-                    {urlTooLong ? 'Too large — export file instead' : shared ? 'Link Copied!' : 'Share URL'}
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ExportPanel
+              selectedCount={selectedCount}
+              aiPrompt={aiPrompt}
+              shared={shared}
+              urlTooLong={urlTooLong}
+              onDownload={downloadStack}
+              onShare={shareStack}
+            />
 
             {/* Tips */}
             <div className="bg-gradient-to-r from-forge-purple/20 to-forge-cyan/20 rounded-xl p-4">
@@ -437,5 +289,5 @@ export default function StackBuilderPage() {
         </div>
       </div>
     </main>
-  )
+  );
 }
