@@ -1,45 +1,46 @@
-import type { Metadata, Viewport } from 'next'
-import { Outfit, IBM_Plex_Mono } from 'next/font/google'
-import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/next'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import { ClerkProvider } from '@clerk/nextjs'
-import './globals.css'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { siteConfig, siteUrl } from '@/lib/site-config'
+import type { Metadata, Viewport } from "next";
+import { Outfit, IBM_Plex_Mono } from "next/font/google";
+import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ClerkProvider } from "@clerk/nextjs";
+import "./globals.css";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { siteConfig, siteUrl } from "@/lib/site-config";
 
 const outfit = Outfit({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  display: 'swap',
-  variable: '--font-outfit',
-})
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-outfit",
+});
 
 const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  display: 'swap',
-  variable: '--font-ibm-plex-mono',
-})
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-ibm-plex-mono",
+});
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#1a1a2e' },
-    { media: '(prefers-color-scheme: light)', color: '#1a1a2e' },
+    { media: "(prefers-color-scheme: dark)", color: "#1a1a2e" },
+    { media: "(prefers-color-scheme: light)", color: "#1a1a2e" },
   ],
-}
+};
 
 export const metadata: Metadata = {
-  manifest: '/manifest.json',
+  metadataBase: new URL(siteConfig.url),
+  manifest: "/manifest.json",
   icons: {
     icon: siteConfig.brand.logo,
     apple: siteConfig.brand.logo,
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'black-translucent',
+    statusBarStyle: "black-translucent",
     title: siteConfig.name,
   },
   title: siteConfig.title,
@@ -47,8 +48,9 @@ export const metadata: Metadata = {
   keywords: siteConfig.keywords,
   openGraph: {
     title: siteConfig.title,
-    description: 'Free tools for Claude Code: memory-mcp (persistent memory), dev utilities, and more. Open source, MIT licensed.',
-    type: 'website',
+    description:
+      "Free tools for Claude Code: memory-mcp (persistent memory), dev utilities, and more. Open source, MIT licensed.",
+    type: "website",
     url: siteConfig.url,
     images: [
       {
@@ -60,61 +62,64 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: siteConfig.title,
-    description: 'Free tools for Claude Code power users: persistent memory, visual agent config, dev utilities. Open source, MIT licensed.',
+    description:
+      "Free tools for Claude Code power users: persistent memory, visual agent config, dev utilities. Open source, MIT licensed.",
     images: [siteUrl(siteConfig.brand.social)],
   },
   alternates: {
     canonical: siteConfig.url,
     types: {
-      'application/rss+xml': siteUrl('/feed.xml'),
+      "application/rss+xml": siteUrl("/feed.xml"),
     },
   },
-}
+};
 
 const organizationLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
+  "@context": "https://schema.org",
+  "@type": "Organization",
   name: siteConfig.name,
   url: siteConfig.url,
   logo: siteUrl(siteConfig.brand.logo),
   description: siteConfig.shortDescription,
-  sameAs: [
-    siteConfig.links.github,
-    siteConfig.links.newsletter,
-  ],
+  sameAs: [siteConfig.links.github, siteConfig.links.newsletter],
   contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer service',
+    "@type": "ContactPoint",
+    contactType: "customer service",
     url: siteConfig.links.github,
   },
-}
+};
 
 const websiteLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
   name: siteConfig.name,
   url: siteConfig.url,
-  description: 'Open-source developer tools for Claude Code. Free: memory-mcp, dev utilities, and more.',
+  description:
+    "Open-source developer tools for Claude Code. Free: memory-mcp, dev utilities, and more.",
   publisher: {
-    '@type': 'Organization',
+    "@type": "Organization",
     name: siteConfig.name,
   },
   potentialAction: {
-    '@type': 'SearchAction',
-    target: siteUrl('/tools?q={search_term_string}'),
-    'query-input': 'required name=search_term_string',
+    "@type": "SearchAction",
+    target: siteUrl("/tools?q={search_term_string}"),
+    "query-input": "required name=search_term_string",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${ibmPlexMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${outfit.variable} ${ibmPlexMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* DNS prefetch for external links */}
         <link rel="dns-prefetch" href="https://github.com" />
@@ -127,7 +132,12 @@ export default function RootLayout({
           src="https://plausible.io/js/script.js"
           strategy="afterInteractive"
         />
-        <link rel="alternate" type="application/rss+xml" title={`${siteConfig.name} Blog`} href="/feed.xml" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`${siteConfig.name} Blog`}
+          href="/feed.xml"
+        />
         <Script
           id="organization-ld"
           type="application/ld+json"
@@ -149,9 +159,7 @@ export default function RootLayout({
               Skip to main content
             </a>
             <Nav />
-            <main id="main-content">
-              {children}
-            </main>
+            <main id="main-content">{children}</main>
             <Footer />
             <Analytics />
             <SpeedInsights />
@@ -159,5 +167,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
