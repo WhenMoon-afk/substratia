@@ -40,6 +40,20 @@ export default function PromptOptimizerPage() {
     }
   }, []);
 
+  const toggleSnippet = useCallback((snippetId: string) => {
+    setSelectedSnippets((prev) =>
+      prev.includes(snippetId)
+        ? prev.filter((id) => id !== snippetId)
+        : [...prev, snippetId],
+    );
+  }, []);
+
+  const clearAll = useCallback(() => {
+    setUserPrompt("");
+    setSelectedSnippets([]);
+    setThinkingMode("normal");
+  }, []);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -51,15 +65,7 @@ export default function PromptOptimizerPage() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  const toggleSnippet = useCallback((snippetId: string) => {
-    setSelectedSnippets((prev) =>
-      prev.includes(snippetId)
-        ? prev.filter((id) => id !== snippetId)
-        : [...prev, snippetId],
-    );
-  }, []);
+  }, [clearAll]);
 
   const generatedPrompt = useMemo(() => {
     const mode = thinkingModes.find((m) => m.id === thinkingMode);
@@ -82,12 +88,6 @@ export default function PromptOptimizerPage() {
 
     return result;
   }, [thinkingMode, userPrompt, selectedSnippets]);
-
-  const clearAll = useCallback(() => {
-    setUserPrompt("");
-    setSelectedSnippets([]);
-    setThinkingMode("normal");
-  }, []);
 
   const shareConfig = useCallback(async () => {
     const state = { thinkingMode, userPrompt, selectedSnippets };
