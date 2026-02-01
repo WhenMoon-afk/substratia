@@ -6,6 +6,7 @@ import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import CopyButton from '@/components/CopyButton'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadFile } from '@/lib/file-utils'
 import {
   categories,
   getCompatibilityWarnings,
@@ -113,13 +114,7 @@ export default function StackBuilderPage() {
         break
     }
 
-    const blob = new Blob([content], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = filename
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadFile(content, filename)
   }, [selections])
 
   const clearAll = useCallback(() => {

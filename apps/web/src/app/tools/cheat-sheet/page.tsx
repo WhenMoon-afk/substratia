@@ -6,6 +6,7 @@ import ShareButton from '@/components/ShareButton'
 
 import RelatedTools from '@/components/RelatedTools'
 import { newsletterUrl } from '@/lib/site-config'
+import { downloadMarkdown as downloadMdFile } from '@/lib/file-utils'
 
 export default function CheatSheetPage() {
   const [email, setEmail] = useState('')
@@ -75,13 +76,7 @@ ${tipsContent}
 ---
 Downloaded from substratia.io/tools/cheat-sheet
 `
-    const blob = new Blob([content], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'claude-code-cheat-sheet.md'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadMdFile(content, 'claude-code-cheat-sheet.md')
   }, [])
 
   return (

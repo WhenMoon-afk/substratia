@@ -5,7 +5,8 @@ import Link from 'next/link'
 import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import CopyButton from '@/components/CopyButton'
-import RelatedTools from '@/components/RelatedTools' 
+import RelatedTools from '@/components/RelatedTools'
+import { downloadText, downloadJson } from '@/lib/file-utils'
 
 export default function SeedMakerPage() {
   const [entropyProgress, setEntropyProgress] = useState(0)
@@ -124,13 +125,7 @@ export default function SeedMakerPage() {
 
   const downloadResult = useCallback(() => {
     if (!result) return
-    const blob = new Blob([result], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `seed-${Date.now()}.txt`
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadText(result, `seed-${Date.now()}.txt`)
   }, [result])
 
   const exportHistory = useCallback(() => {
@@ -139,13 +134,7 @@ export default function SeedMakerPage() {
       exportDate: new Date().toISOString(),
       seeds: history,
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'seed-history.json'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadJson(data, 'seed-history.json')
   }, [history])
 
   return (

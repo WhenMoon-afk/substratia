@@ -6,6 +6,7 @@ import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import CopyButton from '@/components/CopyButton'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadText as downloadTxtFile, downloadJson } from '@/lib/file-utils'
 import {
   platforms,
   stylePresets,
@@ -127,13 +128,7 @@ export default function ImagePromptGeneratorPage() {
       ? `Positive Prompt:\n${generatedPrompt.positive}\n\nNegative Prompt:\n${generatedPrompt.negative}`
       : generatedPrompt.positive
 
-    const blob = new Blob([fullPrompt], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'image-prompt.txt'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadTxtFile(fullPrompt, 'image-prompt.txt')
   }, [generatedPrompt])
 
   // Get current state for export/sharing
@@ -156,14 +151,7 @@ export default function ImagePromptGeneratorPage() {
 
   // Download as JSON file
   const downloadJSON = useCallback(() => {
-    const json = JSON.stringify(getCurrentState(), null, 2)
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'image-prompt-config.json'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadJson(getCurrentState(), 'image-prompt-config.json')
   }, [getCurrentState])
 
   // Share via URL (with length validation)

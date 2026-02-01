@@ -6,6 +6,7 @@ import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import CopyButton from '@/components/CopyButton'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadJson } from '@/lib/file-utils'
 
 interface Model {
   id: string
@@ -158,13 +159,7 @@ export default function CostCalculatorPage() {
       sessions,
       stats: sessionStats,
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'claude-cost-sessions.json'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadJson(data, 'claude-cost-sessions.json')
     setExported(true)
     setTimeout(() => setExported(false), 2000)
   }, [sessions, sessionStats])

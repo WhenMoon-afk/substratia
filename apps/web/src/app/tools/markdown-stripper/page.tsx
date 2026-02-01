@@ -6,6 +6,7 @@ import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import CopyButton from '@/components/CopyButton'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadText as downloadTxtFile } from '@/lib/file-utils'
 
 // Strip markdown formatting from text
 function stripMarkdown(text: string): string {
@@ -91,13 +92,7 @@ export default function MarkdownStripperPage() {
 
   const downloadText = useCallback(() => {
     if (!strippedText) return
-    const blob = new Blob([strippedText], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'stripped-text.txt'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadTxtFile(strippedText, 'stripped-text.txt')
   }, [strippedText])
 
   // Keyboard shortcuts

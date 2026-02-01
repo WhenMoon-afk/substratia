@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadJson } from '@/lib/file-utils'
 
 // Realistic memories that feel like they came from actual dev work
 const REALISTIC_MEMORIES = [
@@ -92,15 +93,7 @@ export default function MemoryDemoPage() {
       exportedAt: new Date().toISOString(),
       memories: REALISTIC_MEMORIES,
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'claude-memories-demo.json'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
+    downloadJson(data, 'claude-memories-demo.json')
     setCopyFeedback('Exported!')
     setTimeout(() => setCopyFeedback(null), 2000)
   }

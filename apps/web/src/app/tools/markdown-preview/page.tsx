@@ -8,6 +8,7 @@ import CopyButton from '@/components/CopyButton'
 import RelatedTools from '@/components/RelatedTools'
 import ReactMarkdown from 'react-markdown'
 import rehypeSanitize from 'rehype-sanitize'
+import { downloadMarkdown as downloadMdFile, downloadHtml as downloadHtmlFile } from '@/lib/file-utils'
 import remarkGfm from 'remark-gfm'
 
 const defaultMarkdown = `# Welcome to Markdown Preview
@@ -74,13 +75,7 @@ export default function MarkdownPreviewPage() {
 
   // Download as .md file
   const downloadMarkdown = useCallback(() => {
-    const blob = new Blob([markdown], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'document.md'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadMdFile(markdown, 'document.md')
   }, [markdown])
 
   // Download as .html file
@@ -110,13 +105,7 @@ export default function MarkdownPreviewPage() {
 ${html}
 </body>
 </html>`
-    const blob = new Blob([fullHtml], { type: 'text/html' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'document.html'
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadHtmlFile(fullHtml, 'document.html')
   }, [getRenderedHtml])
 
   // Export as PDF (via print dialog)

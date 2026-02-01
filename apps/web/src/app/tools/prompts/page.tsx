@@ -5,6 +5,7 @@ import Link from 'next/link'
 import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadMarkdown } from '@/lib/file-utils'
 
 interface Prompt {
   id: string
@@ -1188,13 +1189,7 @@ export default function PromptsPage() {
 
   const downloadPrompt = useCallback((prompt: Prompt) => {
     const content = `# ${prompt.name}\n\n${prompt.description}\n\nCategory: ${prompt.category}\n${prompt.model ? `Model: ${prompt.model}\n` : ''}\n---\n\n${prompt.content}`
-    const blob = new Blob([content], { type: 'text/markdown' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${prompt.id}.md`
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadMarkdown(content, `${prompt.id}.md`)
   }, [])
 
   return (

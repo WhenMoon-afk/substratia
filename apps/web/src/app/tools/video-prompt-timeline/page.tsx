@@ -6,6 +6,7 @@ import ShareButton from '@/components/ShareButton'
 import NewsletterCapture from '@/components/NewsletterCapture'
 import CopyButton from '@/components/CopyButton'
 import RelatedTools from '@/components/RelatedTools'
+import { downloadText, downloadJson } from '@/lib/file-utils'
 import {
   DndContext,
   DragOverlay,
@@ -203,13 +204,7 @@ export default function VideoPromptTimelinePage() {
   // Download prompt
   const downloadPrompt = useCallback(() => {
     if (!generatedPrompt) return
-    const blob = new Blob([generatedPrompt], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${timeline.name.replace(/\s+/g, '-').toLowerCase()}.txt`
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadText(generatedPrompt, `${timeline.name.replace(/\s+/g, '-').toLowerCase()}.txt`)
   }, [generatedPrompt, timeline.name])
 
   // Save to favorites
@@ -230,14 +225,7 @@ export default function VideoPromptTimelinePage() {
 
   // Download as JSON file
   const downloadJSON = useCallback(() => {
-    const json = JSON.stringify(timeline, null, 2)
-    const blob = new Blob([json], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${timeline.name.replace(/\s+/g, '-').toLowerCase()}.json`
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadJson(timeline, `${timeline.name.replace(/\s+/g, '-').toLowerCase()}.json`)
   }, [timeline])
 
   // Share via URL
