@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import DashboardProviders from "./DashboardProviders";
 
+export const metadata: Metadata = {
+  title: "Dashboard",
+  robots: { index: false, follow: false },
+};
+
 // Force dynamic rendering - auth pages can't be statically generated
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default function DashboardLayout({
   children,
