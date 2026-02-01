@@ -55,7 +55,11 @@ export default function DocsSection({ section }: DocsSectionProps) {
       </div>
       <div className="space-y-8">
         {section.content.map((item, idx) => (
-          <div key={idx} className="glass rounded-xl p-6">
+          <div
+            key={idx}
+            className="glass rounded-xl p-6 animate-fade-up"
+            style={{ animationDelay: `${Math.min(idx * 75, 300)}ms` }}
+          >
             <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
 
             {item.text && <p className="text-gray-400">{item.text}</p>}
