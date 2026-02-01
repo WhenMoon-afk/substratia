@@ -3,14 +3,14 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function RelatedResources() {
   return (
-    <section className="mt-16 pt-8 border-t border-white/10">
+    <section className="mt-16 pt-8">
       <h2 className="text-2xl font-bold mb-6">Related Resources</h2>
       <div className="grid md:grid-cols-2 gap-4">
         <a
           href={siteConfig.links.repos.momentum}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-cyan transition-all"
+          className="glass p-4 rounded-xl hover:border-forge-cyan/50 hover:scale-[1.02] transition-all"
         >
           <div className="text-forge-cyan text-sm mb-1">GitHub</div>
           <div className="font-semibold">momentum</div>
@@ -22,7 +22,7 @@ export default function RelatedResources() {
           href={siteConfig.links.repos.memoryMcp}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
+          className="glass p-4 rounded-xl hover:border-forge-purple/50 hover:scale-[1.02] transition-all"
         >
           <div className="text-forge-purple text-sm mb-1">GitHub</div>
           <div className="font-semibold">memory-mcp</div>
@@ -32,7 +32,7 @@ export default function RelatedResources() {
         </a>
         <Link
           href="/blog/how-to-build-claude-agents"
-          className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
+          className="glass p-4 rounded-xl hover:border-forge-purple/50 hover:scale-[1.02] transition-all"
         >
           <div className="text-forge-cyan text-sm mb-1">Blog</div>
           <div className="font-semibold">How to Build Claude Agents</div>
@@ -42,7 +42,7 @@ export default function RelatedResources() {
         </Link>
         <Link
           href="/templates"
-          className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-forge-purple transition-all"
+          className="glass p-4 rounded-xl hover:border-forge-purple/50 hover:scale-[1.02] transition-all"
         >
           <div className="text-forge-cyan text-sm mb-1">Tools</div>
           <div className="font-semibold">Memory Tools</div>

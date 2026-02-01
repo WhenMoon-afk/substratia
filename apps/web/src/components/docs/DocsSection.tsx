@@ -12,17 +12,31 @@ export default function DocsSection({ section }: DocsSectionProps) {
   const [shared, setShared] = useState(false);
 
   const copyCode = useCallback(async (code: string, id: string) => {
-    await navigator.clipboard.writeText(code);
-    setCopiedCode(id);
-    setTimeout(() => setCopiedCode(null), 2000);
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopiedCode(id);
+      setTimeout(() => setCopiedCode(null), 2000);
+    } catch {
+      // Clipboard unavailable — silently fail
+    }
   }, []);
 
   const shareSection = useCallback(async () => {
-    const shareUrl = `${window.location.origin}${window.location.pathname}#${section.id}`;
-    await navigator.clipboard.writeText(shareUrl);
-    setShared(true);
-    setTimeout(() => setShared(false), 2000);
-  }, [section.id]);
+    try {
+      const shareUrl = `${window.location.origin}${window.location.pathname}#${section.id}`;
+      await navigator.clipboard.writeText(shareUrl);
+      setShared(true);
+      setTimeout(() => setShared(false), 2000);
+    } catch {
+      // Clipboard unavailable — fall back to native share
+      if (navigator.share) {
+        const shareUrl = `${window.location.origin}${window.location.pathname}#${section.id}`;
+        navigator
+          .share({ title: section.title, url: shareUrl })
+          .catch(() => {});
+      }
+    }
+  }, [section.id, section.title]);
 
   return (
     <section id={section.id} className="mb-16 scroll-mt-24">
@@ -41,10 +55,7 @@ export default function DocsSection({ section }: DocsSectionProps) {
       </div>
       <div className="space-y-8">
         {section.content.map((item, idx) => (
-          <div
-            key={idx}
-            className="bg-white/5 border border-white/10 rounded-xl p-6"
-          >
+          <div key={idx} className="glass rounded-xl p-6">
             <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
 
             {item.text && <p className="text-gray-400">{item.text}</p>}
