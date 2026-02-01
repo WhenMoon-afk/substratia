@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import CtaSection from "@/components/home/CtaSection";
+import { useLocalStorageJSON } from "@/hooks/useLocalStorage";
 
 interface Step {
   number: number;
@@ -128,24 +129,13 @@ function SectionDivider({ variant = "cyan" }: { variant?: "cyan" | "purple" }) {
 }
 
 export default function StartHerePage() {
-  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
+  const savedProgress = useLocalStorageJSON<number[]>(
+    "substratia-start-here-progress",
+  );
+  const [completedSteps, setCompletedSteps] = useState<Set<number>>(
+    () => new Set(Array.isArray(savedProgress) ? savedProgress : []),
+  );
   const [sharedProgress, setSharedProgress] = useState(false);
-
-  // Load progress from localStorage on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const saved = localStorage.getItem("substratia-start-here-progress");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setCompletedSteps(new Set(parsed));
-        }
-      } catch {
-        // Invalid data, ignore
-      }
-    }
-  }, []);
 
   // Save progress to localStorage when it changes
   useEffect(() => {

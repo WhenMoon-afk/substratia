@@ -10,10 +10,20 @@ import { models, estimateTokens } from "@/data/tokenCounterData";
 import ModelSelector from "./ModelSelector";
 import StatsPanel from "./StatsPanel";
 import TokenTips from "./TokenTips";
+import { useURLParamJSON } from "@/hooks/useURLParam";
+
+interface TokenState {
+  text?: string;
+  model?: string;
+}
 
 export default function TokenCounterPage() {
-  const [text, setText] = useState("");
-  const [selectedModel, setSelectedModel] = useState(models[0]);
+  const urlState = useURLParamJSON<TokenState>("token");
+  const urlModel = urlState?.model
+    ? models.find((m) => m.name === urlState.model)
+    : null;
+  const [text, setText] = useState(urlState?.text ?? "");
+  const [selectedModel, setSelectedModel] = useState(urlModel ?? models[0]);
   const [shared, setShared] = useState(false);
   const [urlTooLong, setUrlTooLong] = useState(false);
 
@@ -27,27 +37,6 @@ export default function TokenCounterPage() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  // Load state from URL on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const stateParam = params.get("token");
-    if (stateParam) {
-      try {
-        const decoded = JSON.parse(atob(stateParam));
-        if (decoded) {
-          if (decoded.text) setText(decoded.text);
-          if (decoded.model) {
-            const found = models.find((m) => m.name === decoded.model);
-            if (found) setSelectedModel(found);
-          }
-        }
-      } catch {
-        // Invalid state param, ignore
-      }
-    }
   }, []);
 
   const tokens = estimateTokens(text);

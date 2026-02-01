@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import NewsletterCapture from "@/components/NewsletterCapture";
@@ -24,38 +24,31 @@ import SessionHistory from "@/components/cost-calculator/SessionHistory";
 import UsageSlider from "@/components/cost-calculator/UsageSlider";
 import CostComparison from "@/components/cost-calculator/CostComparison";
 import PricingTable from "@/components/cost-calculator/PricingTable";
+import { useURLParamJSON } from "@/hooks/useURLParam";
+
+interface CalcState {
+  model?: string;
+  input?: number;
+  output?: number;
+  monthlyUsage?: number;
+}
 
 export default function CostCalculatorPage() {
-  const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL_ID);
-  const [inputTokens, setInputTokens] = useState<number>(0);
-  const [outputTokens, setOutputTokens] = useState<number>(0);
-  const [sessions, setSessions] = useState<Session[]>([]);
-  const [monthlyUsage, setMonthlyUsage] = useState<number>(2_000_000);
+  const urlCalc = useURLParamJSON<CalcState>("calc");
+  const [selectedModel, setSelectedModel] = useState(
+    urlCalc?.model ?? DEFAULT_MODEL_ID,
+  );
+  const [inputTokens, setInputTokens] = useState<number>(urlCalc?.input ?? 0);
+  const [outputTokens, setOutputTokens] = useState<number>(
+    urlCalc?.output ?? 0,
+  );
+  const [sessions, setSessions] = useState<Session[]>(() => loadSessions());
+  const [monthlyUsage, setMonthlyUsage] = useState<number>(
+    urlCalc?.monthlyUsage ?? 2_000_000,
+  );
   const [savedSession, setSavedSession] = useState(false);
   const [shared, setShared] = useState(false);
   const [exported, setExported] = useState(false);
-
-  // Load sessions on mount + check for URL params
-  useEffect(() => {
-    setSessions(loadSessions());
-
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const stateParam = params.get("calc");
-    if (stateParam) {
-      try {
-        const decoded = JSON.parse(atob(stateParam));
-        if (decoded) {
-          if (decoded.model) setSelectedModel(decoded.model);
-          if (decoded.input) setInputTokens(decoded.input);
-          if (decoded.output) setOutputTokens(decoded.output);
-          if (decoded.monthlyUsage) setMonthlyUsage(decoded.monthlyUsage);
-        }
-      } catch {
-        // Invalid state param, ignore
-      }
-    }
-  }, []);
 
   const model = useMemo(() => findModel(selectedModel), [selectedModel]);
   const currentCost = useMemo(

@@ -8,6 +8,7 @@ import RelatedTools from "@/components/RelatedTools";
 import { downloadMarkdown } from "@/lib/file-utils";
 import { prompts, categories } from "@/data/promptLibrary";
 import type { Prompt } from "@/data/promptLibrary";
+import { useURLParam } from "@/hooks/useURLParam";
 
 /**
  * Pre-computed Tailwind class strings for category badge colors.
@@ -20,30 +21,30 @@ const categoryBadgeStyles: Record<string, string> = {
 };
 
 export default function PromptsPage() {
+  const promptParam = useURLParam("p");
+  const validPromptId =
+    promptParam && prompts.find((p) => p.id === promptParam)
+      ? promptParam
+      : null;
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [expandedPrompt, setExpandedPrompt] = useState<string | null>(null);
+  const [expandedPrompt, setExpandedPrompt] = useState<string | null>(
+    validPromptId,
+  );
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [sharedId, setSharedId] = useState<string | null>(null);
 
-  // Load prompt from URL on mount
+  // Scroll to URL-targeted prompt after mount
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const promptId = params.get("p");
-    if (promptId) {
-      const prompt = prompts.find((p) => p.id === promptId);
-      if (prompt) {
-        setExpandedPrompt(promptId);
-        // Scroll to the prompt after a short delay
-        setTimeout(() => {
-          const element = document.getElementById(`prompt-${promptId}`);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth", block: "center" });
-          }
-        }, 100);
+    if (!validPromptId) return;
+    const timer = setTimeout(() => {
+      const element = document.getElementById(`prompt-${validPromptId}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-    }
-  }, []);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [validPromptId]);
 
   const filteredPrompts = selectedCategory
     ? prompts.filter((p) => p.category === selectedCategory)

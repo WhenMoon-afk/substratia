@@ -12,6 +12,7 @@ import RecentSnapshots from "@/components/dashboard/RecentSnapshots";
 import RecentMemories from "@/components/dashboard/RecentMemories";
 import GetStarted from "@/components/dashboard/GetStarted";
 import ApiKeysSection from "@/components/dashboard/ApiKeysSection";
+import { useURLParam } from "@/hooks/useURLParam";
 
 export default function DashboardPage() {
   const { user, isLoaded } = useUser();
@@ -29,17 +30,10 @@ export default function DashboardPage() {
   const revokeApiKey = useMutation(api.apiKeys.revoke);
   const forgetMemory = useMutation(api.memories.forget);
 
-  const [showCheckoutSuccess, setShowCheckoutSuccess] = useState(false);
+  const checkoutParam = useURLParam("checkout");
+  const [checkoutDismissed, setCheckoutDismissed] = useState(false);
+  const showCheckoutSuccess = checkoutParam === "success" && !checkoutDismissed;
   const [showApiSection, setShowApiSection] = useState(true);
-
-  // Check for checkout success
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("checkout") === "success") {
-      setShowCheckoutSuccess(true);
-      window.history.replaceState({}, "", "/dashboard");
-    }
-  }, []);
 
   // Ensure user exists in Convex when dashboard loads
   useEffect(() => {
@@ -79,7 +73,7 @@ export default function DashboardPage() {
       {showCheckoutSuccess && (
         <div className="mb-6 bg-linear-to-r from-green-500/20 to-cyan-500/20 border border-green-500/30 rounded-xl p-6 relative">
           <button
-            onClick={() => setShowCheckoutSuccess(false)}
+            onClick={() => setCheckoutDismissed(true)}
             className="absolute top-4 right-4 text-gray-400 hover:text-white"
           >
             &times;

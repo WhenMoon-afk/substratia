@@ -14,51 +14,48 @@ import {
   snippets,
   type ThinkingMode,
 } from "@/data/promptOptimizerData";
+import { useURLParamJSON } from "@/hooks/useURLParam";
+
+interface OptimizerConfig {
+  thinkingMode?: string;
+  userPrompt?: string;
+  selectedSnippets?: string[];
+}
+
+function parseURLConfig(config: OptimizerConfig | null) {
+  const validModes: ThinkingMode[] = ["normal", "thinkhard", "ultrathink"];
+  const validSnippetIds = snippets.map((s) => s.id);
+  return {
+    thinkingMode:
+      config &&
+      typeof config.thinkingMode === "string" &&
+      validModes.includes(config.thinkingMode as ThinkingMode)
+        ? (config.thinkingMode as ThinkingMode)
+        : "normal",
+    userPrompt:
+      config && typeof config.userPrompt === "string" ? config.userPrompt : "",
+    selectedSnippets:
+      config &&
+      Array.isArray(config.selectedSnippets) &&
+      config.selectedSnippets.every(
+        (id: unknown) =>
+          typeof id === "string" && validSnippetIds.includes(id as string),
+      )
+        ? (config.selectedSnippets as string[])
+        : [],
+  };
+}
 
 export default function PromptOptimizerPage() {
-  const [thinkingMode, setThinkingMode] = useState<ThinkingMode>("normal");
-  const [userPrompt, setUserPrompt] = useState("");
-  const [selectedSnippets, setSelectedSnippets] = useState<string[]>([]);
-
-  // Load state from URL on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const stateParam = params.get("config");
-    if (stateParam) {
-      try {
-        const decoded = JSON.parse(atob(stateParam));
-        if (decoded && typeof decoded === "object") {
-          const validModes: ThinkingMode[] = [
-            "normal",
-            "thinkhard",
-            "ultrathink",
-          ];
-          if (
-            typeof decoded.thinkingMode === "string" &&
-            validModes.includes(decoded.thinkingMode)
-          ) {
-            setThinkingMode(decoded.thinkingMode);
-          }
-          if (typeof decoded.userPrompt === "string") {
-            setUserPrompt(decoded.userPrompt);
-          }
-          const validSnippetIds = snippets.map((s) => s.id);
-          if (
-            Array.isArray(decoded.selectedSnippets) &&
-            decoded.selectedSnippets.every(
-              (id: unknown) =>
-                typeof id === "string" && validSnippetIds.includes(id),
-            )
-          ) {
-            setSelectedSnippets(decoded.selectedSnippets);
-          }
-        }
-      } catch {
-        // Invalid state param, ignore
-      }
-    }
-  }, []);
+  const urlConfig = useURLParamJSON<OptimizerConfig>("config");
+  const parsed = parseURLConfig(urlConfig);
+  const [thinkingMode, setThinkingMode] = useState<ThinkingMode>(
+    parsed.thinkingMode,
+  );
+  const [userPrompt, setUserPrompt] = useState(parsed.userPrompt);
+  const [selectedSnippets, setSelectedSnippets] = useState<string[]>(
+    parsed.selectedSnippets,
+  );
 
   const toggleSnippet = useCallback((snippetId: string) => {
     setSelectedSnippets((prev) =>
