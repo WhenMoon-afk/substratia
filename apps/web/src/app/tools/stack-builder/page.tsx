@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import NewsletterCapture from "@/components/NewsletterCapture";
@@ -20,31 +20,18 @@ import {
   generateJSON,
   type TechOption,
 } from "@/data/stackBuilderPresets";
+import { useURLParamJSON } from "@/hooks/useURLParam";
 
 export default function StackBuilderPage() {
-  const [selections, setSelections] = useState<Record<string, string>>({});
+  const urlStack = useURLParamJSON<Record<string, string>>("stack");
+  const [selections, setSelections] = useState<Record<string, string>>(
+    urlStack && typeof urlStack === "object" ? urlStack : {},
+  );
   const [skipped, setSkipped] = useState<Record<string, boolean>>({});
   const [activeCategory, setActiveCategory] = useState(0);
   const [hoveredOption, setHoveredOption] = useState<TechOption | null>(null);
   const [shared, setShared] = useState(false);
   const [urlTooLong, setUrlTooLong] = useState(false);
-
-  // Load state from URL on mount
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const stateParam = params.get("stack");
-    if (stateParam) {
-      try {
-        const decoded = JSON.parse(atob(stateParam));
-        if (decoded && typeof decoded === "object") {
-          setSelections(decoded);
-        }
-      } catch {
-        // Invalid state param, ignore
-      }
-    }
-  }, []);
 
   // Share via URL (with length validation)
   const MAX_URL_LENGTH = 2000;

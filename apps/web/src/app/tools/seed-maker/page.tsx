@@ -11,12 +11,16 @@ import SeedOptions, { SeedOptionsState } from "./SeedOptions";
 import SeedOutput from "./SeedOutput";
 import SeedHistory from "./SeedHistory";
 import SeedInfo from "./SeedInfo";
+import { useLocalStorageJSON } from "@/hooks/useLocalStorage";
 
 export default function SeedMakerPage() {
+  const savedHistory = useLocalStorageJSON<string[]>("seedHistory");
   const [entropyProgress, setEntropyProgress] = useState(0);
   const [result, setResult] = useState("");
   const [length, setLength] = useState(64);
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<string[]>(
+    Array.isArray(savedHistory) ? savedHistory : [],
+  );
   const [options, setOptions] = useState<SeedOptionsState>({
     lower: true,
     upper: true,
@@ -47,14 +51,6 @@ export default function SeedMakerPage() {
       const seed = new Uint32Array(32);
       crypto.getRandomValues(seed);
       seed.forEach((v) => addEntropy(v));
-    }
-
-    // Load history from localStorage
-    const saved = localStorage.getItem("seedHistory");
-    if (saved) {
-      try {
-        setHistory(JSON.parse(saved));
-      } catch {}
     }
   }, [addEntropy]);
 
