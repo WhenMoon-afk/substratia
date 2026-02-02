@@ -91,6 +91,99 @@ http.route({
   }),
 });
 
+// ============================================================================
+// Registration — agent-native signup (no Clerk required)
+// ============================================================================
+
+http.route({
+  path: "/api/register",
+  method: "POST",
+  handler: httpAction(async (ctx, request) => {
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return new Response(JSON.stringify({ error: "Invalid JSON" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const { email, name } = body as { email?: string; name?: string };
+    if (!email || typeof email !== "string" || !email.includes("@")) {
+      return new Response(
+        JSON.stringify({ error: "Valid email is required" }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
+    }
+
+    try {
+      // Create or find user by email
+      const user = await ctx.runMutation(internal.users.createByEmail, {
+        email: email.toLowerCase().trim(),
+        name: name || undefined,
+      });
+
+      if (!user) {
+        return new Response(
+          JSON.stringify({ error: "Failed to create user" }),
+          { status: 500, headers: { "Content-Type": "application/json" } },
+        );
+      }
+
+      // Check if user already has API keys (returning user)
+      const existingKeys = await ctx.runQuery(
+        internal.apiKeysInternal.listByUser,
+        { userId: user._id },
+      );
+
+      if (existingKeys && existingKeys.length > 0) {
+        // User already registered — don't create duplicate keys
+        return new Response(
+          JSON.stringify({
+            error:
+              "Email already registered. Use your existing API key, or create a new one from the dashboard.",
+            keyPrefix: existingKeys[0].keyPrefix,
+          }),
+          { status: 409, headers: { "Content-Type": "application/json" } },
+        );
+      }
+
+      // Create API key for the new user
+      const keyResult = await ctx.runMutation(
+        internal.apiKeysInternal.createForUser,
+        {
+          userId: user._id,
+          name: "default",
+        },
+      );
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          apiKey: keyResult.key,
+          keyPrefix: keyResult.prefix,
+          tier: "free",
+          message:
+            "Save your API key — it cannot be retrieved later. Run: substratia init --api-key " +
+            keyResult.key,
+        }),
+        { status: 201, headers: { "Content-Type": "application/json" } },
+      );
+    } catch (error) {
+      console.error("Registration failed:", error);
+      return new Response(JSON.stringify({ error: "Registration failed" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  }),
+});
+
+// ============================================================================
+// Authenticated API Routes
+// ============================================================================
+
 // Sync a single snapshot from momentum
 http.route({
   path: "/api/snapshots/sync",

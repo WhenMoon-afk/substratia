@@ -5,7 +5,8 @@ import { internalQuery, internalMutation } from "./_generated/server";
  * Generate a cryptographically secure random string
  */
 function generateApiKey(): string {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const array = new Uint8Array(32);
   crypto.getRandomValues(array);
   return Array.from(array, (byte) => chars[byte % chars.length]).join("");
@@ -50,6 +51,19 @@ export const listUsers = internalQuery({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("users").collect();
+  },
+});
+
+// Internal query to list API keys by user (for registration check)
+export const listByUser = internalQuery({
+  args: {
+    userId: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("apiKeys")
+      .withIndex("by_user", (q) => q.eq("userId", args.userId))
+      .collect();
   },
 });
 
