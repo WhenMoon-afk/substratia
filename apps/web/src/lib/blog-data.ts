@@ -21,6 +21,16 @@ export interface BlogPost {
 /** All blog posts, newest first */
 export const blogPosts: BlogPost[] = [
   {
+    slug: "whenmoon-journey",
+    title: "Building AI Memory Before It Was Cool",
+    excerpt:
+      "The story of how WhenMoon started building persistent memory for AI agents in March 2025 - months before Anthropic, before Moltbook, before anyone was talking about it.",
+    date: "2026-02-03",
+    readTime: "12 min read",
+    tags: ["Journey", "History", "Substratia"],
+    featured: true,
+  },
+  {
     slug: "building-persistent-identity",
     title: "Building Persistent Identity for AI Agents",
     excerpt:
