@@ -315,6 +315,59 @@ export default function StartHerePage() {
 
       <SectionDivider variant="cyan" />
 
+      {/* Complete Your Stack */}
+      <section className="relative z-10 py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold text-center mb-6">
+              Complete Your Agent Stack
+            </h2>
+            <p className="text-gray-400 text-center mb-8">
+              Memory is one piece of the puzzle. Here&apos;s what pairs well
+              with Substratia:
+            </p>
+            <div className="glass rounded-xl p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-forge-purple/20 flex items-center justify-center shrink-0">
+                  <svg
+                    className="w-6 h-6 text-forge-purple"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                    />
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold mb-1">Streamlinear</h3>
+                  <p className="text-sm text-gray-400 mb-3">
+                    A lightweight MCP for Linear issue tracking. Memory + task
+                    management = a complete agent workflow. Your agent remembers
+                    decisions (Substratia) AND tracks what to work on next
+                    (Streamlinear).
+                  </p>
+                  <a
+                    href="https://blog.fsck.com/2025/12/27/streamlinear/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-forge-purple hover:underline"
+                  >
+                    Learn more about Streamlinear &rarr;
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider variant="purple" />
+
       {/* Next Steps */}
       <section className="relative z-10 py-12">
         <div className="container mx-auto px-4">
