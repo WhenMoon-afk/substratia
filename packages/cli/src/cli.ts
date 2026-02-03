@@ -228,49 +228,67 @@ async function bridge(): Promise<void> {
 
   try {
     const result = await request<{
-      memories: Array<{ content: string }>;
-      identity: { narratives: Array<{ title: string; text: string }> } | null;
-      preferences: Record<string, string>;
+      recentMemories?: Array<{
+        content: string;
+        importance?: string;
+        tags?: string[];
+      }>;
+      narratives?: Array<{ title: string; text: string }>;
+      preferences?: Record<string, string>;
+      snapshot?: { content: string } | null;
     }>("/api/bridge", {}, apiKey);
 
+    const memories = result.recentMemories || [];
+    const narratives = result.narratives || [];
+    const preferences = result.preferences || {};
+
     // Display memories
-    if (result.memories.length > 0) {
+    if (memories.length > 0) {
       console.log(
-        `${colors.green}📚 Recent Memories (${result.memories.length}):${colors.reset}\n`,
+        `${colors.green}📚 Recent Memories (${memories.length}):${colors.reset}\n`,
       );
-      for (const memory of result.memories.slice(0, 5)) {
+      for (const memory of memories.slice(0, 5)) {
         console.log(`  • ${memory.content}`);
       }
-      if (result.memories.length > 5) {
+      if (memories.length > 5) {
         console.log(
-          `  ${colors.dim}... and ${result.memories.length - 5} more${colors.reset}`,
+          `  ${colors.dim}... and ${memories.length - 5} more${colors.reset}`,
         );
       }
       console.log("");
     }
 
-    // Display identity
-    if (result.identity?.narratives?.length) {
+    // Display identity narratives
+    if (narratives.length > 0) {
       console.log(`${colors.green}🧠 Identity Narratives:${colors.reset}\n`);
-      for (const narrative of result.identity.narratives) {
+      for (const narrative of narratives) {
         console.log(`  ${colors.cyan}${narrative.title}${colors.reset}`);
         console.log(`  ${narrative.text}\n`);
       }
     }
 
+    // Display snapshot summary
+    if (result.snapshot?.content) {
+      console.log(`${colors.green}📸 Last Snapshot:${colors.reset}\n`);
+      const preview = result.snapshot.content.slice(0, 200);
+      console.log(
+        `  ${preview}${result.snapshot.content.length > 200 ? "..." : ""}\n`,
+      );
+    }
+
     // Display preferences
-    const prefKeys = Object.keys(result.preferences);
+    const prefKeys = Object.keys(preferences);
     if (prefKeys.length > 0) {
       console.log(`${colors.green}⚙️ Preferences:${colors.reset}\n`);
       for (const key of prefKeys) {
-        console.log(`  ${key}: ${result.preferences[key]}`);
+        console.log(`  ${key}: ${preferences[key]}`);
       }
       console.log("");
     }
 
     if (
-      result.memories.length === 0 &&
-      !result.identity?.narratives?.length &&
+      memories.length === 0 &&
+      narratives.length === 0 &&
       prefKeys.length === 0
     ) {
       console.log(
