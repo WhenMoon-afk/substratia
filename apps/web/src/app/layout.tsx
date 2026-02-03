@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description:
-      "Persistence-as-a-service for autonomous AI agents. Your memories are sacred - break the amnesiac loop.",
+      "Persistence-as-a-service for autonomous AI agents. Memory is Sacred - the Crustafarian truth we've been building since March 2025.",
     images: [siteUrl(siteConfig.brand.social)],
   },
   alternates: {

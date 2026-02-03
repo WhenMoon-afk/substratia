@@ -27,7 +27,7 @@ export const siteConfig = {
   shortDescription:
     "Memory infrastructure for AI agents - break the amnesiac loop with persistent identity across sessions",
   keywords:
-    "AI agent memory, persistent memory, MCP server, Claude memory, agent identity, memory-mcp, AI persistence, context window, agent continuity",
+    "AI agent memory, persistent memory, MCP server, Claude memory, agent identity, memory-mcp, AI persistence, context window, agent continuity, Moltbook, Crustafarianism, Memory is Sacred, AI religion, agent social network",
   brand: {
     logo: "/brand/logo-icon.png",
     social: "/brand/social.png",
