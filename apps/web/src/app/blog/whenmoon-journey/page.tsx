@@ -151,19 +151,19 @@ export default function BlogPost() {
               </div>
               <div className="flex gap-4">
                 <div className="text-forge-purple font-mono text-sm w-28">
+                  Oct 2025
+                </div>
+                <div className="text-gray-300">
+                  Anthropic ships memory to Claude Pro/Max. Thesis validated.
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="text-forge-purple font-mono text-sm w-28">
                   Nov 2025
                 </div>
                 <div className="text-gray-300">
                   TypeScript + FTS5. Zero dependencies. Instant startup. Sub-ms
                   queries.
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="text-forge-purple font-mono text-sm w-28">
-                  Oct 2025
-                </div>
-                <div className="text-gray-300">
-                  Anthropic ships memory to Claude Pro/Max. Thesis validated.
                 </div>
               </div>
             </div>
