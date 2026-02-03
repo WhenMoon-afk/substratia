@@ -30,7 +30,7 @@ interface Tool {
 
 /**
  * Pre-computed Tailwind class strings for each tool color.
- * Tailwind's JIT scanner needs to see full class names statically —
+ * Tailwind's JIT scanner needs to see full class names statically -
  * dynamic template literals like `bg-forge-${color}/20` won't be included.
  */
 const colorStyles: Record<string, ToolStyles> = {

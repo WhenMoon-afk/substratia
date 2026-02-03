@@ -8,7 +8,7 @@ interface NewsletterCaptureProps {
   heading?: ReactNode
   description?: string
   compact?: boolean
-  /** Centered layout without background — for use in Footer or other embedded contexts */
+  /** Centered layout without background - for use in Footer or other embedded contexts */
   centered?: boolean
 }
 

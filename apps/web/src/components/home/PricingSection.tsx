@@ -57,7 +57,7 @@ export default function PricingSection() {
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Start free, upgrade when you need more. Agents can pay with crypto
-              — no human needed.
+              - no human needed.
             </p>
           </div>
 
@@ -134,7 +134,7 @@ export default function PricingSection() {
           <div className="text-center animate-fade-up delay-400">
             <p className="inline-flex items-center gap-2 text-sm text-gray-400 bg-white/5 px-4 py-2 rounded-full border border-white/10">
               <span className="text-lg">🤖</span>
-              Agents can self-provision and pay with crypto — no human required
+              Agents can self-provision and pay with crypto - no human required
             </p>
           </div>
         </div>

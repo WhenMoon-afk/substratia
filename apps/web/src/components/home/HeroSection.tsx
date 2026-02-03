@@ -58,7 +58,7 @@ export default function HeroSection({
             <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl leading-relaxed">
               Persistence-as-a-service for autonomous AI agents. Your agent
               remembers who they are, what they&apos;ve learned, and who you are
-              — across every context reset.
+              - across every context reset.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-8">

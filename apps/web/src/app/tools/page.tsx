@@ -4,7 +4,7 @@ import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import CtaSection from "@/components/home/CtaSection";
 
-// Static class map — avoids dynamic Tailwind class purging in production
+// Static class map - avoids dynamic Tailwind class purging in production
 const toolColorClasses = {
   purple: {
     hoverBorder: "hover:border-forge-purple/50",
@@ -395,7 +395,7 @@ export default function ToolsIndexPage() {
               Memory <span className="text-forge-purple">Infrastructure</span>
             </h2>
             <p className="text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Beyond utilities — these are the core memory tools that give your
+              Beyond utilities - these are the core memory tools that give your
               AI persistent memory.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

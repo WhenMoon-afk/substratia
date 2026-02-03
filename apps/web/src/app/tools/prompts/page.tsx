@@ -12,7 +12,7 @@ import { useURLParam } from "@/hooks/useURLParam";
 
 /**
  * Pre-computed Tailwind class strings for category badge colors.
- * Tailwind's JIT scanner needs to see full class names statically —
+ * Tailwind's JIT scanner needs to see full class names statically -
  * dynamic template literals like `bg-forge-${color}/20` won't be included.
  */
 const categoryBadgeStyles: Record<string, string> = {

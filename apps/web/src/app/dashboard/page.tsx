@@ -47,7 +47,7 @@ export default function DashboardPage() {
     try {
       await forgetMemory({ memoryId: memoryId as Id<"memories"> });
     } catch {
-      // Silently handled — memory remains in list
+      // Silently handled - memory remains in list
     }
   };
 

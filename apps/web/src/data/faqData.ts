@@ -1,4 +1,4 @@
-// FAQ structured data — extracted from app/faq/page.tsx
+// FAQ structured data - extracted from app/faq/page.tsx
 // Plain text data for all FAQs; JSX-rich answers are composed in the page component
 
 export type FAQCategory = 'general' | 'tools' | 'technical'
@@ -82,13 +82,13 @@ export const faqs: FAQItem[] = [
     id: 'context-window',
     category: 'technical',
     question: 'What is a context window?',
-    answer: 'The context window is Claude\'s working memory during a conversation—approximately 200,000 tokens. Everything you say, files Claude reads, and Claude\'s responses consume context. When it fills up, Claude compacts (summarizes) the conversation, which can lose details.',
+    answer: 'The context window is Claude\'s working memory during a conversation-approximately 200,000 tokens. Everything you say, files Claude reads, and Claude\'s responses consume context. When it fills up, Claude compacts (summarizes) the conversation, which can lose details.',
   },
   {
     id: 'what-is-compaction',
     category: 'technical',
     question: 'What is compaction?',
-    answer: 'When the context window fills up, Claude Code automatically summarizes the conversation to free up space. This is called compaction. It\'s lossy—details get dropped. Tools like momentum help preserve context across compaction events.',
+    answer: 'When the context window fills up, Claude Code automatically summarizes the conversation to free up space. This is called compaction. It\'s lossy-details get dropped. Tools like momentum help preserve context across compaction events.',
   },
   {
     id: 'what-is-claude-md',

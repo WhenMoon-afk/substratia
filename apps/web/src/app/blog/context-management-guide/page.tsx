@@ -80,8 +80,8 @@ export default function ContextManagementGuidePage() {
               <p className="text-gray-300 mb-4">
                 Every Claude Code session starts fresh. Claude doesn&apos;t
                 remember your previous conversations, your project structure, or
-                the decisions you made yesterday. This is by design—it&apos;s a
-                privacy feature—but it creates a productivity challenge.
+                the decisions you made yesterday. This is by design-it&apos;s a
+                privacy feature-but it creates a productivity challenge.
               </p>
               <p className="text-gray-300 mb-4">The symptoms are familiar:</p>
               <ul className="list-disc pl-6 text-gray-300 space-y-2 mb-4">
@@ -96,7 +96,7 @@ export default function ContextManagementGuidePage() {
                 <li>Having to re-establish coding conventions repeatedly</li>
               </ul>
               <p className="text-gray-300">
-                The root cause is the <strong>context window</strong>—the
+                The root cause is the <strong>context window</strong>-the
                 limited memory Claude has during any single conversation.
               </p>
             </section>
@@ -310,7 +310,7 @@ Save this to CLAUDE.md under ## Session Notes`}</pre>
                     </strong>
                     <p>
                       Key directories and their purposes. Don&apos;t list every
-                      file—focus on patterns.
+                      file-focus on patterns.
                     </p>
                   </div>
                   <div>

@@ -168,7 +168,7 @@ export const categoryColors: Record<Snippet["category"], string> = {
 
 /**
  * Pre-computed Tailwind class strings for each category.
- * Tailwind's JIT scanner needs to see full class names statically —
+ * Tailwind's JIT scanner needs to see full class names statically -
  * dynamic template literals like `bg-forge-${color}/20` won't be included.
  */
 export const categoryStyles: Record<

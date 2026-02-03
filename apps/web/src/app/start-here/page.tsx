@@ -155,7 +155,7 @@ export default function StartHerePage() {
       setSharedProgress(true);
       setTimeout(() => setSharedProgress(false), 2000);
     } catch {
-      // Clipboard unavailable — fall back to native share or silently fail
+      // Clipboard unavailable - fall back to native share or silently fail
       if (navigator.share) {
         const progress = `${completedSteps.size}/${learningPath.length}`;
         const shareUrl = `${window.location.origin}${window.location.pathname}`;

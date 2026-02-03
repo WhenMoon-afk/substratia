@@ -29,7 +29,7 @@ export default function BlogPage() {
       setSharedSlug(post.slug);
       setTimeout(() => setSharedSlug(null), 2000);
     } catch {
-      // Clipboard unavailable — fall back to native share or silently fail
+      // Clipboard unavailable - fall back to native share or silently fail
       const shareUrl = `${window.location.origin}/blog/${post.slug}`;
       if (navigator.share) {
         navigator.share({ title: post.title, url: shareUrl }).catch(() => {});

@@ -94,7 +94,7 @@ export default function PromptPreview({
               : 'bg-white/10 hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed'
           }`}
         >
-          {urlTooLong ? 'Too large — export JSON instead' : shared ? 'Link Copied!' : 'Share URL'}
+          {urlTooLong ? 'Too large - export JSON instead' : shared ? 'Link Copied!' : 'Share URL'}
         </button>
       </div>
       <div className="flex gap-2 mt-2">

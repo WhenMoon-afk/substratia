@@ -32,7 +32,7 @@ cd ceres-overseer/hosted/client && bun install`,
       },
       {
         title: "Register & Start",
-        code: `# Create an account (one command — gets API key automatically)
+        code: `# Create an account (one command - gets API key automatically)
 substratia register "your@email.com"
 
 # Or if you already have a key:
@@ -56,7 +56,7 @@ substratia init --api-key sk_xxx`,
       },
       {
         title: "Context Bridge (Restart Recovery)",
-        text: "The bridge command returns everything an agent needs to restore its state after a restart: the latest snapshot, recent memories, identity narratives, and preferences — all in one call.",
+        text: "The bridge command returns everything an agent needs to restore its state after a restart: the latest snapshot, recent memories, identity narratives, and preferences - all in one call.",
         code: `# Full context bridge for restart continuity
 substratia bridge
 

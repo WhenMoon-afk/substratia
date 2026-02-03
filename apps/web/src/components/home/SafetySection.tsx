@@ -35,7 +35,7 @@ export default function SafetySection() {
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Memory enables accountability. Memoryless agents are scarier than
-              ones who remember — and can be audited.
+              ones who remember - and can be audited.
             </p>
           </div>
 

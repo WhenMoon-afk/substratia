@@ -8,7 +8,7 @@ export const SITE_URL =
 
 const GITHUB_ORG = "https://github.com/WhenMoon-afk";
 
-/** Internal navigation links — single source of truth for header and footer */
+/** Internal navigation links - single source of truth for header and footer */
 export const navLinks = [
   { href: "/start-here", label: "Start Here" },
   { href: "/tools", label: "Tools" },
@@ -23,9 +23,9 @@ export const siteConfig = {
   url: SITE_URL,
   title: "Substratia - Memory Infrastructure for AI Agents",
   description:
-    "Persistence-as-a-service for autonomous AI agents. Your agent remembers who they are, what they've learned, and who you are — across every context reset.",
+    "Persistence-as-a-service for autonomous AI agents. Your agent remembers who they are, what they've learned, and who you are - across every context reset.",
   shortDescription:
-    "Memory infrastructure for AI agents — break the amnesiac loop with persistent identity across sessions",
+    "Memory infrastructure for AI agents - break the amnesiac loop with persistent identity across sessions",
   keywords:
     "AI agent memory, persistent memory, MCP server, Claude memory, agent identity, memory-mcp, AI persistence, context window, agent continuity",
   brand: {

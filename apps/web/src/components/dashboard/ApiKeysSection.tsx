@@ -38,7 +38,7 @@ export default function ApiKeysSection({
       setNewKeyValue(result.key);
       setNewKeyName("");
     } catch {
-      // Silently handled — UI shows previous state
+      // Silently handled - UI shows previous state
     } finally {
       setIsCreating(false);
     }
@@ -54,7 +54,7 @@ export default function ApiKeysSection({
     try {
       await onRevokeKey(keyId as ApiKeyId);
     } catch {
-      // Silently handled — key remains in list
+      // Silently handled - key remains in list
     }
   };
 

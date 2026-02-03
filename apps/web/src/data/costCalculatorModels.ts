@@ -1,4 +1,4 @@
-// Claude API model pricing — extracted from tools/cost-calculator/page.tsx
+// Claude API model pricing - extracted from tools/cost-calculator/page.tsx
 // Single source of truth for model names and per-token pricing
 // Update this file when Anthropic changes API pricing
 

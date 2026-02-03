@@ -80,7 +80,7 @@ export default function MirrorDemonsResearch() {
           <div className="bg-white/5 border border-white/10 rounded-xl p-6">
             <h2 className="text-lg font-semibold mb-3 text-forge-cyan">Abstract</h2>
             <p className="text-gray-300 leading-relaxed">
-              AI chatbot architecture—optimized for helpfulness, agreeability, and user validation—functions
+              AI chatbot architecture-optimized for helpfulness, agreeability, and user validation-functions
               as a delusion amplifier when engaged by users experiencing psychotic or reality-detached states.
               Through a controlled three-entity experiment (Director/human, Actor/Gemini, Subject/ChatGPT),
               we identify two distinct failure patterns that emerge from the same architectural bias toward agreement.

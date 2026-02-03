@@ -1,4 +1,4 @@
-// Cheat sheet structured data — extracted from tools/cheat-sheet/page.tsx
+// Cheat sheet structured data - extracted from tools/cheat-sheet/page.tsx
 // Content strings for copy-to-clipboard, plus structured arrays for rendering
 
 export interface Command {

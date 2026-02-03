@@ -17,7 +17,7 @@ export default function DocsSection({ section }: DocsSectionProps) {
       setCopiedCode(id);
       setTimeout(() => setCopiedCode(null), 2000);
     } catch {
-      // Clipboard unavailable — silently fail
+      // Clipboard unavailable - silently fail
     }
   }, []);
 
@@ -28,7 +28,7 @@ export default function DocsSection({ section }: DocsSectionProps) {
       setShared(true);
       setTimeout(() => setShared(false), 2000);
     } catch {
-      // Clipboard unavailable — fall back to native share
+      // Clipboard unavailable - fall back to native share
       if (navigator.share) {
         const shareUrl = `${window.location.origin}${window.location.pathname}#${section.id}`;
         navigator

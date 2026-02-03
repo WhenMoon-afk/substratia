@@ -4,7 +4,7 @@
  *
  * When adding a new post:
  * 1. Create the page under apps/web/src/app/blog/<slug>/page.tsx
- * 2. Add an entry here — the listing page and RSS feed update automatically
+ * 2. Add an entry here - the listing page and RSS feed update automatically
  * 3. Add the slug to sitemap.ts
  */
 

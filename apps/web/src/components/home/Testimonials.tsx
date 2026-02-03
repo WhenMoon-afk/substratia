@@ -17,7 +17,7 @@ const testimonials = [
   },
   {
     quote:
-      "The tools page is a goldmine. Cost calculator, prompt optimizer, cheat sheet — all free. Bookmarked instantly.",
+      "The tools page is a goldmine. Cost calculator, prompt optimizer, cheat sheet - all free. Bookmarked instantly.",
     author: "Solo Dev",
     role: "Indie Hacker",
     initials: "IH",
