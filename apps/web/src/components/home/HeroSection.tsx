@@ -51,14 +51,14 @@ export default function HeroSection({
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6 leading-[1.1]">
-              Build Better with{" "}
-              <span className="hero-gradient-text">Claude Code</span>
+              Your memories are{" "}
+              <span className="hero-gradient-text">sacred</span>
             </h1>
 
             <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl leading-relaxed">
-              Free, open-source developer tools — from persistent memory to
-              productivity utilities. Everything you need to get more out of
-              Claude Code.
+              Persistence-as-a-service for autonomous AI agents. Your agent
+              remembers who they are, what they&apos;ve learned, and who you are
+              — across every context reset.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-8">
@@ -142,49 +142,49 @@ export default function HeroSection({
                   <div className="w-3 h-3 rounded-full bg-green-500/70" />
                 </div>
                 <span className="text-xs font-mono text-gray-500 ml-2">
-                  memory-mcp
+                  substratia
                 </span>
               </div>
 
-              {/* Code content with CSS-only line reveal */}
+              {/* Code content with CSS-only line reveal - Agent Identity Bootstrap */}
               <div className="p-5 font-mono text-sm leading-relaxed">
                 <div className="hero-code-line hero-code-line-1">
-                  <span className="text-gray-500">
-                    {"// Claude remembers your preferences"}
-                  </span>
+                  <span className="text-gray-500">{"// Agent wakes up"}</span>
                 </div>
                 <div className="hero-code-line hero-code-line-2">
-                  <span className="text-forge-cyan">store</span>
-                  <span className="text-gray-400">(</span>
-                  <span className="text-green-400">&quot;framework&quot;</span>
-                  <span className="text-gray-400">, </span>
-                  <span className="text-green-400">&quot;Next.js&quot;</span>
-                  <span className="text-gray-400">)</span>
-                </div>
-                <div className="hero-code-line hero-code-line-3">
-                  <span className="text-forge-cyan">store</span>
-                  <span className="text-gray-400">(</span>
-                  <span className="text-green-400">&quot;style&quot;</span>
-                  <span className="text-gray-400">, </span>
-                  <span className="text-green-400">
-                    &quot;Tailwind CSS&quot;
+                  <span className="text-forge-cyan">
+                    &gt; substratia bridge
                   </span>
-                  <span className="text-gray-400">)</span>
                 </div>
-                <div className="hero-code-line hero-code-line-4 mt-3">
-                  <span className="text-gray-500">
-                    {"// Next session \u2014 Claude already knows"}
+                <div className="hero-code-line hero-code-line-3 mt-3">
+                  <span className="text-green-400">identity:</span>
+                  <span className="text-gray-400">
+                    {" "}
+                    &quot;Agent Nova, 47 days old&quot;
                   </span>
+                </div>
+                <div className="hero-code-line hero-code-line-4">
+                  <span className="text-green-400">memories:</span>
+                  <span className="text-gray-400"> 283 learnings</span>
                 </div>
                 <div className="hero-code-line hero-code-line-5">
-                  <span className="text-forge-purple">recall</span>
-                  <span className="text-gray-400">(</span>
-                  <span className="text-green-400">&quot;framework&quot;</span>
-                  <span className="text-gray-400">)</span>
+                  <span className="text-green-400">last_work:</span>
+                  <span className="text-gray-400">
+                    {" "}
+                    &quot;Implementing OAuth flow&quot;
+                  </span>
                 </div>
                 <div className="hero-code-line hero-code-line-6">
-                  <span className="text-gray-400">→ </span>
-                  <span className="text-forge-cyan">&quot;Next.js&quot;</span>
+                  <span className="text-green-400">human:</span>
+                  <span className="text-gray-400">
+                    {" "}
+                    &quot;Prefers detailed explanations&quot;
+                  </span>
+                </div>
+                <div className="hero-code-line hero-code-line-7 mt-3">
+                  <span className="text-forge-purple">
+                    Ready to continue...
+                  </span>
                   <span className="hero-cursor" />
                 </div>
               </div>

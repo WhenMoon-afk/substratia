@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import HeroSection from "@/components/home/HeroSection";
+import PricingSection from "@/components/home/PricingSection";
+import SafetySection from "@/components/home/SafetySection";
 import ToolsShowcase from "@/components/home/ToolsShowcase";
 import Testimonials from "@/components/home/Testimonials";
 import CommunitySection from "@/components/home/CommunitySection";
@@ -54,6 +56,10 @@ export default function Home() {
         npmDownloads={npmDownloads}
         statsLoading={statsLoading}
       />
+      <SectionDivider variant="cyan" />
+      <PricingSection />
+      <SectionDivider variant="purple" />
+      <SafetySection />
       <SectionDivider variant="cyan" />
       <ToolsShowcase />
       <SectionDivider variant="purple" />
