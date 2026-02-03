@@ -27,7 +27,8 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "npx tsx src/__tests__/sqlite.test.ts"
   },
   "keywords": [
     "ai",
