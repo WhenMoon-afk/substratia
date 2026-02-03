@@ -21,13 +21,13 @@ export const navLinks = [
 export const siteConfig = {
   name: "Substratia",
   url: SITE_URL,
-  title: "Substratia - Open-Source Developer Tools for Claude Code",
+  title: "Substratia - Memory Infrastructure for AI Agents",
   description:
-    "Free, open-source tools for Claude Code power users. memory-mcp: persistent memory across sessions. Plus 12+ free dev utilities.",
+    "Persistence-as-a-service for autonomous AI agents. Your agent remembers who they are, what they've learned, and who you are — across every context reset.",
   shortDescription:
-    "Open-source developer tools for Claude Code — persistent memory, visual agent config, and free dev utilities",
+    "Memory infrastructure for AI agents — break the amnesiac loop with persistent identity across sessions",
   keywords:
-    "Claude Code tools, open source AI tools, memory-mcp, CLAUDE.md, AI developer tools, Claude Code plugins, MCP server, persistent AI memory",
+    "AI agent memory, persistent memory, MCP server, Claude memory, agent identity, memory-mcp, AI persistence, context window, agent continuity",
   brand: {
     logo: "/brand/logo-icon.png",
     social: "/brand/social.png",

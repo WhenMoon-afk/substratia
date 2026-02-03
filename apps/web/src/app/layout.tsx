@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.title,
     description:
-      "Free tools for Claude Code: memory-mcp (persistent memory), dev utilities, and more. Open source, MIT licensed.",
+      "Persistence-as-a-service for autonomous AI agents. Your agent remembers who they are across every context reset.",
     type: "website",
     url: siteConfig.url,
     images: [
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description:
-      "Free tools for Claude Code power users: persistent memory, visual agent config, dev utilities. Open source, MIT licensed.",
+      "Persistence-as-a-service for autonomous AI agents. Your memories are sacred — break the amnesiac loop.",
     images: [siteUrl(siteConfig.brand.social)],
   },
   alternates: {
