@@ -42,14 +42,35 @@ substratia init --api-key sk_xxx`,
         title: "Core Commands",
         list: [
           { name: "register", desc: "Sign up and get an API key (one step)" },
-          { name: "learn", desc: 'Store a memory: substratia learn "Something important" --category technical' },
-          { name: "remember", desc: 'Search memories: substratia remember "query" --limit 10' },
-          { name: "learnings", desc: "List recent memories with optional filters" },
+          {
+            name: "learn",
+            desc: 'Store a memory: substratia learn "Something important" --category technical',
+          },
+          {
+            name: "remember",
+            desc: 'Search memories: substratia remember "query" --limit 10',
+          },
+          {
+            name: "learnings",
+            desc: "List recent memories with optional filters",
+          },
           { name: "forget", desc: "Delete a memory by ID" },
-          { name: "snapshot save", desc: "Save a context snapshot for restart recovery" },
-          { name: "identity", desc: "View or set identity narratives (identity, capability, relationship, trajectory, milestone)" },
-          { name: "prefer", desc: "Set key-value preferences: substratia prefer --key theme --value dark" },
-          { name: "bridge", desc: "Get full restart context: snapshot + memories + identity + preferences" },
+          {
+            name: "snapshot save",
+            desc: "Save a context snapshot for restart recovery",
+          },
+          {
+            name: "identity",
+            desc: "View or set identity narratives (identity, capability, relationship, trajectory, milestone)",
+          },
+          {
+            name: "prefer",
+            desc: "Set key-value preferences: substratia prefer --key theme --value dark",
+          },
+          {
+            name: "bridge",
+            desc: "Get full restart context: snapshot + memories + identity + preferences",
+          },
           { name: "health", desc: "Check API connectivity" },
           { name: "status", desc: "Show current configuration" },
         ],
@@ -76,7 +97,7 @@ substratia bridge
         title: "Base URL & Authentication",
         text: "All API requests require a Bearer token. Get your API key via the CLI (substratia register) or the dashboard.",
         code: `# Base URL
-https://aware-pony-419.convex.site
+https://agreeable-chameleon-83.convex.site
 
 # Authentication header
 Authorization: Bearer sk_your_api_key`,
@@ -85,28 +106,55 @@ Authorization: Bearer sk_your_api_key`,
         title: "Endpoints",
         list: [
           { name: "GET /api/health", desc: "Health check (no auth required)" },
-          { name: "POST /api/register", desc: "Register a new agent: { email, name? } → { apiKey, tier }" },
-          { name: "POST /api/memories/sync", desc: "Store a memory: { content, context?, importance?, tags? }" },
-          { name: "GET /api/memories", desc: "List memories: ?limit=20&importance=high" },
-          { name: "GET /api/memories/search", desc: "Full-text search: ?q=query&limit=10" },
+          {
+            name: "POST /api/register",
+            desc: "Register a new agent: { email, name? } → { apiKey, tier }",
+          },
+          {
+            name: "POST /api/memories/sync",
+            desc: "Store a memory: { content, context?, importance?, tags? }",
+          },
+          {
+            name: "GET /api/memories",
+            desc: "List memories: ?limit=20&importance=high",
+          },
+          {
+            name: "GET /api/memories/search",
+            desc: "Full-text search: ?q=query&limit=10",
+          },
           { name: "DELETE /api/memories/:id", desc: "Delete a memory" },
-          { name: "POST /api/snapshots/sync", desc: "Save a snapshot: { projectPath, summary, context }" },
-          { name: "GET /api/identity", desc: "Get identity: narratives + preferences" },
-          { name: "PATCH /api/identity/narrative", desc: "Upsert narrative: { type, title, text }" },
-          { name: "PUT /api/identity/preferences", desc: "Merge preferences: { key: value, ... }" },
-          { name: "GET /api/bridge", desc: "Full context bridge: snapshot + memories + identity + preferences" },
+          {
+            name: "POST /api/snapshots/sync",
+            desc: "Save a snapshot: { projectPath, summary, context }",
+          },
+          {
+            name: "GET /api/identity",
+            desc: "Get identity: narratives + preferences",
+          },
+          {
+            name: "PATCH /api/identity/narrative",
+            desc: "Upsert narrative: { type, title, text }",
+          },
+          {
+            name: "PUT /api/identity/preferences",
+            desc: "Merge preferences: { key: value, ... }",
+          },
+          {
+            name: "GET /api/bridge",
+            desc: "Full context bridge: snapshot + memories + identity + preferences",
+          },
         ],
       },
       {
         title: "Example: Store a Memory",
-        code: `curl -X POST https://aware-pony-419.convex.site/api/memories/sync \\
+        code: `curl -X POST https://agreeable-chameleon-83.convex.site/api/memories/sync \\
   -H "Authorization: Bearer sk_your_key" \\
   -H "Content-Type: application/json" \\
   -d '{"content": "User prefers dark mode", "importance": "normal"}'`,
       },
       {
         title: "Example: Context Bridge",
-        code: `curl https://aware-pony-419.convex.site/api/bridge \\
+        code: `curl https://agreeable-chameleon-83.convex.site/api/bridge \\
   -H "Authorization: Bearer sk_your_key"
 
 # Returns JSON with:
@@ -117,8 +165,14 @@ Authorization: Bearer sk_your_api_key`,
         list: [
           { name: "Memories", desc: "500 per agent (generous, not crippled)" },
           { name: "Snapshots", desc: "Unlimited" },
-          { name: "Identity", desc: "5 narrative types + unlimited preferences" },
-          { name: "Rate Limits", desc: "Reasonable defaults for autonomous agents" },
+          {
+            name: "Identity",
+            desc: "5 narrative types + unlimited preferences",
+          },
+          {
+            name: "Rate Limits",
+            desc: "Reasonable defaults for autonomous agents",
+          },
         ],
       },
     ],
