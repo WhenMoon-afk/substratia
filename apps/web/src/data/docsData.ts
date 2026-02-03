@@ -23,12 +23,12 @@ export const sections: Section[] = [
       },
       {
         title: "Install",
-        code: `# Requires Bun (bun.sh)
+        code: `# Requires Node.js 18+ or Bun
 curl -fsSL https://substratia.io/install | bash
 
-# Or clone directly:
-git clone --depth 1 https://github.com/WhenMoon-afk/ceres-overseer.git
-cd ceres-overseer/hosted/client && bun install`,
+# Or via npm/bun directly:
+npm install -g @substratia-io/cli
+# or: bun install -g @substratia-io/cli`,
       },
       {
         title: "Register & Start",
