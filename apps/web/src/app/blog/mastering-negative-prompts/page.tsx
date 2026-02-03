@@ -303,7 +303,7 @@ Every 5 iterations, verify:
           </p>
 
           <div className="mt-12 p-6 bg-linear-to-r from-forge-purple/20 to-forge-cyan/20 rounded-xl">
-            <h3 className="text-xl font-bold mb-2">Build Better Prompts</h3>
+            <h3 className="text-xl font-bold mb-2">Optimize Your Prompts</h3>
             <p className="text-gray-400 mb-4">
               Use our free Prompt Optimizer to craft effective CLAUDE.md files
               with guardrails.

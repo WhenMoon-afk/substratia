@@ -387,7 +387,7 @@ export const imageGeneratorRecommendations: Recommendation[] = [
 ];
 
 export const imageGeneratorCta: ReviewCta = {
-  title: "Build Better Prompts",
+  title: "Optimize Your Prompts",
   description:
     "Use our free Image Prompt Generator to craft prompts optimized for any of these platforms. 50+ style presets, negative prompts, and platform-specific formatting.",
   links: [

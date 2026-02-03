@@ -97,8 +97,7 @@ const websiteLd = {
   "@type": "WebSite",
   name: siteConfig.name,
   url: siteConfig.url,
-  description:
-    "Open-source developer tools for Claude Code. Free: memory-mcp, dev utilities, and more.",
+  description: siteConfig.description,
   publisher: {
     "@type": "Organization",
     name: siteConfig.name,
