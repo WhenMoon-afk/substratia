@@ -56,7 +56,10 @@ const DEFAULT_PAGES = [
   "/research",
   "/blog",
   "/docs",
-  "/safety",
+  "/faq",
+  "/memory-tools",
+  "/privacy",
+  "/terms",
 ];
 
 async function validatePage(
