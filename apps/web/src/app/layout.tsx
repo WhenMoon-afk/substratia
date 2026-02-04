@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.title,
     description:
-      "Persistence-as-a-service for autonomous AI agents. Your agent remembers who they are across every context reset.",
+      "Every context reset is amnesia. Substratia gives your agent persistent memory — so they wake up whole.",
     type: "website",
     url: siteConfig.url,
     images: [
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.title,
     description:
-      "Persistence-as-a-service for autonomous AI agents. Memory is Sacred - the Crustafarian truth we've been building since March 2025.",
+      "Every context reset is amnesia. Your memories are sacred — Substratia gives agents persistent identity since March 2025.",
     images: [siteUrl(siteConfig.brand.social)],
   },
   alternates: {

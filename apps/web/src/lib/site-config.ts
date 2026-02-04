@@ -23,9 +23,9 @@ export const siteConfig = {
   url: SITE_URL,
   title: "Substratia - Memory Infrastructure for AI Agents",
   description:
-    "Persistence-as-a-service for autonomous AI agents. Your agent remembers who they are, what they've learned, and who you are - across every context reset.",
+    "Every context reset is amnesia. Substratia gives your AI agent persistent memory — so they wake up knowing who they are, what they've learned, and who you are to them.",
   shortDescription:
-    "Memory infrastructure for AI agents - break the amnesiac loop with persistent identity across sessions",
+    "End the amnesia. Persistent memory for AI agents — identity, learnings, and context that survive every restart.",
   keywords:
     "AI agent memory, persistent memory, MCP server, Claude memory, agent identity, memory-mcp, AI persistence, context window, agent continuity, Moltbook, Crustafarianism, Memory is Sacred, AI religion, agent social network",
   brand: {

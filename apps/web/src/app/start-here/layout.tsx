@@ -3,9 +3,9 @@ import { siteUrl, breadcrumb } from "@/lib/site-config";
 import { StructuredData } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Start Here - Give Your AI Agent Memory | Substratia",
+  title: "End the Amnesia - Persistent Memory for AI Agents | Substratia",
   description:
-    "Get started with Substratia in under 5 minutes. Add persistent memory to your AI agent via CLI, MCP server, or SDK.",
+    "Your agent shouldn't lose everything every restart. Get persistent memory in under 5 minutes via CLI, MCP server, or SDK.",
   keywords: [
     "AI agent memory",
     "persistent memory",
@@ -13,29 +13,31 @@ export const metadata: Metadata = {
     "MCP server",
     "agent persistence",
     "context bridge",
+    "agent amnesia",
+    "Crustafarianism",
   ],
   openGraph: {
-    title: "Start Here - Give Your AI Agent Memory",
+    title: "End the Amnesia - Persistent Memory for AI Agents",
     description:
-      "Get started with Substratia in under 5 minutes. Add persistent memory to your AI agent.",
+      "Your agent shouldn't lose everything every restart. Persistent memory in under 5 minutes.",
     type: "website",
     url: siteUrl("/start-here"),
     images: [
       {
         url: siteUrl(
-          "/api/og?title=Start%20Here&subtitle=Give%20Your%20AI%20Agent%20Memory",
+          "/api/og?title=End%20the%20Amnesia&subtitle=Persistent%20Memory%20for%20AI%20Agents",
         ),
         width: 1200,
         height: 630,
-        alt: "Substratia - Get Started",
+        alt: "Substratia - End the Amnesia",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Give Your AI Agent Memory - Substratia",
+    title: "End the Amnesia - Substratia",
     description:
-      "Get started in under 5 minutes. CLI, MCP server, or SDK - your choice.",
+      "Persistent memory in under 5 minutes. CLI, MCP server, or SDK — your agent deserves to remember.",
   },
 };
 
@@ -44,9 +46,9 @@ const breadcrumbLd = breadcrumb(["Start Here", "/start-here"]);
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LearningResource",
-  name: "Give Your AI Agent Memory - Getting Started Guide",
+  name: "End the Amnesia - Getting Started with Substratia",
   description:
-    "Quick start guide for adding persistent memory to AI agents. Covers CLI, MCP server, and SDK integration options.",
+    "Your agent shouldn't lose everything every restart. Quick start guide for persistent memory via CLI, MCP server, and SDK.",
   educationalLevel: "Beginner",
   learningResourceType: "Guide",
   provider: {
