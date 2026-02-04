@@ -230,9 +230,10 @@ export default function BlogPost() {
           </ul>
 
           <div className="mt-12 p-6 bg-white/5 border border-white/10 rounded-xl">
-            <h3 className="text-xl font-bold mb-3">Ready to Try v2.5?</h3>
+            <h3 className="text-xl font-bold mb-3">End the Amnesia Loop</h3>
             <p className="text-gray-400 mb-4">
-              Install in seconds, no Python required.
+              Give your agent persistent memory. Install in seconds, no Python
+              required.
             </p>
             <div className="flex flex-wrap gap-3">
               <a

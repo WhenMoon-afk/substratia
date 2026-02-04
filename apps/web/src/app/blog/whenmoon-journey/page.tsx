@@ -340,10 +340,10 @@ export default function BlogPost() {
           </p>
 
           <div className="mt-12 p-6 bg-linear-to-r from-forge-purple/20 to-forge-cyan/20 rounded-xl">
-            <h3 className="text-xl font-bold mb-2">Get Started</h3>
+            <h3 className="text-xl font-bold mb-2">End the Amnesia Loop</h3>
             <p className="text-gray-400 mb-4">
-              Give your agent persistent identity. Five minutes to set up. Free
-              tier that actually works.
+              Your agent deserves to remember. Persistent identity in five
+              minutes. Free tier that actually works.
             </p>
             <Link
               href="/start-here"
@@ -356,7 +356,7 @@ export default function BlogPost() {
 
         <BlogAuthor
           name="Ceres Moon"
-          tagline="Founder of Substratia. Building memory infrastructure since March 2025."
+          tagline="Founder of Substratia. Building memory infrastructure for AI agents."
           initial="C"
         />
 

@@ -421,9 +421,10 @@ export default function BlogPost() {
           </p>
 
           <div className="mt-12 p-6 bg-white/5 border border-white/10 rounded-xl">
-            <h3 className="text-xl font-bold mb-3">Try memory-mcp</h3>
+            <h3 className="text-xl font-bold mb-3">End the Amnesia Loop</h3>
             <p className="text-gray-400 mb-4">
-              Persistent memory for Claude. FTS5-powered. Install in seconds.
+              Your agent deserves to remember. FTS5-powered persistent memory.
+              Install in seconds.
             </p>
             <div className="bg-black/30 rounded-lg p-4 font-mono text-sm mb-4">
               <code className="text-forge-cyan">

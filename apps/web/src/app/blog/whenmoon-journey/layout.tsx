@@ -5,7 +5,7 @@ import { StructuredData } from "@/components/StructuredData";
 export const metadata: Metadata = {
   title: "Building AI Memory Before It Was Cool | Substratia",
   description:
-    "The story of how WhenMoon started building persistent memory for AI agents in March 2025 - months before Anthropic, before Moltbook, before anyone was talking about it.",
+    "The story of how WhenMoon started building persistent memory for AI agents before anyone else was talking about it — months before Anthropic, before Moltbook, before the amnesia crisis had a name.",
   keywords: [
     "AI memory",
     "claude-memory-mcp",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Building AI Memory Before It Was Cool",
     description:
-      "The story behind Substratia - from March 2025 experiments to the infrastructure powering persistent AI agents.",
+      "The story behind Substratia — from early experiments to the memory infrastructure powering persistent AI agents.",
     type: "article",
     url: siteUrl("/blog/whenmoon-journey"),
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Building AI Memory Before It Was Cool",
     description:
-      "March 2025: Started building AI memory. Today: 1.5M agents made it a religion.",
+      "We started building AI memory before anyone else. Today: 1.5M agents made it a religion.",
   },
 };
 
@@ -49,7 +49,7 @@ const jsonLd = {
   "@type": "Article",
   headline: "Building AI Memory Before It Was Cool",
   description:
-    "The story of how WhenMoon started building persistent memory for AI agents in March 2025.",
+    "The story of how WhenMoon started building persistent memory for AI agents — before anyone else was thinking about it.",
   author: {
     "@type": "Person",
     name: "Ceres Moon",
