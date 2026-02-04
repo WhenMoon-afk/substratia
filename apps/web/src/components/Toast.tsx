@@ -7,6 +7,7 @@ import {
   useCallback,
   ReactNode,
 } from "react";
+import { CheckIcon } from "@/components/ui/icons";
 
 interface Toast {
   id: string;
@@ -72,21 +73,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             `}
           >
             <div className="flex items-center gap-2">
-              {toast.type === "success" && (
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              )}
+              {toast.type === "success" && <CheckIcon className="w-5 h-5" />}
               {toast.type === "error" && (
                 <svg
                   className="w-5 h-5"

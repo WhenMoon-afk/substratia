@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import { siteConfig } from "@/lib/site-config";
+import { CheckIcon } from "@/components/ui/icons";
 
 interface ToolStyles {
   hoverBorder: string;
@@ -200,19 +201,9 @@ export default function MemoryToolsClient() {
                         key={feature}
                         className="flex items-start gap-2 text-sm"
                       >
-                        <svg
+                        <CheckIcon
                           className={`w-4 h-4 ${tool.styles.checkIcon} shrink-0 mt-0.5`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
+                        />
                         <span className="text-gray-300">{feature}</span>
                       </li>
                     ))}

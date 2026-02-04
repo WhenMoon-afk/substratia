@@ -13,6 +13,7 @@ import RecentMemories from "@/components/dashboard/RecentMemories";
 import GetStarted from "@/components/dashboard/GetStarted";
 import ApiKeysSection from "@/components/dashboard/ApiKeysSection";
 import { useURLParam } from "@/hooks/useURLParam";
+import { CheckIcon } from "@/components/ui/icons";
 
 export default function DashboardPage() {
   const { user, isLoaded } = useUser();
@@ -80,19 +81,7 @@ export default function DashboardPage() {
           </button>
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-              <svg
-                className="w-6 h-6 text-green-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+              <CheckIcon className="w-6 h-6 text-green-400" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Welcome!</h2>

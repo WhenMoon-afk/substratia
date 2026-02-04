@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { StarIcon, DownloadIcon } from "@/components/ui/icons";
 
 interface HeroSectionProps {
   githubStars: number | null;
@@ -88,25 +89,13 @@ export default function HeroSection({
               </StatBadge>
               {!statsLoading && githubStars && (
                 <StatBadge>
-                  <svg
-                    className="w-3.5 h-3.5 text-forge-purple"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z" />
-                  </svg>
+                  <StarIcon className="w-3.5 h-3.5 text-forge-purple" />
                   <span className="text-forge-purple">{githubStars}</span> stars
                 </StatBadge>
               )}
               {!statsLoading && npmDownloads && (
                 <StatBadge>
-                  <svg
-                    className="w-3.5 h-3.5 text-forge-cyan"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 16l-6-6h4V4h4v6h4l-6 6zm-8 4h16v-2H4v2z" />
-                  </svg>
+                  <DownloadIcon className="w-3.5 h-3.5 text-forge-cyan" />
                   <span className="text-forge-cyan">
                     {npmDownloads.toLocaleString()}+
                   </span>{" "}

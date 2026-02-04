@@ -1,6 +1,7 @@
 "use client";
 
 import { memo } from "react";
+import { StarIcon, DownloadIcon } from "@/components/ui/icons";
 
 const directories = [
   { name: "PulseMCP", url: "https://pulsemcp.com/servers/whenmoon-memory" },
@@ -95,14 +96,7 @@ export default memo(function CommunitySection({
             <>
               {githubStars && (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-                  <svg
-                    className="w-4 h-4 text-forge-purple"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z" />
-                  </svg>
+                  <StarIcon className="w-4 h-4 text-forge-purple" />
                   <span className="text-gray-400">
                     <span className="text-forge-purple font-medium">
                       {githubStars}
@@ -113,14 +107,7 @@ export default memo(function CommunitySection({
               )}
               {npmDownloads && (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
-                  <svg
-                    className="w-4 h-4 text-forge-cyan"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M12 16l-6-6h4V4h4v6h4l-6 6zm-8 4h16v-2H4v2z" />
-                  </svg>
+                  <DownloadIcon className="w-4 h-4 text-forge-cyan" />
                   <span className="text-gray-400">
                     <span className="text-forge-cyan font-medium">
                       {npmDownloads.toLocaleString()}+
