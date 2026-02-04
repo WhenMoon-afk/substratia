@@ -10,6 +10,7 @@ const sizeClasses = {
 
 const variantClasses = {
   primary: "bg-forge-cyan text-forge-dark font-semibold hover:bg-forge-cyan/80",
+  purple: "bg-forge-purple text-white font-semibold hover:bg-forge-purple/80",
   secondary:
     "glass text-gray-300 hover:text-white font-medium hover:border-white/20",
   ghost: "bg-white/10 hover:bg-white/20 text-white font-semibold",
@@ -57,8 +58,8 @@ export function Button({
     "inline-flex items-center justify-center rounded-xl transition-all",
     sizeClasses[size],
     variantClasses[variant],
-    glow && variant === "primary"
-      ? "glow-cyan hover:scale-[1.02] active:scale-[0.98]"
+    glow
+      ? `${variant === "purple" ? "glow-purple" : "glow-cyan"} hover:scale-[1.02] active:scale-[0.98]`
       : "",
     "disabled" in props && props.disabled
       ? "disabled:opacity-50 disabled:cursor-not-allowed"
@@ -89,7 +90,7 @@ export function Button({
     return (
       <Link href={href} className={baseClasses} {...rest}>
         {children}
-        {glow && variant === "primary" && (
+        {glow && (
           <span className="absolute inset-0 rounded-xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
         )}
       </Link>

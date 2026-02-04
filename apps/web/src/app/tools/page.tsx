@@ -4,6 +4,7 @@ import Link from "next/link";
 import ShareButton from "@/components/ShareButton";
 import CtaSection from "@/components/home/CtaSection";
 import { SectionDivider } from "@/components/SectionDivider";
+import { Button } from "@/components/ui/Button";
 
 // Static class map - avoids dynamic Tailwind class purging in production
 const toolColorClasses = {
@@ -387,18 +388,16 @@ export default function ToolsIndexPage() {
               AI persistent memory.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href="/memory-tools"
-                className="px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
+              <Button href="/memory-tools" variant="purple" glow>
                 View Memory Tools
-              </Link>
-              <Link
+              </Button>
+              <Button
                 href="/docs"
-                className="px-6 py-3 glass rounded-xl font-semibold text-gray-300 hover:text-white transition-all hover:border-white/20"
+                variant="secondary"
+                className="font-semibold"
               >
                 Documentation
-              </Link>
+              </Button>
             </div>
           </div>
         </div>

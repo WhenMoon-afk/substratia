@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Button } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
@@ -15,26 +15,17 @@ export default function NotFound() {
           Let&apos;s get you back on track.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/"
-            className="px-6 py-3 bg-forge-purple hover:bg-forge-purple/80 rounded-xl font-semibold transition-all"
-          >
+          <Button href="/" variant="purple">
             Go Home
-          </Link>
-          <Link
-            href="/tools"
-            className="px-6 py-3 border border-white/30 hover:bg-white/10 rounded-xl font-semibold transition-all"
-          >
+          </Button>
+          <Button href="/tools" variant="outline">
             Browse Tools
-          </Link>
-          <Link
-            href="/start-here"
-            className="px-6 py-3 border border-white/30 hover:bg-white/10 rounded-xl font-semibold transition-all"
-          >
+          </Button>
+          <Button href="/start-here" variant="outline">
             Start Here
-          </Link>
+          </Button>
         </div>
       </div>
     </main>
-  )
+  );
 }
