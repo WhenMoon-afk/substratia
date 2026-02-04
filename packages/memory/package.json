@@ -28,6 +28,14 @@
     "./types/shared": {
       "import": "./dist/types/shared.js",
       "types": "./dist/types/shared.d.ts"
+    },
+    "./dashboard": {
+      "import": "./dist/dashboard/index.js",
+      "types": "./dist/dashboard/index.d.ts"
+    },
+    "./share": {
+      "import": "./dist/share/index.js",
+      "types": "./dist/share/index.d.ts"
     }
   },
   "files": [

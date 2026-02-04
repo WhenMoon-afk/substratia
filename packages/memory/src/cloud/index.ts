@@ -18,7 +18,8 @@ export type {
 // Backwards compatibility: re-export CloudMemory as Memory
 export type { CloudMemory as Memory } from "./types.js";
 
-const DEFAULT_BASE_URL = "https://aware-pony-419.convex.site";
+const DEFAULT_BASE_URL =
+  process.env.SUBSTRATIA_API_URL || "https://aware-pony-419.convex.site";
 
 export class Substratia {
   private apiKey: string;

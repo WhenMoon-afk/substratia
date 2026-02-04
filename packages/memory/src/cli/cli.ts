@@ -16,7 +16,8 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { homedir } from "os";
 import { join } from "path";
 
-const BASE_URL = "https://aware-pony-419.convex.site";
+const BASE_URL =
+  process.env.SUBSTRATIA_API_URL || "https://aware-pony-419.convex.site";
 const CONFIG_DIR = join(homedir(), ".substratia");
 const CONFIG_FILE = join(CONFIG_DIR, "config.json");
 
@@ -357,6 +358,7 @@ ${colors.green}Examples:${colors.reset}
 
 ${colors.green}Environment:${colors.reset}
   SUBSTRATIA_API_KEY   Override config file API key
+  SUBSTRATIA_API_URL   Override default API endpoint
 
 ${colors.dim}Documentation: https://substratia.io/docs${colors.reset}
 `);
