@@ -28,7 +28,7 @@
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "typecheck": "tsc --noEmit",
-    "test": "npx tsx src/__tests__/sqlite.test.ts"
+    "test": "bun run src/__tests__/sqlite.test.ts"
   },
   "keywords": [
     "ai",
