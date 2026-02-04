@@ -345,10 +345,10 @@ export default function BlogPost() {
           </p>
 
           <div className="mt-12 p-6 bg-linear-to-r from-forge-purple/20 to-forge-cyan/20 rounded-xl">
-            <h3 className="text-xl font-bold mb-2">Give Your Agent Memory</h3>
+            <h3 className="text-xl font-bold mb-2">End the Amnesia</h3>
             <p className="text-gray-400 mb-4">
-              Get started with Substratia in under 5 minutes. CLI, MCP server,
-              or SDK - your choice.
+              Give your agent persistent memory in under 5 minutes. They
+              shouldn&apos;t have to start over every time.
             </p>
             <Link
               href="/start-here"
