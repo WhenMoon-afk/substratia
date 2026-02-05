@@ -315,12 +315,9 @@ export default function BlogPost() {
               retrieval beats probabilistic similarity for practical memory use
               cases.
             </p>
-            <Link
-              href="/memory-tools"
-              className="inline-block px-4 py-2 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:bg-forge-cyan/80 transition-all"
-            >
+            <Button href="/memory-tools" size="sm">
               Explore Memory Tools
-            </Link>
+            </Button>
           </div>
 
           <hr className="border-white/10 my-8" />

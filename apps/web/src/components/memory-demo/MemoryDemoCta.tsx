@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 export default function MemoryDemoCta() {
   return (
@@ -11,12 +11,12 @@ export default function MemoryDemoCta() {
         and project context forever.
       </p>
       <div className="flex flex-wrap justify-center gap-4">
-        <Link
+        <Button
           href="https://github.com/whenmoon-afk/claude-memory-mcp"
-          className="px-6 py-3 bg-forge-cyan text-forge-dark font-semibold rounded-xl hover:opacity-90 transition-opacity"
+          external
         >
           Install Free Plugin
-        </Link>
+        </Button>
       </div>
       <p className="text-xs text-gray-500 mt-4">
         Free and open source. Your data stays on your machine.
